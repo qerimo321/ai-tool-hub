@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tool Index 2026 | Maximize Productivity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712;
+            color: #f3f4f6;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tool-card:hover {
+            border-color: #06b6d4;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.2);
+        }
+
+        input[type="range"] {
+            appearance: none;
+            background: rgba(255,255,255,0.1);
+            height: 6px;
+            border-radius: 5px;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #06b6d4;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #fff, #06b6d4, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body x-data="aiHub()">
+
+    <div class="fixed inset-0 overflow-hidden -z-10">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 blur-[120px] rounded-full"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-12">
+        
+        <header class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6">
+                <i data-lucide="sparkles" class="w-4 h-4 text-cyan-400"></i>
+                <span class="text-xs font-bold tracking-widest uppercase">Premium AI Directory 2026</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
+                Die besten <span class="gradient-text">KI-Tools</span><br>für deinen Erfolg
+            </h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                Handverlesene Software, die dir echte Zeit erspart. Berechne deinen ROI und finde das perfekte Tool.
+            </p>
+        </header>
+
+        <section class="glass rounded-[2rem] p-8 md:p-12 mb-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="calculator" class="text-cyan-400"></i>
+                        AI Profit Rechner
+                    </h2>
+                    <div class="space-y-10">
+                        <div>
+                            <div class="flex justify-between mb-4 text-sm font-medium">
+                                <span class="text-slate-400">Manuelle Arbeit pro Woche</span>
+                                <span class="text-white"><span x-text="hours"></span> Stunden</span>
+                            </div>
+                            <input type="range" min="1" max="40" x-model="hours" class="w-full">
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-4 text-sm font-medium">
+                                <span class="text-slate-400">Dein Stundensatz (€)</span>
+                                <span class="text-white"><span x-text="rate"></span> €</span>
+                            </div>
+                            <input type="range" min="20" max="200" step="5" x-model="rate" class="w-full">
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-cyan-500 to-blue-600 rounded-3xl p-10 text-black shadow-xl shadow-cyan-500/20">
+                    <p class="text-sm font-black uppercase tracking-tighter opacity-70 mb-2">Ersparnis pro Monat</p>
+                    <div class="text-6xl font-black mb-4">€<span x-text="calcSavings()"></span></div>
+                    <div class="flex items-center gap-2 font-bold text-black/80 text-lg">
+                        <i data-lucide="clock" class="w-5 h-5"></i>
+                        + <span x-text="Math.round(hours * 0.7 * 4)"></span> Stunden gewonnen
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="flex flex-wrap justify-center gap-3 mb-12">
+            <template x-for="cat in categories">
+                <button 
+                    @click="activeCategory = cat.id"
+                    :class="activeCategory === cat.id ? 'bg-white text-black' : 'bg-white/5 text-slate-400 hover:bg-white/10'"
+                    class="px-6 py-2 rounded-full text-sm font-bold uppercase transition-all border border-white/5"
+                    x-text="cat.name">
+                </button>
+            </template>
+        </nav>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <template x-for="tool in filteredTools()" :key="tool.id">
+                <div 
+                    class="tool-card glass rounded-[2rem] p-8 transition-all duration-300 flex flex-col h-full"
+                    :class="tool.featured ? 'lg:col-span-2' : ''"
+                >
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-3 rounded-2xl bg-cyan-500/10 text-cyan-400">
+                            <i :data-lucide="tool.icon" class="w-6 h-6"></i>
+                        </div>
+                        <template x-if="tool.featured">
+                            <span class="px-3 py-1 bg-purple-500 text-[10px] font-black uppercase rounded-full tracking-widest">Featured Tool</span>
+                        </template>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3" x-text="tool.name"></h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-8 flex-grow" x-text="tool.desc"></p>
+                    
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-[10px] font-mono uppercase text-slate-500 tracking-tighter" x-text="tool.pricing"></span>
+                        <a :href="tool.link" target="_blank" class="flex items-center gap-2 font-bold text-sm text-cyan-400 hover:text-white transition-colors uppercase tracking-widest">
+                            Ansehen <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <footer class="mt-32 pt-12 border-t border-white/5 text-center">
+            <p class="text-slate-500 text-sm">
+                © 2026 AI Tool Directory. Wir nutzen Affiliate-Links zur Unterstützung dieser Seite.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function aiHub() {
+            return {
+                hours: 15,
+                rate: 55,
+                activeCategory: 'all',
+                categories: [
+                    { id: 'all', name: 'Alle' },
+                    { id: 'video', name: 'Video' },
+                    { id: 'image', name: 'Bilder' },
+                    { id: 'business', name: 'Business' },
+                    { id: 'study', name: 'Lernen' }
+                ],
+                // --- HIER DEINE TOOLS EINTRAGEN ---
+                tools: [
+                    {
+                        id: 1,
+                        name: 'Jasper AI',
+                        icon: 'pen-tool',
+                        category: 'business',
+                        desc: 'Der Goldstandard für KI-Texte. Erstellt Marketing-Kopien, Blogs und Ads in Profi-Qualität.',
+                        pricing: 'Premium',
+                        featured: true,
+                        link: 'DEIN-AFFILIATE-LINK-1'
+                    },
+                    {
+                        id: 2,
+                        name: 'HeyGen',
+                        icon: 'video',
+                        category: 'video',
+                        desc: 'Erstelle täuschend echte Video-Avatare. Nie wieder selbst vor der Kamera stehen.',
+                        pricing: 'Free Trial',
+                        featured: false,
+                        link: 'DEIN-AFFILIATE-LINK-2'
+                    },
+                    {
+                        id: 3,
+                        name: 'Leonardo.ai',
+                        icon: 'image',
+                        category: 'image',
+                        desc: 'Die kreativste KI für Bilder. Perfekt für Grafikdesign, Spieleentwicklung und Kunst.',
+                        pricing: 'Daily Free Credits',
+                        featured: false,
+                        link: 'DEIN-AFFILIATE-LINK-3'
+                    },
+                    {
+                        id: 4,
+                        name: 'Perplexity',
+                        icon: 'search',
+                        category: 'study',
+                        desc: 'KI-gestützte Suche, die dir fertige Antworten mit Quellen liefert. Zeitersparnis: 90%.',
+                        pricing: 'Free',
+                        featured: true,
+                        link: 'DEIN-AFFILIATE-LINK-4'
+                    }
+                ],
+                calcSavings() {
+                    let monthly = (this.hours * 0.7) * 4 * this.rate;
+                    return Math.round(monthly).toLocaleString();
+                },
+                filteredTools() {
+                    if (this.activeCategory === 'all') return this.tools;
+                    return this.tools.filter(t => t.category === this.activeCategory);
+                },
+                init() {
+                    // Start Lucide Icons
+                    lucide.createIcons();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
