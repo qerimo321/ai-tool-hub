@@ -9,6 +9,10 @@
 <meta name="keywords" content="KI Tools, AI Software, ChatGPT Alternativen, KI Bildgeneratoren, kostenlose KI Tools">
 <meta name="google-site-verification" content="Wo_6LQQ8LoGlobalzVMjBHh_Z-VD3N_dFdqCZb2BYxV0" />
 <link rel="canonical" href="https://ai-searcher.github.io/ai-tool-hub/">
+<!-- Hreflang Meta-Tags für mehrsprachige SEO -->
+<link rel="alternate" hreflang="de" href="https://ai-searcher.github.io/ai-tool-hub/">
+<link rel="alternate" hreflang="en" href="https://ai-searcher.github.io/ai-tool-hub/">
+<link rel="alternate" hreflang="x-default" href="https://ai-searcher.github.io/ai-tool-hub/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AI Finder 2026 - Finde sofort dein perfektes KI-Tool">
@@ -260,7 +264,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%
 <div class="comments-header">
 <div class="comments-title">
 <i class="fas fa-comments"></i>
-<span id="commentsToolTitle">Kommentare</span>
+<span id="commentsToolTitle" data-de="Kommentare" data-en="Comments"></span>
 </div>
 <button class="close-comments" id="closeComments">
 <i class="fas fa-times"></i>
@@ -270,15 +274,15 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%
 <!-- Kommentare werden hier dynamisch eingefügt -->
 </div>
 <div class="comments-input-container">
-<textarea class="comment-input" id="commentInput" placeholder="Dein Kommentar... (Enter zum Senden, Shift+Enter für neue Zeile)"></textarea>
+<textarea class="comment-input" id="commentInput" placeholder="Dein Kommentar... (Enter zum Senden, Shift+Enter für neue Zeile)" data-de="Dein Kommentar... (Enter zum Senden, Shift+Enter für neue Zeile)" data-en="Your comment... (Enter to send, Shift+Enter for new line)"></textarea>
 <div class="comment-submit-row">
 <div class="user-input-container">
-<span class="user-input-label" id="userLabel">Name:</span>
-<input type="text" class="user-input" id="userNameInput" placeholder="Anonym" maxlength="20">
+<span class="user-input-label" id="userLabel" data-de="Name:" data-en="Name:"></span>
+<input type="text" class="user-input" id="userNameInput" placeholder="Anonym" maxlength="20" data-de="Anonym" data-en="Anonymous">
 </div>
 <button class="comment-submit-btn" id="submitCommentBtn">
 <i class="fas fa-paper-plane"></i>
-<span id="submitText">Kommentieren</span>
+<span id="submitText" data-de="Kommentieren" data-en="Comment"></span>
 </button>
 </div>
 </div>
@@ -288,90 +292,90 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%
 <i class="fas fa-arrow-up"></i>
 </div>
 <header class="header">
-<div class="badge" id="badgeText">🚀 126 KI-Tools für 2026</div>
-<h1 id="pageTitle">Finde sofort dein perfektes KI-Tool</h1>
-<p id="pageDescription">Echte User-Bewertungen, Top 5 Charts, intelligente Empfehlungen. Kein unnötiges Scrollen.</p>
+<div class="badge" id="badgeText" data-de="🚀 126 KI-Tools für 2026" data-en="🚀 126 AI Tools for 2026"></div>
+<h1 id="pageTitle" data-de="Finde sofort dein perfektes KI-Tool" data-en="Find your perfect AI tool instantly"></h1>
+<p id="pageDescription" data-de="Echte User-Bewertungen, Top 5 Charts, intelligente Empfehlungen. Kein unnötiges Scrollen." data-en="Real user ratings, Top 5 charts, smart recommendations. No unnecessary scrolling."></p>
 <div class="search-container">
 <i class="fas fa-search search-icon"></i>
-<input type="text" class="search-box" id="searchInput" autocomplete="off" placeholder="Was möchtest du mit KI erreichen?">
+<input type="text" class="search-box" id="searchInput" autocomplete="off" placeholder="Was möchtest du mit KI erreichen?" data-de="Was möchtest du mit KI erreichen?" data-en="What do you want to achieve with AI?">
 <div class="search-suggestions" id="searchSuggestions" role="listbox"></div>
 </div>
 <div class="search-hint-container" id="searchHintContainer">
 <div class="search-hint-text">
 <i class="fas fa-lightbulb"></i>
-<span id="hintText">Tipp: Suche nach</span>
+<span id="hintText" data-de="Tipp: Suche nach" data-en="Tip: Search for"></span>
 </div>
 <div class="search-hint-chip" data-search="ChatGPT">
 <i class="fas fa-robot"></i>
-<span>ChatGPT</span>
+<span data-de="ChatGPT" data-en="ChatGPT">ChatGPT</span>
 </div>
 <div class="search-hint-chip" data-search="Bilder">
 <i class="fas fa-image"></i>
-<span>Bilder</span>
+<span data-de="Bilder" data-en="Images">Bilder</span>
 </div>
 <div class="search-hint-chip" data-search="Video">
 <i class="fas fa-video"></i>
-<span>Video</span>
+<span data-de="Video" data-en="Video">Video</span>
 </div>
 <div class="search-hint-chip" data-search="kostenlos">
 <i class="fas fa-gift"></i>
-<span>kostenlos</span>
+<span data-de="kostenlos" data-en="free">kostenlos</span>
 </div>
 <div class="search-hint-chip" data-search="Code">
 <i class="fas fa-code"></i>
-<span>Code</span>
+<span data-de="Code" data-en="Code">Code</span>
 </div>
 <div class="search-hint-chip" data-search="Musik">
 <i class="fas fa-music"></i>
-<span>Musik</span>
+<span data-de="Musik" data-en="Music">Musik</span>
 </div>
 </div>
 </header>
 <section class="quick-navigation" id="quickNav">
 <div class="quick-card" data-filter="chat-text">
 <div class="quick-icon"><i class="fas fa-comments"></i></div>
-<div class="quick-title" id="navChat">Chat & Text</div>
-<div class="quick-desc" id="navChatDesc">KI schreiben lassen, Fragen beantworten</div>
+<div class="quick-title" id="navChat" data-de="Chat & Text" data-en="Chat & Text"></div>
+<div class="quick-desc" id="navChatDesc" data-de="KI schreiben lassen, Fragen beantworten" data-en="Let AI write, answer questions"></div>
 </div>
 <div class="quick-card" data-filter="image">
 <div class="quick-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
-<div class="quick-title" id="navImage">Bilder generieren</div>
-<div class="quick-desc" id="navImageDesc">Kunst, Logos, Designs erstellen</div>
+<div class="quick-title" id="navImage" data-de="Bilder generieren" data-en="Generate images"></div>
+<div class="quick-desc" id="navImageDesc" data-de="Kunst, Logos, Designs erstellen" data-en="Create art, logos, designs"></div>
 </div>
 <div class="quick-card" data-filter="audio">
 <div class="quick-icon"><i class="fas fa-microphone-lines"></i></div>
-<div class="quick-title" id="navVoice">Stimmen & Audio</div>
-<div class="quick-desc" id="navVoiceDesc">Text vorlesen, Musik generieren</div>
+<div class="quick-title" id="navVoice" data-de="Stimmen & Audio" data-en="Voices & Audio"></div>
+<div class="quick-desc" id="navVoiceDesc" data-de="Text vorlesen, Musik generieren" data-en="Read text, generate music"></div>
 </div>
 <div class="quick-card" data-filter="video">
 <div class="quick-icon"><i class="fas fa-video"></i></div>
-<div class="quick-title" id="navVideo">Video erstellen</div>
-<div class="quick-desc" id="navVideoDesc">KI-Videos, Avatare, Editing</div>
+<div class="quick-title" id="navVideo" data-de="Video erstellen" data-en="Create video"></div>
+<div class="quick-desc" id="navVideoDesc" data-de="KI-Videos, Avatare, Editing" data-en="AI videos, avatars, editing"></div>
 </div>
 <div class="quick-card" data-filter="code">
 <div class="quick-icon"><i class="fas fa-code"></i></div>
-<div class="quick-title" id="navCode">Programmieren</div>
-<div class="quick-desc" id="navCodeDesc">Code generieren, debuggen, erklären</div>
+<div class="quick-title" id="navCode" data-de="Programmieren" data-en="Programming"></div>
+<div class="quick-desc" id="navCodeDesc" data-de="Code generieren, debuggen, erklären" data-en="Generate code, debug, explain"></div>
 </div>
 <div class="quick-card" data-filter="free">
 <div class="quick-icon"><i class="fas fa-gift"></i></div>
-<div class="quick-title" id="navFree">Kostenlos</div>
-<div class="quick-desc" id="navFreeDesc">Top kostenlose KI-Tools</div>
+<div class="quick-title" id="navFree" data-de="Kostenlos" data-en="Free"></div>
+<div class="quick-desc" id="navFreeDesc" data-de="Top kostenlose KI-Tools" data-en="Top free AI tools"></div>
 </div>
 </section>
 <section class="top-charts-section">
-<div class="section-title"><i class="fas fa-trophy"></i> <span id="topChartsTitle">Top 5 KI-Tools - Community Ranking</span></div>
+<div class="section-title"><i class="fas fa-trophy"></i> <span id="topChartsTitle" data-de="Top 5 KI-Tools - Community Ranking" data-en="Top 5 AI Tools - Community Ranking"></span></div>
 <div class="top-charts" id="topCharts"></div>
 </section>
 <section class="tools-container">
 <div class="compact-tools-header">
 <div class="compact-filters">
-<button class="filter-btn active" data-scope="all" type="button"><i class="fas fa-globe"></i> <span id="catAll">Alle</span></button>
-<button class="filter-btn" data-category="text" type="button"><i class="fas fa-keyboard"></i> <span id="catText">Text</span></button>
-<button class="filter-btn" data-category="image" type="button"><i class="fas fa-image"></i> <span id="catImage">Bilder</span></button>
-<button class="filter-btn" data-category="audio" type="button"><i class="fas fa-music"></i> <span id="catAudio">Audio</span></button>
-<button class="filter-btn" data-category="video" type="button"><i class="fas fa-video"></i> <span id="catVideo">Video</span></button>
-<button class="filter-btn" data-category="code" type="button"><i class="fas fa-code"></i> <span id="catCode">Code</span></button>
+<button class="filter-btn active" data-scope="all" type="button"><i class="fas fa-globe"></i> <span id="catAll" data-de="Alle" data-en="All"></span></button>
+<button class="filter-btn" data-category="text" type="button"><i class="fas fa-keyboard"></i> <span id="catText" data-de="Text" data-en="Text"></span></button>
+<button class="filter-btn" data-category="image" type="button"><i class="fas fa-image"></i> <span id="catImage" data-de="Bilder" data-en="Images"></span></button>
+<button class="filter-btn" data-category="audio" type="button"><i class="fas fa-music"></i> <span id="catAudio" data-de="Audio" data-en="Audio"></span></button>
+<button class="filter-btn" data-category="video" type="button"><i class="fas fa-video"></i> <span id="catVideo" data-de="Video" data-en="Video"></span></button>
+<button class="filter-btn" data-category="code" type="button"><i class="fas fa-code"></i> <span id="catCode" data-de="Code" data-en="Code"></span></button>
 </div>
 <div class="compact-filters">
 <div class="filter-group">
@@ -381,17 +385,100 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%
 <select id="sortFilter" class="filter-select"></select>
 </div>
 </div>
-<div class="tools-count"><span id="toolCount">0</span> <span id="toolsText">Tools</span></div>
+<div class="tools-count"><span id="toolCount">0</span> <span id="toolsText" data-de="Tools" data-en="Tools"></span></div>
 </div>
 <div class="compact-tools-grid" id="toolsGrid"></div>
 </section>
 <footer class="footer">
-<p id="footerCopy">© 2026 AI Finder | Community-gestützte KI Tool Empfehlungen</p>
-<p id="footerDiscl">Bewertungen basieren auf User-Feedback (LocalStorage).</p>
-<p><a href="#"><i class="fas fa-question-circle"></i> Hilfe</a> | <a href="#"><i class="fas fa-envelope"></i> Feedback</a></p>
+<p id="footerCopy" data-de="© 2026 AI Finder | Community-gestützte KI Tool Empfehlungen" data-en="© 2026 AI Finder | Community-driven AI tool recommendations"></p>
+<p id="footerDiscl" data-de="Bewertungen basieren auf User-Feedback (LocalStorage)." data-en="Ratings based on user feedback (LocalStorage)."></p>
+<p><a href="#"><i class="fas fa-question-circle"></i> <span data-de="Hilfe" data-en="Help">Hilfe</span></a> | <a href="#"><i class="fas fa-envelope"></i> <span data-de="Feedback" data-en="Feedback">Feedback</span></a></p>
 </footer>
 <script>
-// KI Tools Datenbank mit initialen Votes
+// ========== SPRACHSYSTEM ==========
+let lang = 'de';
+
+// Initialisierung des Sprachsystems
+function initLanguageSystem() {
+  // 1. Prüfe localStorage für gespeicherte Sprache
+  const savedLang = localStorage.getItem('preferredLang');
+  
+  // 2. Wenn gespeichert, diese verwenden
+  if (savedLang && (savedLang === 'de' || savedLang === 'en')) {
+    lang = savedLang;
+  } 
+  // 3. Ansonsten Browsersprache prüfen
+  else {
+    const browserLang = navigator.language || navigator.userLanguage;
+    // Vereinfachte Erkennung: Wenn Deutsch (de, de-DE, de-AT, etc.) dann DE, sonst EN
+    lang = browserLang.toLowerCase().startsWith('de') ? 'de' : 'en';
+  }
+  
+  // 4. Sprache anwenden
+  updateLanguage(lang);
+  
+  // 5. Button-Text setzen
+  document.getElementById('langText').textContent = lang === 'de' ? 'EN' : 'DE';
+}
+
+// Sprache umschalten
+function toggleLanguage() {
+  lang = lang === 'de' ? 'en' : 'de';
+  localStorage.setItem('preferredLang', lang);
+  updateLanguage(lang);
+  document.getElementById('langText').textContent = lang === 'de' ? 'EN' : 'DE';
+}
+
+// Sprache auf der Seite anwenden
+function updateLanguage(language) {
+  lang = language;
+  
+  // 1. Alle Elemente mit data-de und data-en Attributen aktualisieren
+  const elements = document.querySelectorAll('[data-de][data-en]');
+  elements.forEach(element => {
+    const text = element.getAttribute(`data-${lang}`);
+    if (text !== null) {
+      // Spezielle Behandlung für Input-Platzhalter
+      if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+        element.placeholder = text;
+      } 
+      // Spezielle Behandlung für Buttons/Spans innerhalb von Chips
+      else if (element.classList.contains('search-hint-chip')) {
+        // Überspringe die Chip-Container selbst
+        const span = element.querySelector('span');
+        if (span) {
+          const spanText = span.getAttribute(`data-${lang}`);
+          if (spanText) span.textContent = spanText;
+        }
+      }
+      else {
+        element.textContent = text;
+      }
+    }
+  });
+  
+  // 2. Dynamische Inhalte aktualisieren (Tool-Beschreibungen etc.)
+  updateDynamicContent();
+}
+
+// Dynamische Inhalte aktualisieren (KI-Tools Beschreibungen)
+function updateDynamicContent() {
+  // Nur wenn die KI-Tools Daten bereits geladen sind
+  if (typeof aiTools !== 'undefined') {
+    // Top Charts neu rendern
+    renderTopCharts();
+    
+    // Filter anwenden (rendert auch die Tool-Liste)
+    applyFilters();
+    
+    // Kommentare neu rendern falls Overlay offen
+    if (currentToolId) {
+      renderComments(currentToolId);
+    }
+  }
+}
+
+// ========== KI TOOLS DATENBANK ==========
 let aiTools = [
 {id:1,name:"ChatGPT",category:"text",price:"freemium",priceDisplay:"Free/$20",rating:4.9,description:{de:"Bester Allrounder für Texte, Ideen, Code.",en:"Best all-rounder for text, ideas, code."},features:["GPT-4","Web","Files"],link:"https://chat.openai.com/",badge:"popular",useCases:["chatbot", "writing", "coding"],votes:0,userVote:0},
 {id:2,name:"Claude",category:"text",price:"freemium",priceDisplay:"Free/$20",rating:4.8,description:{de:"Exzellent für lange Texte, Dokumente.",en:"Excellent for long-form, documents."},features:["200K","Files","Writing"],link:"https://claude.ai/",badge:"popular",useCases:["chatbot", "writing", "analysis"],votes:0,userVote:0},
@@ -425,59 +512,15 @@ const moreTools = [
 
 aiTools = [...aiTools, ...moreTools];
 
-// Kommentar Datenbank
-let commentsDB = {};
-let likedComments = {};
-
-// Translations
+// ========== ÜBERSETZUNGEN FÜR DYNAMISCHE TEXTE ==========
 const translations = {
   de: {
     badge: n => `🚀 ${n} KI-Tools für 2026`,
-    title: "Finde sofort dein perfektes KI-Tool",
-    desc: "Echte User-Bewertungen, Top 5 Charts, intelligente Empfehlungen. Kein unnötiges Scrollen.",
-    searchPlaceholder: "Was möchtest du mit KI erreichen?",
-    searchHint: "Tipp: Suche nach",
-    navChat: "Chat & Text",
-    navChatDesc: "KI schreiben lassen, Fragen beantworten",
-    navImage: "Bilder generieren",
-    navImageDesc: "Kunst, Logos, Designs erstellen",
-    navVoice: "Stimmen & Audio",
-    navVoiceDesc: "Text vorlesen, Musik generieren",
-    navVideo: "Video erstellen",
-    navVideoDesc: "KI-Videos, Avatare, Editing",
-    navCode: "Programmieren",
-    navCodeDesc: "Code generieren, debuggen, erklären",
-    navFree: "Kostenlos",
-    navFreeDesc: "Top kostenlose KI-Tools",
-    topChartsTitle: "Top 5 KI-Tools - Community Ranking",
-    catAll: "Alle",
-    catText: "Text",
-    catImage: "Bilder",
-    catAudio: "Audio",
-    catVideo: "Video",
-    catCode: "Code",
-    priceAll: "💰 Alle Preise",
-    priceFree: "🆓 Kostenlos",
-    pricePaid: "💳 Bezahlt",
-    priceFreemium: "⭐ Freemium",
-    sortPopular: "🔥 Beliebt",
-    sortVotes: "👍 Community",
-    sortRating: "⭐ Bewertung",
-    sortPriceLow: "💰 Preis ↑",
-    sortPriceHigh: "💰 Preis ↓",
-    toolsFound: "Tools",
+    helpful: "Hilfreich",
     tryNow: "Testen",
     noTitle: "Keine Tools gefunden",
     noMsg: "Ändere deine Filter oder versuche andere Suchbegriffe.",
     resetBtn: "Filter zurücksetzen",
-    footerCopy: "© 2026 AI Finder | Community-gestützte KI Tool Empfehlungen",
-    footerDiscl: "Bewertungen basieren auf User-Feedback (LocalStorage).",
-    comments: "Kommentare",
-    commentPlaceholder: "Dein Kommentar... (Enter zum Senden, Shift+Enter für neue Zeile)",
-    userLabel: "Name:",
-    userPlaceholder: "Anonym",
-    submitText: "Kommentieren",
-    noComments: "Noch keine Kommentare. Sei der Erste!",
     commentLikes: "Gefällt mir",
     liked: "Gefällt mir",
     viewComments: "Kommentare",
@@ -488,55 +531,16 @@ const translations = {
     days: "Tagen",
     weeks: "Wochen",
     months: "Monaten",
-    years: "Jahren"
+    years: "Jahren",
+    noComments: "Noch keine Kommentare. Sei der Erste!"
   },
   en: {
     badge: n => `🚀 ${n} AI Tools for 2026`,
-    title: "Find your perfect AI tool instantly",
-    desc: "Real user ratings, Top 5 charts, smart recommendations. No unnecessary scrolling.",
-    searchPlaceholder: "What do you want to achieve with AI?",
-    searchHint: "Tip: Search for",
-    navChat: "Chat & Text",
-    navChatDesc: "Let AI write, answer questions",
-    navImage: "Generate images",
-    navImageDesc: "Create art, logos, designs",
-    navVoice: "Voices & Audio",
-    navVoiceDesc: "Read text, generate music",
-    navVideo: "Create video",
-    navVideoDesc: "AI videos, avatars, editing",
-    navCode: "Programming",
-    navCodeDesc: "Generate code, debug, explain",
-    navFree: "Free",
-    navFreeDesc: "Top free AI tools",
-    topChartsTitle: "Top 5 AI Tools - Community Ranking",
-    catAll: "All",
-    catText: "Text",
-    catImage: "Images",
-    catAudio: "Audio",
-    catVideo: "Video",
-    catCode: "Code",
-    priceAll: "💰 All prices",
-    priceFree: "🆓 Free",
-    pricePaid: "💳 Paid",
-    priceFreemium: "⭐ Freemium",
-    sortPopular: "🔥 Popular",
-    sortVotes: "👍 Community",
-    sortRating: "⭐ Rating",
-    sortPriceLow: "💰 Price ↑",
-    sortPriceHigh: "💰 Price ↓",
-    toolsFound: "Tools",
+    helpful: "Helpful",
     tryNow: "Try",
     noTitle: "No tools found",
     noMsg: "Change your filters or try different search terms.",
     resetBtn: "Reset filters",
-    footerCopy: "© 2026 AI Finder | Community-driven AI tool recommendations",
-    footerDiscl: "Ratings based on user feedback (LocalStorage).",
-    comments: "Comments",
-    commentPlaceholder: "Your comment... (Enter to send, Shift+Enter for new line)",
-    userLabel: "Name:",
-    userPlaceholder: "Anonymous",
-    submitText: "Comment",
-    noComments: "No comments yet. Be the first!",
     commentLikes: "Likes",
     liked: "Liked",
     viewComments: "Comments",
@@ -547,11 +551,12 @@ const translations = {
     days: "days",
     weeks: "weeks",
     months: "months",
-    years: "years"
+    years: "years",
+    noComments: "No comments yet. Be the first!"
   }
 };
 
-let lang = 'de';
+// ========== FILTER VARIABLEN ==========
 let cat = 'all';
 let price = 'all';
 let sort = 'votes';
@@ -562,90 +567,37 @@ let hintInterval;
 let hintChips = [];
 let currentToolId = null;
 let userName = '';
+let commentsDB = {};
+let likedComments = {};
 
-// Initialize
+// ========== INITIALISIERUNG ==========
 document.addEventListener('DOMContentLoaded', () => {
+  // 1. Sprachsystem initialisieren (muss zuerst kommen!)
+  initLanguageSystem();
+  
+  // 2. Daten laden
   loadUserVotes();
   loadComments();
   loadLikedComments();
   loadUserName();
+  
+  // 3. Event Listener einrichten
   setupEvents();
-  updateLang();
+  
+  // 4. Filter Dropdowns initialisieren
+  initFilterDropdowns();
+  
+  // 5. Inhalt rendern
   renderTopCharts();
   applyFilters();
 });
 
-function loadComments() {
-  const saved = localStorage.getItem('aiToolsComments');
-  if (saved) {
-    commentsDB = JSON.parse(saved);
-  }
-}
-
-function saveComments() {
-  localStorage.setItem('aiToolsComments', JSON.stringify(commentsDB));
-}
-
-function loadLikedComments() {
-  const saved = localStorage.getItem('likedComments');
-  if (saved) {
-    likedComments = JSON.parse(saved);
-  }
-}
-
-function saveLikedComments() {
-  localStorage.setItem('likedComments', JSON.stringify(likedComments));
-}
-
-function loadUserName() {
-  const saved = localStorage.getItem('commentUserName');
-  if (saved) {
-    userName = saved;
-    document.getElementById('userNameInput').value = userName;
-  }
-}
-
-function saveUserName() {
-  userName = document.getElementById('userNameInput').value.trim() || 'Anonym';
-  localStorage.setItem('commentUserName', userName);
-}
-
-function loadUserVotes() {
-  const saved = localStorage.getItem('aiToolsVotes');
-  if (saved) {
-    userVotes = JSON.parse(saved);
-    // Apply saved votes to tools
-    aiTools.forEach(tool => {
-      if (userVotes[tool.id]) {
-        tool.votes = userVotes[tool.id].votes || 0;
-        tool.userVote = userVotes[tool.id].userVote || 0;
-      }
-    });
-  }
-}
-
-function saveUserVotes() {
-  const toSave = {};
-  aiTools.forEach(tool => {
-    if (tool.votes !== 0 || tool.userVote !== 0) {
-      toSave[tool.id] = { votes: tool.votes, userVote: tool.userVote };
-    }
-  });
-  localStorage.setItem('aiToolsVotes', JSON.stringify(toSave));
-}
-
+// ========== EVENT HANDLER ==========
 function setupEvents() {
-  document.getElementById('langBtn').addEventListener('click', () => {
-    lang = lang === 'de' ? 'en' : 'de';
-    document.getElementById('langText').textContent = lang === 'de' ? 'EN' : 'DE';
-    updateLang();
-    renderTopCharts();
-    applyFilters();
-    if (currentToolId) {
-      renderComments(currentToolId);
-    }
-  });
-
+  // Sprachumschalter Button
+  document.getElementById('langBtn').addEventListener('click', toggleLanguage);
+  
+  // Suchfunktion
   const searchInput = document.getElementById('searchInput');
   searchInput.addEventListener('input', e => {
     clearTimeout(searchTimeout);
@@ -663,7 +615,8 @@ function setupEvents() {
   searchInput.addEventListener('blur', () => {
     setTimeout(hideSuggestions, 200);
   });
-
+  
+  // Tastatur Shortcuts
   document.addEventListener('keydown', e => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
       e.preventDefault();
@@ -676,8 +629,8 @@ function setupEvents() {
       applyFilters();
     }
   });
-
-  // Search hint chips click events
+  
+  // Search hint chips
   document.querySelectorAll('.search-hint-chip').forEach(chip => {
     chip.addEventListener('click', () => {
       const searchTerm = chip.dataset.search;
@@ -687,16 +640,16 @@ function setupEvents() {
       searchInput.focus();
     });
   });
-
-  // Kommentar Overlay Events
+  
+  // Kommentar Overlay
   document.getElementById('closeComments').addEventListener('click', closeComments);
   document.getElementById('commentsOverlay').addEventListener('click', (e) => {
     if (e.target === document.getElementById('commentsOverlay')) {
       closeComments();
     }
   });
-
-  // Kommentar senden Event
+  
+  // Kommentar senden
   document.getElementById('submitCommentBtn').addEventListener('click', submitComment);
   document.getElementById('commentInput').addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -704,8 +657,8 @@ function setupEvents() {
       submitComment();
     }
   });
-
-  // Benutzername speichern beim Verlassen des Felds
+  
+  // Benutzername speichern
   document.getElementById('userNameInput').addEventListener('blur', saveUserName);
   document.getElementById('userNameInput').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -714,7 +667,8 @@ function setupEvents() {
       document.getElementById('commentInput').focus();
     }
   });
-
+  
+  // Quick Navigation Filter
   document.getElementById('quickNav').addEventListener('click', e => {
     const card = e.target.closest('.quick-card');
     if (!card) return;
@@ -748,7 +702,8 @@ function setupEvents() {
     applyFilters();
     window.scrollTo({ top: document.querySelector('.tools-container').offsetTop - 20, behavior: 'smooth' });
   });
-
+  
+  // Filter Buttons
   document.querySelector('.compact-filters').addEventListener('click', e => {
     const btn = e.target.closest('.filter-btn');
     if (!btn) return;
@@ -764,7 +719,8 @@ function setupEvents() {
     
     applyFilters();
   });
-
+  
+  // Filter Dropdowns
   document.getElementById('priceFilter').addEventListener('change', function() {
     price = this.value;
     applyFilters();
@@ -774,7 +730,8 @@ function setupEvents() {
     sort = this.value;
     applyFilters();
   });
-
+  
+  // Scroll to top Button
   const scrollBtn = document.getElementById('scrollTop');
   window.addEventListener('scroll', () => {
     scrollBtn.classList.toggle('visible', window.pageYOffset > 300);
@@ -784,6 +741,93 @@ function setupEvents() {
   });
 }
 
+// ========== FILTER DROPDOWNS INIT ==========
+function initFilterDropdowns() {
+  const t = translations[lang];
+  
+  // Price Filter
+  const priceFilter = document.getElementById('priceFilter');
+  priceFilter.innerHTML = `
+    <option value="all">${lang === 'de' ? '💰 Alle Preise' : '💰 All prices'}</option>
+    <option value="free">${lang === 'de' ? '🆓 Kostenlos' : '🆓 Free'}</option>
+    <option value="paid">${lang === 'de' ? '💳 Bezahlt' : '💳 Paid'}</option>
+    <option value="freemium">${lang === 'de' ? '⭐ Freemium' : '⭐ Freemium'}</option>
+  `;
+  priceFilter.value = price;
+  
+  // Sort Filter
+  const sortFilter = document.getElementById('sortFilter');
+  sortFilter.innerHTML = `
+    <option value="votes">${lang === 'de' ? '👍 Community' : '👍 Community'}</option>
+    <option value="popular">${lang === 'de' ? '🔥 Beliebt' : '🔥 Popular'}</option>
+    <option value="rating">${lang === 'de' ? '⭐ Bewertung' : '⭐ Rating'}</option>
+    <option value="price-low">${lang === 'de' ? '💰 Preis ↑' : '💰 Price ↑'}</option>
+    <option value="price-high">${lang === 'de' ? '💰 Preis ↓' : '💰 Price ↓'}</option>
+  `;
+  sortFilter.value = sort;
+}
+
+// ========== DATEN SPEICHERN/LADEN ==========
+function loadComments() {
+  const saved = localStorage.getItem('aiToolsComments');
+  if (saved) {
+    commentsDB = JSON.parse(saved);
+  }
+}
+
+function saveComments() {
+  localStorage.setItem('aiToolsComments', JSON.stringify(commentsDB));
+}
+
+function loadLikedComments() {
+  const saved = localStorage.getItem('likedComments');
+  if (saved) {
+    likedComments = JSON.parse(saved);
+  }
+}
+
+function saveLikedComments() {
+  localStorage.setItem('likedComments', JSON.stringify(likedComments));
+}
+
+function loadUserName() {
+  const saved = localStorage.getItem('commentUserName');
+  if (saved) {
+    userName = saved;
+    document.getElementById('userNameInput').value = userName;
+  }
+}
+
+function saveUserName() {
+  userName = document.getElementById('userNameInput').value.trim() || (lang === 'de' ? 'Anonym' : 'Anonymous');
+  localStorage.setItem('commentUserName', userName);
+}
+
+function loadUserVotes() {
+  const saved = localStorage.getItem('aiToolsVotes');
+  if (saved) {
+    userVotes = JSON.parse(saved);
+    // Apply saved votes to tools
+    aiTools.forEach(tool => {
+      if (userVotes[tool.id]) {
+        tool.votes = userVotes[tool.id].votes || 0;
+        tool.userVote = userVotes[tool.id].userVote || 0;
+      }
+    });
+  }
+}
+
+function saveUserVotes() {
+  const toSave = {};
+  aiTools.forEach(tool => {
+    if (tool.votes !== 0 || tool.userVote !== 0) {
+      toSave[tool.id] = { votes: tool.votes, userVote: tool.userVote };
+    }
+  });
+  localStorage.setItem('aiToolsVotes', JSON.stringify(toSave));
+}
+
+// ========== SUCHE & VORSCHLÄGE ==========
 function showSuggestions(q) {
   const div = document.getElementById('searchSuggestions');
   const matches = aiTools.filter(t => {
@@ -862,61 +906,7 @@ function catName(c) {
   return m[c] || c;
 }
 
-function updateLang() {
-  const t = translations[lang];
-  document.getElementById('badgeText').textContent = t.badge(aiTools.length);
-  document.getElementById('pageTitle').textContent = t.title;
-  document.getElementById('pageDescription').textContent = t.desc;
-  document.getElementById('searchInput').placeholder = t.searchPlaceholder;
-  document.getElementById('hintText').textContent = t.searchHint;
-  document.getElementById('navChat').textContent = t.navChat;
-  document.getElementById('navChatDesc').textContent = t.navChatDesc;
-  document.getElementById('navImage').textContent = t.navImage;
-  document.getElementById('navImageDesc').textContent = t.navImageDesc;
-  document.getElementById('navVoice').textContent = t.navVoice;
-  document.getElementById('navVoiceDesc').textContent = t.navVoiceDesc;
-  document.getElementById('navVideo').textContent = t.navVideo;
-  document.getElementById('navVideoDesc').textContent = t.navVideoDesc;
-  document.getElementById('navCode').textContent = t.navCode;
-  document.getElementById('navCodeDesc').textContent = t.navCodeDesc;
-  document.getElementById('navFree').textContent = t.navFree;
-  document.getElementById('navFreeDesc').textContent = t.navFreeDesc;
-  document.getElementById('topChartsTitle').textContent = t.topChartsTitle;
-  document.getElementById('catAll').textContent = t.catAll;
-  document.getElementById('catText').textContent = t.catText;
-  document.getElementById('catImage').textContent = t.catImage;
-  document.getElementById('catAudio').textContent = t.catAudio;
-  document.getElementById('catVideo').textContent = t.catVideo;
-  document.getElementById('catCode').textContent = t.catCode;
-  document.getElementById('toolsText').textContent = t.toolsFound;
-  document.getElementById('footerCopy').textContent = t.footerCopy;
-  document.getElementById('footerDiscl').textContent = t.footerDiscl;
-  document.getElementById('commentsToolTitle').textContent = t.comments;
-  document.getElementById('commentInput').placeholder = t.commentPlaceholder;
-  document.getElementById('userLabel').textContent = t.userLabel;
-  document.getElementById('userNameInput').placeholder = t.userPlaceholder;
-  document.getElementById('submitText').textContent = t.submitText;
-
-  const pf = document.getElementById('priceFilter');
-  pf.innerHTML = `
-    <option value="all">${t.priceAll}</option>
-    <option value="free">${t.priceFree}</option>
-    <option value="paid">${t.pricePaid}</option>
-    <option value="freemium">${t.priceFreemium}</option>
-  `;
-  pf.value = price;
-
-  const sf = document.getElementById('sortFilter');
-  sf.innerHTML = `
-    <option value="votes">${t.sortVotes}</option>
-    <option value="popular">${t.sortPopular}</option>
-    <option value="rating">${t.sortRating}</option>
-    <option value="price-low">${t.sortPriceLow}</option>
-    <option value="price-high">${t.sortPriceHigh}</option>
-  `;
-  sf.value = sort;
-}
-
+// ========== TOP CHARTS RENDERN ==========
 function renderTopCharts() {
   const container = document.getElementById('topCharts');
   const t = translations[lang];
@@ -946,7 +936,7 @@ function renderTopCharts() {
       <div class="chart-description">${tool.description[lang]}</div>
       <div class="chart-actions">
         <button class="vote-btn up ${tool.userVote === 1 ? 'active' : ''}" data-id="${tool.id}" data-vote="1">
-          <i class="fas fa-thumbs-up"></i> ${lang === 'de' ? 'Hilfreich' : 'Helpful'}
+          <i class="fas fa-thumbs-up"></i> ${t.helpful}
         </button>
         <button class="vote-btn down ${tool.userVote === -1 ? 'active' : ''}" data-id="${tool.id}" data-vote="-1">
           <i class="fas fa-thumbs-down"></i>
@@ -974,6 +964,7 @@ function renderTopCharts() {
   });
 }
 
+// ========== VOTE HANDLING ==========
 function handleVote(toolId, vote) {
   const tool = aiTools.find(t => t.id === toolId);
   if (!tool) return;
@@ -994,15 +985,15 @@ function handleVote(toolId, vote) {
   userVotes[toolId] = { votes: tool.votes, userVote: tool.userVote };
   saveUserVotes();
   renderTopCharts();
-  applyFilters(); // Update main list
+  applyFilters();
 }
 
+// ========== KOMMENTARE SYSTEM ==========
 function openComments(toolId) {
   const tool = aiTools.find(t => t.id === toolId);
   if (!tool) return;
   
   currentToolId = toolId;
-  document.getElementById('commentsToolTitle').textContent = `${translations[lang].comments}: ${tool.name}`;
   document.getElementById('commentsOverlay').classList.add('active');
   document.body.style.overflow = 'hidden';
   
@@ -1118,7 +1109,7 @@ function submitComment() {
   // Erfolgsfeedback
   const submitBtn = document.getElementById('submitCommentBtn');
   const originalText = submitBtn.innerHTML;
-  submitBtn.innerHTML = '<i class="fas fa-check"></i> Gesendet!';
+  submitBtn.innerHTML = lang === 'de' ? '<i class="fas fa-check"></i> Gesendet!' : '<i class="fas fa-check"></i> Sent!';
   submitBtn.disabled = true;
   
   setTimeout(() => {
@@ -1203,6 +1194,7 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
+// ========== FILTER & TOOL LISTE ==========
 function applyFilters() {
   let filtered = aiTools.filter(tool => {
     if (cat !== 'all' && tool.category !== cat) return false;
