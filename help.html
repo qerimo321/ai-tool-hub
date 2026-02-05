@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
+<title>Hilfe - AI Finder 2026</title>
+<meta name="description" content="Hilfe und Informationen zur Nutzung von AI Finder">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="glitch-effect"></div>
+
+<div class="language-switch">
+  <button class="lang-btn" id="langBtn" type="button" aria-label="Sprache wechseln">
+    <i class="fas fa-globe"></i>
+    <span id="langText">EN</span>
+  </button>
+</div>
+
+<div class="help-container">
+  <header class="header">
+    <div class="badge" data-de="❓ Hilfe & FAQ" data-en="❓ Help & FAQ"></div>
+    <h1 data-de="Hilfe zu AI Finder" data-en="AI Finder Help"></h1>
+    <p data-de="Alles, was du wissen musst, um KI-Tools zu finden und zu bewerten." data-en="Everything you need to know to find and rate AI tools."></p>
+    <a href="index.html" class="back-btn" data-de="← Zurück zur Hauptseite" data-en="← Back to main page"></a>
+  </header>
+
+  <main class="help-content">
+    <section class="help-section">
+      <h2><i class="fas fa-vote-yea"></i> <span data-de="Voting-System" data-en="Voting System"></span></h2>
+      <p data-de="Du kannst für jedes KI-Tool abstimmen, ob es hilfreich ist oder nicht. Diese Votes werden <strong>lokal in deinem Browser</strong> (LocalStorage) gespeichert." data-en="You can vote for each AI tool whether it's helpful or not. These votes are stored <strong>locally in your browser</strong> (LocalStorage)."></p>
+    </section>
+
+    <section class="help-section">
+      <h2><i class="fas fa-comments"></i> <span data-de="Kommentare" data-en="Comments"></span></h2>
+      <p data-de="Kommentare werden ebenfalls lokal gespeichert. Sie sind nur auf deinem Gerät sichtbar." data-en="Comments are also stored locally. They are only visible on your device."></p>
+    </section>
+
+    <section class="help-section">
+      <h2><i class="fas fa-trash-alt"></i> <span data-de="Daten löschen" data-en="Delete Data"></span></h2>
+      <p data-de="Um alle gespeicherten Daten (Votes, Kommentare, Spracheinstellung) zu löschen:" data-en="To delete all stored data (votes, comments, language setting):"></p>
+      <ol>
+        <li data-de="Öffne die Entwicklertools (F12)" data-en="Open Developer Tools (F12)"></li>
+        <li data-de="Gehe zum Tab 'Anwendung' (Application)" data-en="Go to the 'Application' tab"></li>
+        <li data-de="Wähle 'Local Storage' und klicke auf die Website-URL" data-en="Select 'Local Storage' and click on the website URL"></li>
+        <li data-de="Klicke rechts auf 'Local Storage löschen'" data-en="Click 'Clear Local Storage' on the right"></li>
+      </ol>
+      <button id="clearDataBtn" class="danger-btn" type="button" data-de="Alle lokalen Daten löschen" data-en="Clear all local data"></button>
+    </section>
+
+    <section class="help-section">
+      <h2><i class="fas fa-search"></i> <span data-de="Suchtipps" data-en="Search Tips"></span></h2>
+      <ul>
+        <li data-de="Verwende einfache Suchbegriffe: 'ChatGPT', 'Bilder', 'kostenlos'" data-en="Use simple search terms: 'ChatGPT', 'Images', 'free'"></li>
+        <li data-de="Klicke auf die Quick-Navigation für häufige Kategorien" data-en="Click on quick navigation for common categories"></li>
+        <li data-de="Nutze Filter, um nach Preis oder Kategorie einzugrenzen" data-en="Use filters to narrow by price or category"></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p data-de="© 2026 AI Finder | Dein KI-Tool Finder" data-en="© 2026 AI Finder | Your AI Tool Finder"></p>
+    <p><a href="index.html" data-de="← Zurück zur Hauptseite" data-en="← Back to main page"></a></p>
+  </footer>
+</div>
+
+<script>
+  // Einfache Sprachlogik für Hilfeseite
+  let lang = localStorage.getItem('preferredLang') || (navigator.language.toLowerCase().startsWith('de') ? 'de' : 'en');
+  
+  function updateLanguage() {
+    document.querySelectorAll('[data-de][data-en]').forEach(el => {
+      el.textContent = el.getAttribute(`data-${lang}`);
+    });
+    document.getElementById('langText').textContent = lang === 'de' ? 'EN' : 'DE';
+  }
+  
+  document.getElementById('langBtn').addEventListener('click', () => {
+    lang = lang === 'de' ? 'en' : 'de';
+    localStorage.setItem('preferredLang', lang);
+    updateLanguage();
+  });
+  
+  // Daten löschen Button
+  document.getElementById('clearDataBtn').addEventListener('click', () => {
+    if (confirm(lang === 'de' ? 
+      'Alle lokalen Daten (Votes, Kommentare, Sprache) löschen?' : 
+      'Clear all local data (votes, comments, language)?')) {
+      localStorage.clear();
+      alert(lang === 'de' ? 'Daten gelöscht!' : 'Data cleared!');
+    }
+  });
+  
+  updateLanguage();
+</script>
+</body>
+</html>
