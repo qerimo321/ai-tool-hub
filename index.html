@@ -59,6 +59,12 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%
 .search-box{width:100%;padding:14px 20px 14px 48px;background:var(--card-bg);border:2px solid var(--dark-light);border-radius:var(--radius);color:var(--text);font-size:0.95rem;transition:var(--transition);backdrop-filter:blur(10px)}
 .search-box:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,0.1)}
 .search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--primary-light);font-size:1.1rem}
+.search-hint-container{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
+.search-hint-text{font-size:0.8rem;color:var(--text-muted);margin-right:8px;display:flex;align-items:center;gap:4px}
+.search-hint-text i{color:var(--primary-light);font-size:0.7rem}
+.search-hint-chip{background:rgba(99,102,241,0.1);color:var(--primary-light);padding:4px 10px;border-radius:16px;font-size:0.75rem;cursor:pointer;transition:var(--transition);border:1px solid rgba(99,102,241,0.3);display:flex;align-items:center;gap:4px;white-space:nowrap}
+.search-hint-chip:hover{background:rgba(99,102,241,0.2);transform:translateY(-1px);border-color:var(--primary-light)}
+.search-hint-chip i{font-size:0.7rem}
 .search-suggestions{position:absolute;top:100%;left:0;right:0;background:var(--card-bg);border:2px solid var(--primary);border-top:none;border-radius:0 0 var(--radius) var(--radius);backdrop-filter:blur(10px);max-height:280px;overflow-y:auto;z-index:100;display:none}
 .search-suggestions.active{display:block}
 .suggestion-item{padding:10px 16px;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--dark-light)}
@@ -77,7 +83,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%
 .section-title{display:flex;align-items:center;gap:8px;font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:12px}
 .section-title i{color:var(--primary)}
 .top-charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
-.chart-card{background:var(--card-bg);border-radius:var(--radius);padding:16px;border:1px solid var(--dark-light);backdrop-filter:blur(10px)}
+.chart-card{background:var(--card-bg);border-radius:var(--radius);padding:16px;border:1px solid var(--dark-light);backdrop-filter:blur(10px);position:relative}
 .chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .chart-rank{width:28px;height:28px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem}
 .chart-rank.rank-1{background:linear-gradient(135deg,#fbbf24,#f59e0b)}
@@ -96,6 +102,9 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%
 .vote-btn.active.up{background:rgba(16,185,129,0.25);border-color:var(--secondary);color:var(--secondary-light)}
 .vote-btn.active.down{background:rgba(239,68,68,0.25);border-color:#ef4444;color:#f87171}
 .vote-btn i{font-size:1.1rem}
+.chart-comment-btn{position:absolute;top:16px;right:16px;background:rgba(99,102,241,0.1);border:1px solid var(--primary);border-radius:20px;padding:4px 10px;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:5px;font-size:0.75rem;color:var(--primary-light)}
+.chart-comment-btn:hover{background:rgba(99,102,241,0.2);transform:translateY(-1px)}
+.comment-badge{background:var(--primary);color:white;font-size:0.7rem;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:700}
 .tools-container{max-width:1200px;margin:0 auto;padding:0 20px 40px}
 .compact-tools-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px}
 .compact-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
@@ -128,6 +137,8 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%
 .tool-price-compact{font-size:0.85rem;font-weight:800;color:var(--secondary-light)}
 .tool-link-compact{background:linear-gradient(135deg,var(--primary),var(--accent));color:white;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:700;transition:var(--transition);font-size:0.85rem;white-space:nowrap;text-align:center}
 .tool-link-compact:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(99,102,241,0.3)}
+.comment-btn-compact{background:rgba(99,102,241,0.1);border:1px solid var(--primary);border-radius:6px;padding:6px 10px;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:5px;font-size:0.75rem;color:var(--primary-light);white-space:nowrap}
+.comment-btn-compact:hover{background:rgba(99,102,241,0.2);transform:translateY(-1px)}
 .empty-state{text-align:center;padding:40px 20px;grid-column:1/-1}
 .empty-state i{font-size:3rem;color:var(--text-muted);margin-bottom:16px;opacity:0.5}
 .empty-state h3{font-size:1.2rem;margin-bottom:10px;color:var(--text)}
@@ -141,8 +152,44 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%
 .scroll-top{position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,var(--primary),var(--accent));color:white;width:45px;height:45px;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition);z-index:999;box-shadow:var(--shadow)}
 .scroll-top.visible{display:flex}
 .scroll-top:hover{transform:translateY(-3px)}
-@media (max-width:768px){.header{padding:50px 15px 15px}.quick-navigation{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:0 15px}.top-charts-section{padding:0 15px}.tools-container{padding:0 15px 30px}.compact-tools-header{flex-direction:column;align-items:stretch}.compact-filters{justify-content:center}.compact-tool-row{grid-template-columns:1fr;gap:12px}.tool-meta-compact{flex-direction:row;justify-content:space-between;align-items:center;min-width:auto}.tool-vote-compact{flex-direction:row;justify-content:space-between;width:100%;margin-bottom:8px}.vote-buttons-compact{gap:15px}}
-@media (max-width:480px){.header h1{font-size:1.5rem}.search-box{padding:12px 16px 12px 44px;font-size:0.9rem}.quick-navigation{grid-template-columns:1fr 1fr}.top-charts{grid-template-columns:1fr}.compact-tool-row{padding:12px}.vote-btn-compact{width:38px;height:38px;padding:6px}.tool-link-compact{padding:8px 14px;font-size:0.8rem}}
+/* Kommentar Overlay */
+.comments-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.95);z-index:1000;display:none;justify-content:center;align-items:center;padding:20px;backdrop-filter:blur(5px)}
+.comments-overlay.active{display:flex}
+.comments-container{width:100%;max-width:600px;max-height:80vh;background:var(--card-bg);border-radius:var(--radius);border:2px solid var(--primary);overflow:hidden;display:flex;flex-direction:column;backdrop-filter:blur(10px);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.comments-header{background:linear-gradient(135deg,var(--primary),var(--accent));padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
+.comments-title{font-weight:800;font-size:1.1rem;color:white;display:flex;align-items:center;gap:8px}
+.comments-title i{font-size:0.9rem}
+.close-comments{background:transparent;border:none;color:white;cursor:pointer;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:var(--transition);font-size:1.1rem}
+.close-comments:hover{background:rgba(255,255,255,0.1);transform:rotate(90deg)}
+.comments-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px}
+.comment-item{background:rgba(255,255,255,0.03);border-radius:10px;padding:14px;border:1px solid var(--dark-light);transition:var(--transition)}
+.comment-item:hover{border-color:var(--primary-light)}
+.comment-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.comment-user{display:flex;align-items:center;gap:8px}
+.user-avatar{width:32px;height:32px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem}
+.user-name{font-weight:600;font-size:0.85rem;color:var(--text)}
+.comment-time{font-size:0.75rem;color:var(--text-muted)}
+.comment-content{font-size:0.9rem;line-height:1.5;color:var(--text)}
+.comment-actions{display:flex;gap:10px;margin-top:10px}
+.comment-like-btn{background:transparent;border:none;color:var(--text-muted);cursor:pointer;font-size:0.8rem;display:flex;align-items:center;gap:4px;transition:var(--transition);padding:4px 8px;border-radius:4px}
+.comment-like-btn:hover{color:var(--secondary-light);background:rgba(16,185,129,0.1)}
+.comment-like-btn.liked{color:var(--secondary-light)}
+.no-comments{text-align:center;padding:40px 20px;color:var(--text-muted);font-size:0.9rem}
+.no-comments i{font-size:2rem;margin-bottom:12px;opacity:0.5}
+.comments-input-container{padding:20px;border-top:1px solid var(--dark-light);background:rgba(30,41,59,0.5)}
+.comment-input{width:100%;background:var(--dark);border:2px solid var(--dark-light);border-radius:8px;padding:12px 16px;color:var(--text);font-size:0.9rem;resize:none;min-height:80px;transition:var(--transition);font-family:'Inter',sans-serif}
+.comment-input:focus{outline:none;border-color:var(--primary)}
+.comment-input::placeholder{color:var(--text-muted)}
+.comment-submit-row{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.user-input-container{display:flex;align-items:center;gap:10px}
+.user-input-label{font-size:0.8rem;color:var(--text-muted)}
+.user-input{background:var(--dark);border:1px solid var(--dark-light);border-radius:6px;padding:8px 12px;color:var(--text);font-size:0.85rem;width:150px;transition:var(--transition)}
+.user-input:focus{outline:none;border-color:var(--primary)}
+.comment-submit-btn{background:linear-gradient(135deg,var(--primary),var(--accent));color:white;border:none;padding:10px 20px;border-radius:8px;font-weight:700;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:6px}
+.comment-submit-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(99,102,241,0.3)}
+.comment-submit-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+@media (max-width:768px){.header{padding:50px 15px 15px}.quick-navigation{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:0 15px}.top-charts-section{padding:0 15px}.tools-container{padding:0 15px 30px}.compact-tools-header{flex-direction:column;align-items:stretch}.compact-filters{justify-content:center}.compact-tool-row{grid-template-columns:1fr;gap:12px}.tool-meta-compact{flex-direction:row;justify-content:space-between;align-items:center;min-width:auto}.tool-vote-compact{flex-direction:row;justify-content:space-between;width:100%;margin-bottom:8px}.vote-buttons-compact{gap:15px}.search-hint-container{justify-content:flex-start;overflow-x:auto;padding-bottom:5px;-ms-overflow-style:none;scrollbar-width:none}.search-hint-container::-webkit-scrollbar{display:none}.comments-container{max-height:90vh;margin:0}}
+@media (max-width:480px){.header h1{font-size:1.5rem}.search-box{padding:12px 16px 12px 44px;font-size:0.9rem}.quick-navigation{grid-template-columns:1fr 1fr}.top-charts{grid-template-columns:1fr}.compact-tool-row{padding:12px}.vote-btn-compact{width:38px;height:38px;padding:6px}.tool-link-compact{padding:8px 14px;font-size:0.8rem}.search-hint-text{font-size:0.7rem}.search-hint-chip{font-size:0.7rem;padding:3px 8px}.comment-submit-row{flex-direction:column;gap:12px;align-items:stretch}.user-input-container{justify-content:space-between}.comments-body{padding:15px}.comments-header{padding:15px}}
 </style>
 </head>
 <body>
@@ -151,6 +198,35 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%
 <i class="fas fa-globe"></i>
 <span id="langText">EN</span>
 </button>
+</div>
+<div class="comments-overlay" id="commentsOverlay">
+<div class="comments-container">
+<div class="comments-header">
+<div class="comments-title">
+<i class="fas fa-comments"></i>
+<span id="commentsToolTitle">Kommentare</span>
+</div>
+<button class="close-comments" id="closeComments">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="comments-body" id="commentsBody">
+<!-- Kommentare werden hier dynamisch eingefügt -->
+</div>
+<div class="comments-input-container">
+<textarea class="comment-input" id="commentInput" placeholder="Dein Kommentar... (Enter zum Senden, Shift+Enter für neue Zeile)"></textarea>
+<div class="comment-submit-row">
+<div class="user-input-container">
+<span class="user-input-label" id="userLabel">Name:</span>
+<input type="text" class="user-input" id="userNameInput" placeholder="Anonym" maxlength="20">
+</div>
+<button class="comment-submit-btn" id="submitCommentBtn">
+<i class="fas fa-paper-plane"></i>
+<span id="submitText">Kommentieren</span>
+</button>
+</div>
+</div>
+</div>
 </div>
 <div class="scroll-top" id="scrollTop" aria-label="Nach oben">
 <i class="fas fa-arrow-up"></i>
@@ -163,6 +239,36 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%
 <i class="fas fa-search search-icon"></i>
 <input type="text" class="search-box" id="searchInput" autocomplete="off" placeholder="Was möchtest du mit KI erreichen?">
 <div class="search-suggestions" id="searchSuggestions" role="listbox"></div>
+</div>
+<div class="search-hint-container" id="searchHintContainer">
+<div class="search-hint-text">
+<i class="fas fa-lightbulb"></i>
+<span id="hintText">Tipp: Suche nach</span>
+</div>
+<div class="search-hint-chip" data-search="ChatGPT">
+<i class="fas fa-robot"></i>
+<span>ChatGPT</span>
+</div>
+<div class="search-hint-chip" data-search="Bilder">
+<i class="fas fa-image"></i>
+<span>Bilder</span>
+</div>
+<div class="search-hint-chip" data-search="Video">
+<i class="fas fa-video"></i>
+<span>Video</span>
+</div>
+<div class="search-hint-chip" data-search="kostenlos">
+<i class="fas fa-gift"></i>
+<span>kostenlos</span>
+</div>
+<div class="search-hint-chip" data-search="Code">
+<i class="fas fa-code"></i>
+<span>Code</span>
+</div>
+<div class="search-hint-chip" data-search="Musik">
+<i class="fas fa-music"></i>
+<span>Musik</span>
+</div>
 </div>
 </header>
 <section class="quick-navigation" id="quickNav">
@@ -263,6 +369,10 @@ const moreTools = [
 
 aiTools = [...aiTools, ...moreTools];
 
+// Kommentar Datenbank
+let commentsDB = {};
+let likedComments = {};
+
 // Translations
 const translations = {
   de: {
@@ -270,6 +380,7 @@ const translations = {
     title: "Finde sofort dein perfektes KI-Tool",
     desc: "Echte User-Bewertungen, Top 5 Charts, intelligente Empfehlungen. Kein unnötiges Scrollen.",
     searchPlaceholder: "Was möchtest du mit KI erreichen?",
+    searchHint: "Tipp: Suche nach",
     navChat: "Chat & Text",
     navChatDesc: "KI schreiben lassen, Fragen beantworten",
     navImage: "Bilder generieren",
@@ -304,13 +415,31 @@ const translations = {
     noMsg: "Ändere deine Filter oder versuche andere Suchbegriffe.",
     resetBtn: "Filter zurücksetzen",
     footerCopy: "© 2026 AI Finder | Community-gestützte KI Tool Empfehlungen",
-    footerDiscl: "Bewertungen basieren auf User-Feedback (LocalStorage)."
+    footerDiscl: "Bewertungen basieren auf User-Feedback (LocalStorage).",
+    comments: "Kommentare",
+    commentPlaceholder: "Dein Kommentar... (Enter zum Senden, Shift+Enter für neue Zeile)",
+    userLabel: "Name:",
+    userPlaceholder: "Anonym",
+    submitText: "Kommentieren",
+    noComments: "Noch keine Kommentare. Sei der Erste!",
+    commentLikes: "Gefällt mir",
+    liked: "Gefällt mir",
+    viewComments: "Kommentare",
+    ago: "vor",
+    seconds: "Sekunden",
+    minutes: "Minuten",
+    hours: "Stunden",
+    days: "Tagen",
+    weeks: "Wochen",
+    months: "Monaten",
+    years: "Jahren"
   },
   en: {
     badge: n => `🚀 ${n} AI Tools for 2026`,
     title: "Find your perfect AI tool instantly",
     desc: "Real user ratings, Top 5 charts, smart recommendations. No unnecessary scrolling.",
     searchPlaceholder: "What do you want to achieve with AI?",
+    searchHint: "Tip: Search for",
     navChat: "Chat & Text",
     navChatDesc: "Let AI write, answer questions",
     navImage: "Generate images",
@@ -345,7 +474,24 @@ const translations = {
     noMsg: "Change your filters or try different search terms.",
     resetBtn: "Reset filters",
     footerCopy: "© 2026 AI Finder | Community-driven AI tool recommendations",
-    footerDiscl: "Ratings based on user feedback (LocalStorage)."
+    footerDiscl: "Ratings based on user feedback (LocalStorage).",
+    comments: "Comments",
+    commentPlaceholder: "Your comment... (Enter to send, Shift+Enter for new line)",
+    userLabel: "Name:",
+    userPlaceholder: "Anonymous",
+    submitText: "Comment",
+    noComments: "No comments yet. Be the first!",
+    commentLikes: "Likes",
+    liked: "Liked",
+    viewComments: "Comments",
+    ago: "ago",
+    seconds: "seconds",
+    minutes: "minutes",
+    hours: "hours",
+    days: "days",
+    weeks: "weeks",
+    months: "months",
+    years: "years"
   }
 };
 
@@ -356,15 +502,57 @@ let sort = 'votes';
 let query = '';
 let searchTimeout;
 let userVotes = {};
+let hintInterval;
+let hintChips = [];
+let currentToolId = null;
+let userName = '';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
   loadUserVotes();
+  loadComments();
+  loadLikedComments();
+  loadUserName();
   setupEvents();
   updateLang();
   renderTopCharts();
   applyFilters();
 });
+
+function loadComments() {
+  const saved = localStorage.getItem('aiToolsComments');
+  if (saved) {
+    commentsDB = JSON.parse(saved);
+  }
+}
+
+function saveComments() {
+  localStorage.setItem('aiToolsComments', JSON.stringify(commentsDB));
+}
+
+function loadLikedComments() {
+  const saved = localStorage.getItem('likedComments');
+  if (saved) {
+    likedComments = JSON.parse(saved);
+  }
+}
+
+function saveLikedComments() {
+  localStorage.setItem('likedComments', JSON.stringify(likedComments));
+}
+
+function loadUserName() {
+  const saved = localStorage.getItem('commentUserName');
+  if (saved) {
+    userName = saved;
+    document.getElementById('userNameInput').value = userName;
+  }
+}
+
+function saveUserName() {
+  userName = document.getElementById('userNameInput').value.trim() || 'Anonym';
+  localStorage.setItem('commentUserName', userName);
+}
 
 function loadUserVotes() {
   const saved = localStorage.getItem('aiToolsVotes');
@@ -397,6 +585,9 @@ function setupEvents() {
     updateLang();
     renderTopCharts();
     applyFilters();
+    if (currentToolId) {
+      renderComments(currentToolId);
+    }
   });
 
   const searchInput = document.getElementById('searchInput');
@@ -427,6 +618,44 @@ function setupEvents() {
       query = '';
       hideSuggestions();
       applyFilters();
+    }
+  });
+
+  // Search hint chips click events
+  document.querySelectorAll('.search-hint-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const searchTerm = chip.dataset.search;
+      searchInput.value = searchTerm;
+      query = searchTerm.toLowerCase();
+      applyFilters();
+      searchInput.focus();
+    });
+  });
+
+  // Kommentar Overlay Events
+  document.getElementById('closeComments').addEventListener('click', closeComments);
+  document.getElementById('commentsOverlay').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('commentsOverlay')) {
+      closeComments();
+    }
+  });
+
+  // Kommentar senden Event
+  document.getElementById('submitCommentBtn').addEventListener('click', submitComment);
+  document.getElementById('commentInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      submitComment();
+    }
+  });
+
+  // Benutzername speichern beim Verlassen des Felds
+  document.getElementById('userNameInput').addEventListener('blur', saveUserName);
+  document.getElementById('userNameInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      saveUserName();
+      document.getElementById('commentInput').focus();
     }
   });
 
@@ -583,6 +812,7 @@ function updateLang() {
   document.getElementById('pageTitle').textContent = t.title;
   document.getElementById('pageDescription').textContent = t.desc;
   document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+  document.getElementById('hintText').textContent = t.searchHint;
   document.getElementById('navChat').textContent = t.navChat;
   document.getElementById('navChatDesc').textContent = t.navChatDesc;
   document.getElementById('navImage').textContent = t.navImage;
@@ -605,6 +835,11 @@ function updateLang() {
   document.getElementById('toolsText').textContent = t.toolsFound;
   document.getElementById('footerCopy').textContent = t.footerCopy;
   document.getElementById('footerDiscl').textContent = t.footerDiscl;
+  document.getElementById('commentsToolTitle').textContent = t.comments;
+  document.getElementById('commentInput').placeholder = t.commentPlaceholder;
+  document.getElementById('userLabel').textContent = t.userLabel;
+  document.getElementById('userNameInput').placeholder = t.userPlaceholder;
+  document.getElementById('submitText').textContent = t.submitText;
 
   const pf = document.getElementById('priceFilter');
   pf.innerHTML = `
@@ -628,11 +863,14 @@ function updateLang() {
 
 function renderTopCharts() {
   const container = document.getElementById('topCharts');
+  const t = translations[lang];
   const sortedTools = [...aiTools]
     .sort((a, b) => (b.votes + b.rating * 10) - (a.votes + a.rating * 10))
     .slice(0, 5);
 
-  container.innerHTML = sortedTools.map((tool, index) => `
+  container.innerHTML = sortedTools.map((tool, index) => {
+    const commentCount = commentsDB[tool.id] ? commentsDB[tool.id].length : 0;
+    return `
     <div class="chart-card">
       <div class="chart-header">
         <div class="chart-rank rank-${index + 1}">${index + 1}</div>
@@ -641,6 +879,10 @@ function renderTopCharts() {
           <span>${tool.votes}</span>
         </div>
       </div>
+      <button class="chart-comment-btn" data-id="${tool.id}">
+        <i class="fas fa-comment"></i>
+        <span class="comment-badge">${commentCount}</span>
+      </button>
       <div class="chart-tool-name">${tool.name}</div>
       <div class="chart-category">${catName(tool.category)}</div>
       <div class="chart-price">${tool.priceDisplay}</div>
@@ -654,7 +896,7 @@ function renderTopCharts() {
         </button>
       </div>
     </div>
-  `).join('');
+  `}).join('');
 
   // Add vote event listeners
   container.querySelectorAll('.vote-btn').forEach(btn => {
@@ -662,6 +904,15 @@ function renderTopCharts() {
       const toolId = parseInt(btn.dataset.id);
       const vote = parseInt(btn.dataset.vote);
       handleVote(toolId, vote);
+    });
+  });
+
+  // Add comment button listeners
+  container.querySelectorAll('.chart-comment-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const toolId = parseInt(btn.dataset.id);
+      openComments(toolId);
     });
   });
 }
@@ -689,12 +940,218 @@ function handleVote(toolId, vote) {
   applyFilters(); // Update main list
 }
 
+function openComments(toolId) {
+  const tool = aiTools.find(t => t.id === toolId);
+  if (!tool) return;
+  
+  currentToolId = toolId;
+  document.getElementById('commentsToolTitle').textContent = `${translations[lang].comments}: ${tool.name}`;
+  document.getElementById('commentsOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  
+  // Setze Fokus auf Kommentarfeld
+  setTimeout(() => {
+    document.getElementById('commentInput').focus();
+  }, 300);
+  
+  renderComments(toolId);
+}
+
+function closeComments() {
+  document.getElementById('commentsOverlay').classList.remove('active');
+  document.body.style.overflow = 'auto';
+  document.getElementById('commentInput').value = '';
+  currentToolId = null;
+}
+
+function renderComments(toolId) {
+  const commentsBody = document.getElementById('commentsBody');
+  const t = translations[lang];
+  
+  if (!commentsDB[toolId] || commentsDB[toolId].length === 0) {
+    commentsBody.innerHTML = `
+      <div class="no-comments">
+        <i class="fas fa-comment-slash"></i>
+        <p>${t.noComments}</p>
+      </div>
+    `;
+    return;
+  }
+  
+  const comments = commentsDB[toolId].sort((a, b) => b.timestamp - a.timestamp);
+  
+  commentsBody.innerHTML = comments.map(comment => {
+    const timeAgo = getTimeAgo(comment.timestamp);
+    const isLiked = likedComments[comment.id] || false;
+    const likeCount = comment.likes || 0;
+    
+    return `
+      <div class="comment-item" data-comment-id="${comment.id}">
+        <div class="comment-header">
+          <div class="comment-user">
+            <div class="user-avatar" style="background: ${getAvatarColor(comment.user)}">
+              ${comment.user.charAt(0).toUpperCase()}
+            </div>
+            <span class="user-name">${comment.user}</span>
+          </div>
+          <span class="comment-time">${timeAgo}</span>
+        </div>
+        <div class="comment-content">${escapeHtml(comment.text).replace(/\n/g, '<br>')}</div>
+        <div class="comment-actions">
+          <button class="comment-like-btn ${isLiked ? 'liked' : ''}" data-comment-id="${comment.id}">
+            <i class="fas fa-thumbs-up"></i>
+            <span>${likeCount} ${t.commentLikes}</span>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  // Add like button listeners
+  commentsBody.querySelectorAll('.comment-like-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const commentId = btn.dataset.commentId;
+      toggleCommentLike(commentId);
+    });
+  });
+}
+
+function submitComment() {
+  if (!currentToolId) return;
+  
+  const commentInput = document.getElementById('commentInput');
+  const text = commentInput.value.trim();
+  
+  if (!text) return;
+  
+  // Benutzername speichern
+  saveUserName();
+  
+  // Kommentar-ID generieren
+  const commentId = Date.now();
+  
+  // Kommentar erstellen
+  const comment = {
+    id: commentId,
+    user: userName,
+    text: text,
+    timestamp: Date.now(),
+    likes: 0
+  };
+  
+  // Kommentar zur Datenbank hinzufügen
+  if (!commentsDB[currentToolId]) {
+    commentsDB[currentToolId] = [];
+  }
+  commentsDB[currentToolId].push(comment);
+  
+  // Speichern
+  saveComments();
+  
+  // Kommentarfeld leeren
+  commentInput.value = '';
+  
+  // Kommentarliste aktualisieren
+  renderComments(currentToolId);
+  
+  // Kommentarzahlen in der Liste aktualisieren
+  renderTopCharts();
+  applyFilters();
+  
+  // Erfolgsfeedback
+  const submitBtn = document.getElementById('submitCommentBtn');
+  const originalText = submitBtn.innerHTML;
+  submitBtn.innerHTML = '<i class="fas fa-check"></i> Gesendet!';
+  submitBtn.disabled = true;
+  
+  setTimeout(() => {
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+  }, 1500);
+}
+
+function toggleCommentLike(commentId) {
+  if (!likedComments[commentId]) {
+    // Like hinzufügen
+    likedComments[commentId] = true;
+    
+    // Like-Zähler in Kommentar erhöhen
+    Object.keys(commentsDB).forEach(toolId => {
+      commentsDB[toolId].forEach(comment => {
+        if (comment.id == commentId) {
+          comment.likes = (comment.likes || 0) + 1;
+        }
+      });
+    });
+  } else {
+    // Like entfernen
+    delete likedComments[commentId];
+    
+    // Like-Zähler in Kommentar verringern
+    Object.keys(commentsDB).forEach(toolId => {
+      commentsDB[toolId].forEach(comment => {
+        if (comment.id == commentId) {
+          comment.likes = Math.max((comment.likes || 0) - 1, 0);
+        }
+      });
+    });
+  }
+  
+  saveComments();
+  saveLikedComments();
+  
+  if (currentToolId) {
+    renderComments(currentToolId);
+  }
+}
+
+function getTimeAgo(timestamp) {
+  const now = Date.now();
+  const diff = now - timestamp;
+  const t = translations[lang];
+  
+  const seconds = Math.floor(diff / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const weeks = Math.floor(days / 7);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(days / 365);
+  
+  if (years > 0) return `${years} ${t.years} ${t.ago}`;
+  if (months > 0) return `${months} ${t.months} ${t.ago}`;
+  if (weeks > 0) return `${weeks} ${t.weeks} ${t.ago}`;
+  if (days > 0) return `${days} ${t.days} ${t.ago}`;
+  if (hours > 0) return `${hours} ${t.hours} ${t.ago}`;
+  if (minutes > 0) return `${minutes} ${t.minutes} ${t.ago}`;
+  return `${seconds} ${t.seconds} ${t.ago}`;
+}
+
+function getAvatarColor(userName) {
+  const colors = [
+    'linear-gradient(135deg, #6366f1, #8b5cf6)',
+    'linear-gradient(135deg, #10b981, #34d399)',
+    'linear-gradient(135deg, #f59e0b, #d97706)',
+    'linear-gradient(135deg, #ef4444, #f87171)',
+    'linear-gradient(135deg, #8b5cf6, #a78bfa)',
+    'linear-gradient(135deg, #06b6d4, #22d3ee)'
+  ];
+  const index = userName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % colors.length;
+  return colors[index];
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 function applyFilters() {
   let filtered = aiTools.filter(tool => {
     if (cat !== 'all' && tool.category !== cat) return false;
     if (price !== 'all' && tool.price !== price) return false;
     if (query) {
-      const txt = `${tool.name} ${tool.category} ${tool.description[lang]} ${tool.features.join(' ')} ${tool.useCases ? tool.useCases.join(' ') : ''}`.toLowerCase();
+      const txt = `${tool.name} ${tool.category} ${tool.description[lang]} ${t.features.join(' ')} ${t.useCases ? t.useCases.join(' ') : ''}`.toLowerCase();
       if (!txt.includes(query)) return false;
     }
     return true;
@@ -737,7 +1194,9 @@ function renderTools(tools) {
     return;
   }
 
-  grid.innerHTML = tools.map(tool => `
+  grid.innerHTML = tools.map(tool => {
+    const commentCount = commentsDB[tool.id] ? commentsDB[tool.id].length : 0;
+    return `
     <div class="compact-tool-row" data-id="${tool.id}">
       <div class="tool-vote-compact">
         <div class="vote-count">${tool.votes}</div>
@@ -759,10 +1218,16 @@ function renderTools(tools) {
       </div>
       <div class="tool-meta-compact">
         <div class="tool-price-compact">${tool.priceDisplay}</div>
-        <a href="${tool.link}" class="tool-link-compact" target="_blank" rel="noopener noreferrer">${t.tryNow}</a>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="comment-btn-compact" data-id="${tool.id}">
+            <i class="fas fa-comment"></i>
+            <span class="comment-badge">${commentCount}</span>
+          </button>
+          <a href="${tool.link}" class="tool-link-compact" target="_blank" rel="noopener noreferrer">${t.tryNow}</a>
+        </div>
       </div>
     </div>
-  `).join('');
+  `}).join('');
 
   // Add vote event listeners
   grid.querySelectorAll('.vote-btn-compact').forEach(btn => {
@@ -770,6 +1235,15 @@ function renderTools(tools) {
       const toolId = parseInt(btn.dataset.id);
       const vote = parseInt(btn.dataset.vote);
       handleVote(toolId, vote);
+    });
+  });
+
+  // Add comment button listeners
+  grid.querySelectorAll('.comment-btn-compact').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const toolId = parseInt(btn.dataset.id);
+      openComments(toolId);
     });
   });
 }
