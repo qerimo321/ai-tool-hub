@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
 <title>AI Finder 2026 - Finde sofort dein perfektes KI-Tool</title>
-<meta name="description" content="Finde in 2 Klicks dein perfektes KI-Tool. Echte User-Bewertungen, Top 5 Charts, intelligente Empfehlungen.">
+<meta name="description" content="Finde in 2 Klicks dein perfektes KI-Tool. Echte User-Bewertungen, Top 5 Charts, intelligente Empfehlungen, Favoriten & Vergleichsfunktion.">
 <meta name="keywords" content="KI Tools, AI Software, ChatGPT Alternativen, KI Bildgeneratoren, kostenlose KI Tools">
 <meta name="google-site-verification" content="Wo_6LQQ8LoGlobalzVMjBHh_Z-VD3N_dFdqCZb2BYxV0" />
 <link rel="canonical" href="https://ai-searcher.github.io/ai-tool-hub/">
@@ -16,7 +16,7 @@
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AI Finder 2026 - Finde sofort dein perfektes KI-Tool">
-<meta property="og:description" content="Finde in 2 Klicks dein perfektes KI-Tool. Echte User-Bewertungen, Top 5 Charts, intelligente Empfehlungen.">
+<meta property="og:description" content="Finde in 2 Klicks dein perfektes KI-Tool. Echte User-Bewertungen, Top 5 Charts, intelligente Empfehlungen, Favoriten & Vergleichsfunktion.">
 <meta property="og:url" content="https://ai-searcher.github.io/ai-tool-hub/">
 <meta property="og:site_name" content="AI Finder">
 <meta name="twitter:card" content="summary_large_image">
@@ -68,6 +68,8 @@
   --radius-smooth: 20px;
   --transition-tech: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-glow: all 0.5s ease;
+  --favorite-gold: #FFD700;
+  --compare-blue: #4a9eff;
 }
 
 /* ===== NEUES DESIGN: FUTURISTISCHE GRUNDLAGEN ===== */
@@ -678,6 +680,66 @@ body::before {
   font-size: 1.2rem;
 }
 
+/* Favoriten Button */
+.favorite-btn {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: var(--tech-silver);
+  cursor: pointer;
+  transition: var(--transition-tech);
+  padding: 10px;
+  border-radius: 10px;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.favorite-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--favorite-gold);
+  transform: translateY(-2px);
+}
+
+.favorite-btn.active {
+  color: var(--favorite-gold);
+  border-color: var(--favorite-gold);
+  background: rgba(255, 215, 0, 0.1);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+/* Compare Button */
+.compare-btn {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: var(--tech-silver);
+  cursor: pointer;
+  transition: var(--transition-tech);
+  padding: 10px;
+  border-radius: 10px;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.compare-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--compare-blue);
+  transform: translateY(-2px);
+}
+
+.compare-btn.active {
+  color: var(--compare-blue);
+  border-color: var(--compare-blue);
+  background: rgba(74, 158, 255, 0.1);
+  box-shadow: 0 0 15px rgba(74, 158, 255, 0.2);
+}
+
 /* Tools Container & Filter */
 .tools-container {
   max-width: 1200px;
@@ -997,7 +1059,7 @@ body::before {
   box-shadow: 0 10px 30px rgba(0, 243, 255, 0.4);
 }
 
-/* Futuristischer Footer */
+/* Futuristischer Footer (OHNE Help & Feedback) */
 .footer {
   text-align: center;
   padding: 40px 20px;
@@ -1055,6 +1117,324 @@ body::before {
   box-shadow: 0 10px 30px rgba(0, 243, 255, 0.6);
 }
 
+/* ===== NEUE FEATURES ===== */
+
+/* Favoriten & Compare Bar */
+.actions-bar {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 14, 23, 0.95);
+  border: 1px solid var(--neon-cyan);
+  border-radius: var(--radius-smooth);
+  padding: 15px 25px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  z-index: 999;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 40px rgba(0, 243, 255, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-tech);
+}
+
+.actions-bar.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.actions-bar.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(20px);
+}
+
+.action-count {
+  font-weight: 700;
+  color: var(--neon-cyan);
+}
+
+.action-btn {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  color: var(--void-black);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-tech);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0, 243, 255, 0.4);
+}
+
+.action-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.action-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Vergleichs-Matrix Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+.compare-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: linear-gradient(145deg, var(--deep-space), var(--void-black));
+  border: 1px solid var(--neon-cyan);
+  border-radius: var(--radius-tech);
+  width: 90%;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.compare-modal.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+  padding: 25px 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  font-family: 'Space Grotesk', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.close-modal {
+  background: transparent;
+  border: none;
+  color: var(--tech-silver);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition-tech);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.close-modal:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.modal-content {
+  padding: 30px;
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.compare-table th {
+  background: rgba(0, 243, 255, 0.1);
+  padding: 15px;
+  text-align: left;
+  color: var(--neon-cyan);
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.compare-table td {
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--tech-silver);
+}
+
+.compare-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.compare-table tr:hover {
+  background: rgba(0, 243, 255, 0.05);
+}
+
+.compare-tool-header {
+  background: rgba(20, 25, 40, 0.8);
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tool-remove-btn {
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid #ff6b6b;
+  color: #ff6b6b;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: var(--transition-tech);
+  margin-top: 10px;
+}
+
+.tool-remove-btn:hover {
+  background: rgba(255, 107, 107, 0.2);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Tool-Vorschlags Modal */
+.suggestion-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: linear-gradient(145deg, var(--deep-space), var(--void-black));
+  border: 1px solid var(--neon-purple);
+  border-radius: var(--radius-tech);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.suggestion-modal.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.suggestion-form {
+  padding: 30px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group-full {
+  margin-bottom: 20px;
+}
+
+.suggestion-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.suggestion-input, .suggestion-select, .suggestion-textarea {
+  width: 100%;
+  padding: 12px 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  transition: var(--transition-tech);
+}
+
+.suggestion-input:focus, .suggestion-select:focus, .suggestion-textarea:focus {
+  outline: none;
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 0 3px rgba(185, 103, 255, 0.2);
+}
+
+.suggestion-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Status Messages */
+.status-message {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  display: none;
+  animation: fadeIn 0.5s;
+}
+
+.status-message.success {
+  background: rgba(46, 204, 113, 0.15);
+  border-left: 4px solid #2ecc71;
+}
+
+.status-message.error {
+  background: rgba(231, 76, 60, 0.15);
+  border-left: 4px solid #e74c3c;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ===== RESPONSIVE ANPASSUNGEN ===== */
 @media (max-width: 1024px) {
   .header {
@@ -1068,6 +1448,15 @@ body::before {
   .quick-navigation {
     grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
     gap: 15px;
+  }
+  
+  .compare-modal {
+    width: 95%;
+  }
+  
+  .compare-table {
+    display: block;
+    overflow-x: auto;
   }
 }
 
@@ -1150,6 +1539,16 @@ body::before {
     order: 2;
     justify-content: center;
   }
+  
+  .actions-bar {
+    flex-direction: column;
+    width: 90%;
+    padding: 15px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1174,7 +1573,7 @@ body::before {
     padding: 18px;
   }
   
-  .vote-btn-compact {
+  .vote-btn-compact, .favorite-btn, .compare-btn {
     width: 42px;
     height: 42px;
     padding: 8px;
@@ -1202,6 +1601,15 @@ body::before {
     gap: 6px;
     min-height: 40px;
   }
+  
+  .compare-modal, .suggestion-modal {
+    width: 95%;
+    padding: 15px;
+  }
+  
+  .modal-content {
+    padding: 15px;
+  }
 }
 
 @media (max-width: 375px) {
@@ -1218,17 +1626,6 @@ body::before {
     width: 30px;
     height: 30px;
     font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 320px) {
-  .chart-header {
-    justify-content: flex-start;
-    gap: 10px;
-  }
-  
-  .chart-votes {
-    margin-left: auto;
   }
   
   .quick-navigation {
@@ -1312,6 +1709,170 @@ body::before {
 <div class="data-stream" style="left: 70%; animation-delay: 1.5s;"></div>
 <div class="data-stream" style="left: 90%; animation-delay: 2s;"></div>
 
+<!-- Favoriten & Compare Actions Bar -->
+<div class="actions-bar hidden" id="actionsBar">
+  <div class="action-info">
+    <span id="favoritesCount" class="action-count">0</span>
+    <span id="favoritesText" data-de="Favoriten" data-en="Favorites"></span>
+  </div>
+  <div class="action-info">
+    <span id="compareCount" class="action-count">0</span>
+    <span id="compareText" data-de="im Vergleich" data-en="in comparison"></span>
+  </div>
+  <button class="action-btn" id="viewFavoritesBtn">
+    <i class="fas fa-star"></i>
+    <span data-de="Favoriten anzeigen" data-en="View Favorites"></span>
+  </button>
+  <button class="action-btn secondary" id="compareToolsBtn">
+    <i class="fas fa-balance-scale"></i>
+    <span data-de="Tools vergleichen" data-en="Compare Tools"></span>
+  </button>
+  <button class="action-btn secondary" id="clearAllBtn">
+    <i class="fas fa-trash"></i>
+    <span data-de="Alle löschen" data-en="Clear All"></span>
+  </button>
+</div>
+
+<!-- Vergleichs-Matrix Modal -->
+<div class="modal-overlay" id="compareModalOverlay"></div>
+<div class="compare-modal" id="compareModal">
+  <div class="modal-header">
+    <div class="modal-title">
+      <i class="fas fa-balance-scale"></i>
+      <span id="compareModalTitle" data-de="KI-Tools Vergleich" data-en="AI Tools Comparison"></span>
+    </div>
+    <button class="close-modal" id="closeCompareModal">&times;</button>
+  </div>
+  <div class="modal-content">
+    <div id="compareEmpty" style="text-align: center; padding: 40px;">
+      <i class="fas fa-balance-scale" style="font-size: 3rem; color: var(--tech-silver); opacity: 0.5; margin-bottom: 20px;"></i>
+      <h3 id="compareEmptyTitle" data-de="Keine Tools zum Vergleich ausgewählt" data-en="No tools selected for comparison"></h3>
+      <p id="compareEmptyText" data-de="Wähle mindestens 2 Tools aus, um sie zu vergleichen." data-en="Select at least 2 tools to compare them."></p>
+    </div>
+    <div id="compareContent" style="display: none;">
+      <table class="compare-table" id="compareTable"></table>
+      <div class="modal-actions">
+        <button class="action-btn secondary" id="exportComparisonBtn">
+          <i class="fas fa-download"></i>
+          <span data-de="Als CSV exportieren" data-en="Export as CSV"></span>
+        </button>
+        <button class="action-btn" id="clearComparisonBtn">
+          <i class="fas fa-trash"></i>
+          <span data-de="Vergleich löschen" data-en="Clear Comparison"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tool-Vorschlags Modal -->
+<div class="modal-overlay" id="suggestionModalOverlay"></div>
+<div class="suggestion-modal" id="suggestionModal">
+  <div class="modal-header">
+    <div class="modal-title">
+      <i class="fas fa-plus-circle"></i>
+      <span id="suggestionModalTitle" data-de="KI-Tool vorschlagen" data-en="Suggest AI Tool"></span>
+    </div>
+    <button class="close-modal" id="closeSuggestionModal">&times;</button>
+  </div>
+  <div class="modal-content">
+    <form id="toolSuggestionForm" class="suggestion-form">
+      <div class="form-row">
+        <div class="form-group-full">
+          <label class="suggestion-label" for="suggestionName">
+            <i class="fas fa-tag"></i>
+            <span data-de="Tool-Name *" data-en="Tool Name *"></span>
+          </label>
+          <input type="text" id="suggestionName" class="suggestion-input" required>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group-full">
+          <label class="suggestion-label" for="suggestionCategory">
+            <i class="fas fa-folder"></i>
+            <span data-de="Kategorie *" data-en="Category *"></span>
+          </label>
+          <select id="suggestionCategory" class="suggestion-select" required>
+            <option value="">-- Wählen --</option>
+            <option value="text" data-de="Text & Chat" data-en="Text & Chat"></option>
+            <option value="image" data-de="Bilder & Design" data-en="Images & Design"></option>
+            <option value="audio" data-de="Audio & Musik" data-en="Audio & Music"></option>
+            <option value="video" data-de="Video & Animation" data-en="Video & Animation"></option>
+            <option value="code" data-de="Code & Entwicklung" data-en="Code & Development"></option>
+            <option value="business" data-de="Business & Marketing" data-en="Business & Marketing"></option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group-full">
+          <label class="suggestion-label" for="suggestionLink">
+            <i class="fas fa-link"></i>
+            <span data-de="Website-URL *" data-en="Website URL *"></span>
+          </label>
+          <input type="url" id="suggestionLink" class="suggestion-input" required>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group-full">
+          <label class="suggestion-label" for="suggestionPrice">
+            <i class="fas fa-euro-sign"></i>
+            <span data-de="Preismodell" data-en="Pricing Model"></span>
+          </label>
+          <select id="suggestionPrice" class="suggestion-select">
+            <option value="free" data-de="Kostenlos" data-en="Free"></option>
+            <option value="freemium" data-de="Freemium" data-en="Freemium"></option>
+            <option value="paid" data-de="Bezahlt" data-en="Paid"></option>
+            <option value="unknown" data-de="Unbekannt" data-en="Unknown"></option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-group-full">
+        <label class="suggestion-label" for="suggestionDescription">
+          <i class="fas fa-align-left"></i>
+          <span data-de="Beschreibung *" data-en="Description *"></span>
+        </label>
+        <textarea id="suggestionDescription" class="suggestion-textarea" required placeholder="Beschreibe das Tool und seine Hauptfunktionen..."></textarea>
+      </div>
+      
+      <div class="form-group-full">
+        <label class="suggestion-label" for="suggestionWhy">
+          <i class="fas fa-lightbulb"></i>
+          <span data-de="Warum sollte dieses Tool aufgenommen werden?" data-en="Why should this tool be included?"></span>
+        </label>
+        <textarea id="suggestionWhy" class="suggestion-textarea" placeholder="Was macht dieses Tool besonders oder einzigartig?"></textarea>
+      </div>
+      
+      <div class="form-group-full">
+        <label class="suggestion-label" for="suggestionEmail">
+          <i class="fas fa-envelope"></i>
+          <span data-de="Deine E-Mail (optional)" data-en="Your Email (optional)"></span>
+        </label>
+        <input type="email" id="suggestionEmail" class="suggestion-input" placeholder="name@beispiel.de">
+        <small style="color: var(--tech-silver); display: block; margin-top: 5px;">
+          <span data-de="Nur für Rückfragen. Wir teilen sie nicht weiter." data-en="Only for follow-up questions. We won't share it."></span>
+        </small>
+      </div>
+      
+      <div class="modal-actions">
+        <button type="submit" class="action-btn">
+          <i class="fas fa-paper-plane"></i>
+          <span data-de="Vorschlag senden" data-en="Submit Suggestion"></span>
+        </button>
+        <button type="reset" class="action-btn secondary">
+          <i class="fas fa-redo"></i>
+          <span data-de="Formular zurücksetzen" data-en="Reset Form"></span>
+        </button>
+      </div>
+      
+      <div id="suggestionStatus" class="status-message"></div>
+    </form>
+  </div>
+</div>
+
 <div class="language-switch">
 <button class="lang-btn" id="langBtn" type="button" aria-label="Sprache wechseln">
 <i class="fas fa-globe"></i>
@@ -1394,6 +1955,22 @@ body::before {
 <div class="quick-title" id="navFree" data-de="Kostenlos" data-en="Free"></div>
 <div class="quick-desc" id="navFreeDesc" data-de="Top kostenlose KI-Tools" data-en="Top free AI tools"></div>
 </div>
+<!-- Neue Karten für die neuen Features -->
+<div class="quick-card" id="favoritesQuickCard">
+<div class="quick-icon" style="background: linear-gradient(135deg, var(--favorite-gold), #ffaa00);"><i class="fas fa-star"></i></div>
+<div class="quick-title" id="navFavorites" data-de="Meine Favoriten" data-en="My Favorites"></div>
+<div class="quick-desc" id="navFavoritesDesc" data-de="Gespeicherte KI-Tools anzeigen" data-en="View saved AI tools"></div>
+</div>
+<div class="quick-card" id="compareQuickCard">
+<div class="quick-icon" style="background: linear-gradient(135deg, var(--compare-blue), #0066ff);"><i class="fas fa-balance-scale"></i></div>
+<div class="quick-title" id="navCompare" data-de="Tools vergleichen" data-en="Compare Tools"></div>
+<div class="quick-desc" id="navCompareDesc" data-de="Bis zu 4 Tools gegenüberstellen" data-en="Compare up to 4 tools"></div>
+</div>
+<div class="quick-card" id="suggestQuickCard">
+<div class="quick-icon" style="background: linear-gradient(135deg, #ff6b6b, #ff8e53);"><i class="fas fa-plus-circle"></i></div>
+<div class="quick-title" id="navSuggest" data-de="Tool vorschlagen" data-en="Suggest Tool"></div>
+<div class="quick-desc" id="navSuggestDesc" data-de="Neues KI-Tool hinzufügen" data-en="Add new AI tool"></div>
+</div>
 </section>
 <section class="top-charts-section">
 <div class="section-title"><i class="fas fa-trophy"></i> <span id="topChartsTitle" data-de="Top 5 KI-Tools - Community Ranking" data-en="Top 5 AI Tools - Community Ranking"></span></div>
@@ -1408,6 +1985,7 @@ body::before {
 <button class="filter-btn" data-category="audio" type="button"><i class="fas fa-music"></i> <span id="catAudio" data-de="Audio" data-en="Audio"></span></button>
 <button class="filter-btn" data-category="video" type="button"><i class="fas fa-video"></i> <span id="catVideo" data-de="Video" data-en="Video"></span></button>
 <button class="filter-btn" data-category="code" type="button"><i class="fas fa-code"></i> <span id="catCode" data-de="Code" data-en="Code"></span></button>
+<button class="filter-btn" data-category="favorites" type="button"><i class="fas fa-star"></i> <span id="catFavorites" data-de="Favoriten" data-en="Favorites"></span></button>
 </div>
 <div class="compact-filters">
 <div class="filter-group">
@@ -1424,7 +2002,7 @@ body::before {
 <footer class="footer">
 <p id="footerCopy" data-de="© 2026 AI Finder | Community-gestützte KI Tool Empfehlungen" data-en="© 2026 AI Finder | Community-driven AI tool recommendations"></p>
 <p id="footerDiscl" data-de="Bewertungen basieren auf User-Feedback (LocalStorage)." data-en="Ratings based on user feedback (LocalStorage)."></p>
-<p><a href="#"><i class="fas fa-question-circle"></i> <span data-de="Hilfe" data-en="Help">Hilfe</span></a> | <a href="#"><i class="fas fa-envelope"></i> <span data-de="Feedback" data-en="Feedback">Feedback</span></a></p>
+<!-- Help & Feedback Buttons wurden hier entfernt -->
 </footer>
 <script>
 // ===== SPRACHSYSTEM =====
@@ -1502,6 +2080,9 @@ function updateDynamicContent() {
     
     // Filter anwenden (rendert auch die Tool-Liste)
     applyFilters();
+    
+    // Actions Bar aktualisieren
+    updateActionsBar();
   }
 }
 
@@ -1579,6 +2160,11 @@ const translations = {
   }
 };
 
+// ===== NEUE DATENSTRUKTUREN =====
+let favorites = [];
+let compareTools = [];
+let toolSuggestions = [];
+
 // ===== FILTER VARIABLEN =====
 let cat = 'all';
 let price = 'all';
@@ -1594,6 +2180,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 2. Daten laden
   loadUserVotes();
+  loadFavorites();
+  loadCompareTools();
+  loadToolSuggestions();
   
   // 3. Event Listener einrichten
   setupEvents();
@@ -1604,6 +2193,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 5. Inhalt rendern
   renderTopCharts();
   applyFilters();
+  
+  // 6. Actions Bar aktualisieren
+  updateActionsBar();
 });
 
 // ===== EVENT HANDLER =====
@@ -1659,6 +2251,24 @@ function setupEvents() {
   document.getElementById('quickNav').addEventListener('click', e => {
     const card = e.target.closest('.quick-card');
     if (!card) return;
+    
+    const cardId = card.id;
+    
+    // Spezielle Behandlung für neue Features
+    if (cardId === 'favoritesQuickCard') {
+      showFavorites();
+      return;
+    }
+    
+    if (cardId === 'compareQuickCard') {
+      openCompareModal();
+      return;
+    }
+    
+    if (cardId === 'suggestQuickCard') {
+      openSuggestionModal();
+      return;
+    }
     
     const filterType = card.dataset.filter;
     
@@ -1726,6 +2336,24 @@ function setupEvents() {
   scrollBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+  
+  // Actions Bar Events
+  document.getElementById('viewFavoritesBtn').addEventListener('click', showFavorites);
+  document.getElementById('compareToolsBtn').addEventListener('click', openCompareModal);
+  document.getElementById('clearAllBtn').addEventListener('click', clearAllSelections);
+  
+  // Modal Events
+  document.getElementById('closeCompareModal').addEventListener('click', closeCompareModal);
+  document.getElementById('compareModalOverlay').addEventListener('click', closeCompareModal);
+  document.getElementById('closeSuggestionModal').addEventListener('click', closeSuggestionModal);
+  document.getElementById('suggestionModalOverlay').addEventListener('click', closeSuggestionModal);
+  
+  // Vergleichs-Modal Actions
+  document.getElementById('exportComparisonBtn').addEventListener('click', exportComparison);
+  document.getElementById('clearComparisonBtn').addEventListener('click', clearComparison);
+  
+  // Tool-Vorschlags Formular
+  document.getElementById('toolSuggestionForm').addEventListener('submit', submitToolSuggestion);
 }
 
 // ===== FILTER DROPDOWNS INIT =====
@@ -1777,6 +2405,398 @@ function saveUserVotes() {
     }
   });
   localStorage.setItem('aiToolsVotes', JSON.stringify(toSave));
+}
+
+function loadFavorites() {
+  const saved = localStorage.getItem('aiToolsFavorites');
+  if (saved) {
+    favorites = JSON.parse(saved);
+  }
+  // Update tools with favorite status
+  aiTools.forEach(tool => {
+    tool.isFavorite = favorites.includes(tool.id);
+  });
+}
+
+function saveFavorites() {
+  localStorage.setItem('aiToolsFavorites', JSON.stringify(favorites));
+}
+
+function loadCompareTools() {
+  const saved = localStorage.getItem('aiToolsCompare');
+  if (saved) {
+    compareTools = JSON.parse(saved);
+  }
+  // Update tools with compare status
+  aiTools.forEach(tool => {
+    tool.inCompare = compareTools.includes(tool.id);
+  });
+}
+
+function saveCompareTools() {
+  localStorage.setItem('aiToolsCompare', JSON.stringify(compareTools));
+}
+
+function loadToolSuggestions() {
+  const saved = localStorage.getItem('aiToolsSuggestions');
+  if (saved) {
+    toolSuggestions = JSON.parse(saved);
+  }
+}
+
+function saveToolSuggestions() {
+  localStorage.setItem('aiToolsSuggestions', JSON.stringify(toolSuggestions));
+}
+
+// ===== FAVORITEN SYSTEM =====
+function toggleFavorite(toolId) {
+  const tool = aiTools.find(t => t.id === toolId);
+  if (!tool) return;
+  
+  const index = favorites.indexOf(toolId);
+  
+  if (index === -1) {
+    // Add to favorites
+    favorites.push(toolId);
+    tool.isFavorite = true;
+  } else {
+    // Remove from favorites
+    favorites.splice(index, 1);
+    tool.isFavorite = false;
+  }
+  
+  saveFavorites();
+  updateActionsBar();
+  
+  // Wenn wir im Favoriten-Filter sind, neu rendern
+  if (cat === 'favorites') {
+    applyFilters();
+  }
+  
+  // Top Charts neu rendern für Favoriten-Buttons
+  renderTopCharts();
+}
+
+function showFavorites() {
+  // Set filter to favorites
+  cat = 'favorites';
+  
+  // Update UI
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('[data-category="favorites"]').classList.add('active');
+  
+  // Apply filter
+  applyFilters();
+  
+  // Scroll to tools section
+  window.scrollTo({ top: document.querySelector('.tools-container').offsetTop - 20, behavior: 'smooth' });
+}
+
+// ===== VERGLEICHS-MATRIX =====
+function toggleCompare(toolId) {
+  const tool = aiTools.find(t => t.id === toolId);
+  if (!tool) return;
+  
+  const index = compareTools.indexOf(toolId);
+  
+  if (index === -1) {
+    // Check if we can add more (max 4)
+    if (compareTools.length >= 4) {
+      alert(lang === 'de' 
+        ? 'Maximal 4 Tools können verglichen werden. Entferne zuerst ein Tool aus dem Vergleich.' 
+        : 'Maximum 4 tools can be compared. Remove a tool from comparison first.');
+      return;
+    }
+    
+    // Add to compare
+    compareTools.push(toolId);
+    tool.inCompare = true;
+  } else {
+    // Remove from compare
+    compareTools.splice(index, 1);
+    tool.inCompare = false;
+  }
+  
+  saveCompareTools();
+  updateActionsBar();
+}
+
+function openCompareModal() {
+  if (compareTools.length === 0) {
+    alert(lang === 'de' 
+      ? 'Wähle mindestens 2 Tools zum Vergleichen aus.' 
+      : 'Select at least 2 tools to compare.');
+    return;
+  }
+  
+  if (compareTools.length < 2) {
+    alert(lang === 'de' 
+      ? 'Wähle mindestens 2 Tools zum Vergleichen aus.' 
+      : 'Select at least 2 tools to compare.');
+    return;
+  }
+  
+  renderComparison();
+  document.getElementById('compareModalOverlay').classList.add('active');
+  document.getElementById('compareModal').classList.add('active');
+}
+
+function closeCompareModal() {
+  document.getElementById('compareModalOverlay').classList.remove('active');
+  document.getElementById('compareModal').classList.remove('active');
+}
+
+function renderComparison() {
+  const toolsToCompare = aiTools.filter(tool => compareTools.includes(tool.id));
+  
+  if (toolsToCompare.length === 0) {
+    document.getElementById('compareEmpty').style.display = 'block';
+    document.getElementById('compareContent').style.display = 'none';
+    return;
+  }
+  
+  document.getElementById('compareEmpty').style.display = 'none';
+  document.getElementById('compareContent').style.display = 'block';
+  
+  // Create table
+  let tableHTML = `
+    <thead>
+      <tr>
+        <th>${lang === 'de' ? 'Eigenschaft' : 'Feature'}</th>
+        ${toolsToCompare.map(tool => `
+          <th>
+            <div class="compare-tool-header">
+              <strong>${tool.name}</strong>
+              <div class="tool-price-compact">${tool.priceDisplay}</div>
+              <button class="tool-remove-btn" data-id="${tool.id}">
+                ${lang === 'de' ? 'Entfernen' : 'Remove'}
+              </button>
+            </div>
+          </th>
+        `).join('')}
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>${lang === 'de' ? 'Kategorie' : 'Category'}</td>
+        ${toolsToCompare.map(tool => `<td>${catName(tool.category)}</td>`).join('')}
+      </tr>
+      <tr>
+        <td>${lang === 'de' ? 'Bewertung' : 'Rating'}</td>
+        ${toolsToCompare.map(tool => `<td>${tool.rating}/5.0</td>`).join('')}
+      </tr>
+      <tr>
+        <td>${lang === 'de' ? 'Community Votes' : 'Community Votes'}</td>
+        ${toolsToCompare.map(tool => `<td>${tool.votes}</td>`).join('')}
+      </tr>
+      <tr>
+        <td>${lang === 'de' ? 'Preismodell' : 'Pricing Model'}</td>
+        ${toolsToCompare.map(tool => `<td>${tool.price === 'free' ? (lang === 'de' ? 'Kostenlos' : 'Free') : 
+                                        tool.price === 'paid' ? (lang === 'de' ? 'Bezahlt' : 'Paid') : 
+                                        tool.price === 'freemium' ? 'Freemium' : 
+                                        (lang === 'de' ? 'Unbekannt' : 'Unknown')}</td>`).join('')}
+      </tr>
+      <tr>
+        <td>${lang === 'de' ? 'Hauptfunktionen' : 'Main Features'}</td>
+        ${toolsToCompare.map(tool => `<td>${tool.features.join(', ')}</td>`).join('')}
+      </tr>
+      <tr>
+        <td>${lang === 'de' ? 'Einsatzgebiete' : 'Use Cases'}</td>
+        ${toolsToCompare.map(tool => `<td>${tool.useCases ? tool.useCases.join(', ') : ''}</td>`).join('')}
+      </tr>
+      <tr>
+        <td>${lang === 'de' ? 'Beschreibung' : 'Description'}</td>
+        ${toolsToCompare.map(tool => `<td>${tool.description[lang]}</td>`).join('')}
+      </tr>
+    </tbody>
+  `;
+  
+  document.getElementById('compareTable').innerHTML = tableHTML;
+  
+  // Add event listeners to remove buttons
+  document.querySelectorAll('.tool-remove-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const toolId = parseInt(btn.dataset.id);
+      removeFromComparison(toolId);
+    });
+  });
+}
+
+function removeFromComparison(toolId) {
+  const index = compareTools.indexOf(toolId);
+  if (index !== -1) {
+    compareTools.splice(index, 1);
+    const tool = aiTools.find(t => t.id === toolId);
+    if (tool) tool.inCompare = false;
+    saveCompareTools();
+    updateActionsBar();
+    
+    if (compareTools.length < 2) {
+      closeCompareModal();
+    } else {
+      renderComparison();
+    }
+  }
+}
+
+function clearComparison() {
+  compareTools.forEach(toolId => {
+    const tool = aiTools.find(t => t.id === toolId);
+    if (tool) tool.inCompare = false;
+  });
+  
+  compareTools = [];
+  saveCompareTools();
+  updateActionsBar();
+  closeCompareModal();
+}
+
+function exportComparison() {
+  const toolsToCompare = aiTools.filter(tool => compareTools.includes(tool.id));
+  
+  let csv = 'Feature,' + toolsToCompare.map(tool => `"${tool.name}"`).join(',') + '\n';
+  csv += `Category,${toolsToCompare.map(tool => catName(tool.category)).join(',')}\n`;
+  csv += `Rating,${toolsToCompare.map(tool => tool.rating).join(',')}\n`;
+  csv += `Community Votes,${toolsToCompare.map(tool => tool.votes).join(',')}\n`;
+  csv += `Pricing,${toolsToCompare.map(tool => tool.priceDisplay).join(',')}\n`;
+  csv += `Features,${toolsToCompare.map(tool => `"${tool.features.join(', ')}"`).join(',')}\n`;
+  csv += `Use Cases,${toolsToCompare.map(tool => `"${tool.useCases ? tool.useCases.join(', ') : ''}"`).join(',')}\n`;
+  csv += `Description,${toolsToCompare.map(tool => `"${tool.description[lang]}"`).join(',')}\n`;
+  
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `ai-tools-comparison-${new Date().toISOString().split('T')[0]}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
+}
+
+// ===== TOOL-VORSCHLAGS FORMULAR =====
+function openSuggestionModal() {
+  document.getElementById('suggestionModalOverlay').classList.add('active');
+  document.getElementById('suggestionModal').classList.add('active');
+  document.getElementById('suggestionStatus').style.display = 'none';
+}
+
+function closeSuggestionModal() {
+  document.getElementById('suggestionModalOverlay').classList.remove('active');
+  document.getElementById('suggestionModal').classList.remove('active');
+  document.getElementById('toolSuggestionForm').reset();
+}
+
+function submitToolSuggestion(e) {
+  e.preventDefault();
+  
+  const suggestion = {
+    id: Date.now(),
+    name: document.getElementById('suggestionName').value,
+    category: document.getElementById('suggestionCategory').value,
+    link: document.getElementById('suggestionLink').value,
+    price: document.getElementById('suggestionPrice').value,
+    description: document.getElementById('suggestionDescription').value,
+    why: document.getElementById('suggestionWhy').value,
+    email: document.getElementById('suggestionEmail').value,
+    date: new Date().toISOString(),
+    status: 'pending'
+  };
+  
+  // Validierung
+  if (!suggestion.name || !suggestion.category || !suggestion.link || !suggestion.description) {
+    showSuggestionStatus(lang === 'de' 
+      ? 'Bitte fülle alle Pflichtfelder aus.' 
+      : 'Please fill in all required fields.', 'error');
+    return;
+  }
+  
+  // URL Validierung
+  try {
+    new URL(suggestion.link);
+  } catch {
+    showSuggestionStatus(lang === 'de' 
+      ? 'Bitte gib eine gültige URL ein.' 
+      : 'Please enter a valid URL.', 'error');
+    return;
+  }
+  
+  // Speichern
+  toolSuggestions.push(suggestion);
+  saveToolSuggestions();
+  
+  // Erfolgsmeldung
+  showSuggestionStatus(lang === 'de' 
+    ? 'Vielen Dank für deinen Vorschlag! Wir werden ihn prüfen und gegebenenfalls hinzufügen.' 
+    : 'Thank you for your suggestion! We will review it and potentially add it.', 'success');
+  
+  // Formular zurücksetzen nach 3 Sekunden
+  setTimeout(() => {
+    closeSuggestionModal();
+  }, 3000);
+}
+
+function showSuggestionStatus(message, type) {
+  const statusDiv = document.getElementById('suggestionStatus');
+  statusDiv.className = `status-message ${type}`;
+  statusDiv.style.display = 'block';
+  statusDiv.innerHTML = `
+    <h4><i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i> 
+    ${type === 'success' ? (lang === 'de' ? 'Erfolg!' : 'Success!') : (lang === 'de' ? 'Fehler!' : 'Error!')}</h4>
+    <p>${message}</p>
+  `;
+}
+
+// ===== ACTIONS BAR =====
+function updateActionsBar() {
+  const actionsBar = document.getElementById('actionsBar');
+  const favoritesCount = favorites.length;
+  const compareCount = compareTools.length;
+  
+  document.getElementById('favoritesCount').textContent = favoritesCount;
+  document.getElementById('compareCount').textContent = compareCount;
+  
+  if (favoritesCount > 0 || compareCount > 0) {
+    actionsBar.classList.remove('hidden');
+    actionsBar.classList.add('visible');
+  } else {
+    actionsBar.classList.remove('visible');
+    actionsBar.classList.add('hidden');
+  }
+}
+
+function clearAllSelections() {
+  if (confirm(lang === 'de' 
+    ? 'Möchtest du wirklich alle Favoriten und Vergleichsauswahlen löschen?' 
+    : 'Do you really want to clear all favorites and comparison selections?')) {
+    
+    // Clear favorites
+    favorites.forEach(toolId => {
+      const tool = aiTools.find(t => t.id === toolId);
+      if (tool) tool.isFavorite = false;
+    });
+    favorites = [];
+    saveFavorites();
+    
+    // Clear compare
+    compareTools.forEach(toolId => {
+      const tool = aiTools.find(t => t.id === toolId);
+      if (tool) tool.inCompare = false;
+    });
+    compareTools = [];
+    saveCompareTools();
+    
+    // Update UI
+    updateActionsBar();
+    
+    // Wenn wir im Favoriten-Filter sind, neu rendern
+    if (cat === 'favorites') {
+      applyFilters();
+    }
+    
+    // Top Charts neu rendern
+    renderTopCharts();
+  }
 }
 
 // ===== SUCHE & VORSCHLÄGE =====
@@ -1887,16 +2907,36 @@ function renderTopCharts() {
         <button class="vote-btn down ${tool.userVote === -1 ? 'active' : ''}" data-id="${tool.id}" data-vote="-1">
           <i class="fas fa-thumbs-down"></i>
         </button>
+        <button class="favorite-btn ${tool.isFavorite ? 'active' : ''}" data-id="${tool.id}">
+          <i class="fas fa-star"></i>
+        </button>
+        <button class="compare-btn ${tool.inCompare ? 'active' : ''}" data-id="${tool.id}">
+          <i class="fas fa-balance-scale"></i>
+        </button>
       </div>
     </div>
   `}).join('');
 
-  // Add vote event listeners
+  // Add event listeners
   container.querySelectorAll('.vote-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const toolId = parseInt(btn.dataset.id);
       const vote = parseInt(btn.dataset.vote);
       handleVote(toolId, vote);
+    });
+  });
+  
+  container.querySelectorAll('.favorite-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const toolId = parseInt(btn.dataset.id);
+      toggleFavorite(toolId);
+    });
+  });
+  
+  container.querySelectorAll('.compare-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const toolId = parseInt(btn.dataset.id);
+      toggleCompare(toolId);
     });
   });
 }
@@ -1928,7 +2968,8 @@ function handleVote(toolId, vote) {
 // ===== FILTER & TOOL LISTE =====
 function applyFilters() {
   let filtered = aiTools.filter(tool => {
-    if (cat !== 'all' && tool.category !== cat) return false;
+    if (cat === 'favorites' && !tool.isFavorite) return false;
+    if (cat !== 'all' && cat !== 'favorites' && tool.category !== cat) return false;
     if (price !== 'all' && tool.price !== price) return false;
     if (query) {
       const txt = `${tool.name} ${tool.category} ${tool.description[lang]} ${tool.features.join(' ')} ${tool.useCases ? tool.useCases.join(' ') : ''}`.toLowerCase();
@@ -1998,18 +3039,38 @@ function renderTools(tools) {
       <div class="tool-meta-compact">
         <div class="tool-price-compact">${tool.priceDisplay}</div>
         <div style="display:flex;gap:8px;align-items:center;">
+          <button class="favorite-btn ${tool.isFavorite ? 'active' : ''}" data-id="${tool.id}">
+            <i class="fas fa-star"></i>
+          </button>
+          <button class="compare-btn ${tool.inCompare ? 'active' : ''}" data-id="${tool.id}">
+            <i class="fas fa-balance-scale"></i>
+          </button>
           <a href="${tool.link}" class="tool-link-compact" target="_blank" rel="noopener noreferrer">${t.tryNow}</a>
         </div>
       </div>
     </div>
   `}).join('');
 
-  // Add vote event listeners
+  // Add event listeners
   grid.querySelectorAll('.vote-btn-compact').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const toolId = parseInt(btn.dataset.id);
       const vote = parseInt(btn.dataset.vote);
       handleVote(toolId, vote);
+    });
+  });
+  
+  grid.querySelectorAll('.favorite-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const toolId = parseInt(btn.dataset.id);
+      toggleFavorite(toolId);
+    });
+  });
+  
+  grid.querySelectorAll('.compare-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const toolId = parseInt(btn.dataset.id);
+      toggleCompare(toolId);
     });
   });
 }
