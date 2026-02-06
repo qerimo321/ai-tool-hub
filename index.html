@@ -2180,7 +2180,7 @@ function renderTopCharts() {
         </div>
         <div class="chart-category">${getCategoryLabel(tool.category)}</div>
         <div class="chart-tool-name">${tool.name}</div>
-        <div class="chart-price">💰 ${tool.priceDisplay}${ltdBadge}</div>
+        <div class="chart-price">💰 ${tool.priceDisplay[currentLang === 'de' ? 'de' : 'en']}${ltdBadge}</div>
         <div class="chart-description">${description}</div>
         <div class="chart-actions" onclick="event.stopPropagation()">
           <button class="vote-btn up ${tool.userVote === 1 ? 'active' : ''}" onclick="vote('${tool.id}', 'up')">
@@ -2262,7 +2262,7 @@ function renderTools() {
         </div>
             
         <div class="tool-meta-compact" onclick="event.stopPropagation()">
-          <div class="tool-price-compact">${tool.priceDisplay}${ltdBadge}</div>
+          <div class="tool-price-compact">${tool.priceDisplay[currentLang === 'de' ? 'de' : 'en']}${ltdBadge}</div>
           <div class="tool-actions-compact">
             <button class="favorite-btn ${isFavorite(tool.id) ? 'active' : ''}" onclick="toggleFavorite('${tool.id}')">
               <i class="fas fa-star"></i>
@@ -2295,7 +2295,8 @@ function openToolDetail(toolId) {
   const seoTitle = currentLang === 'de' ? (tool.seoTitle?.de || tool.name) : (tool.seoTitle?.en || tool.name);
   const seoDesc = currentLang === 'de' ? (tool.seoDesc?.de || description) : (tool.seoDesc?.en || description);
   const pros = tool.pros ? (currentLang === 'de' ? tool.pros.de : tool.pros.en) || [] : [];
-  const cons = tool.cons ? (currentLang === 'de' ? tool.cons.de : tool.cons.en) || [] : [];
+const cons = tool.cons ? (currentLang === 'de' ? tool.cons.de : tool.cons.en) || [] : [];
+const pricingText = tool.pricing ? (currentLang === 'de' ? tool.pricing.de : tool.pricing.en) || '' : '';
   
   const pricingText = tool.pricing ? (currentLang === 'de' ? tool.pricing.de : tool.pricing.en) || '' : '';
   const features = tool.features || [];
@@ -2334,9 +2335,9 @@ function openToolDetail(toolId) {
             ${getCategoryLabel(tool.category)}
           </span>
           <span class="tool-badge price">
-            <i class="fas fa-dollar-sign"></i>
-            ${tool.priceDisplay}
-          </span>
+  <i class="fas ${currentLang === 'de' ? 'fa-euro-sign' : 'fa-dollar-sign'}"></i>
+  ${tool.priceDisplay[currentLang === 'de' ? 'de' : 'en']}
+</span>
           <span class="tool-badge rating">
             <i class="fas fa-star"></i>
             ${tool.rating}/5
