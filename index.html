@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; base-uri 'self'; frame-ancestors 'none';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://kffoeqqgurbptguqjdlq.supabase.co; base-uri 'self'; frame-ancestors 'none';">
 <title>AI Finder 2026 - Finde sofort dein perfektes KI-Tool</title>
 <meta name="description" content="Finde in 2 Klicks dein perfektes KI-Tool. Echte User-Bewertungen, intelligente Empfehlungen, Favoriten & Vergleichsfunktion.">
 <meta name="keywords" content="KI Tools, AI Software, ChatGPT Alternativen, KI Bildgeneratoren, kostenlose KI Tools">
@@ -588,12 +588,17 @@ body.focus-mode .search-container {
   letter-spacing: 0.5px;
 }
 
+/* ===== RATING STARS - NEUE POSITION ===== */
 .tool-rating {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   display: flex;
   align-items: center;
   gap: 4px;
   font-size: 0.85rem;
   color: var(--gold);
+  margin-top: 8px;
 }
 
 /* ===== NEW: UP-VOTE COUNTER ===== */
@@ -624,15 +629,15 @@ body.focus-mode .search-container {
   color: var(--error);
 }
 
-/* ===== AI RECOMMENDATION BADGE - NEUE POSITION ===== */
+/* ===== AI RECOMMENDATION BADGE - NEUE POSITION (LINKS) ===== */
 .ai-recommended {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   background: linear-gradient(135deg, var(--secondary), var(--primary));
   color: white;
   padding: 6px 12px;
-  border-radius: 0 var(--radius) 0 var(--radius);
+  border-radius: 0 var(--radius) var(--radius) 0;
   font-size: 0.7rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -1467,6 +1472,11 @@ body.focus-mode .search-container {
     font-size: 0.6rem;
     padding: 4px 8px;
   }
+  
+  .tool-rating {
+    position: static;
+    margin-top: 8px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1512,6 +1522,11 @@ body.focus-mode .search-container {
   
   .tool-votes {
     font-size: 0.75rem;
+  }
+  
+  .tool-rating {
+    position: static;
+    margin-top: 8px;
   }
 }
 
@@ -1877,6 +1892,11 @@ body.focus-mode .search-container {
 </div>
 
 <script>
+// ===== SUPABASE KONFIGURATION =====
+const supabaseUrl = 'https://kffoeqqgurbptguqjdlq.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtmZm9lcXFndXJicHRndXFqZGxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2ODc1NTEsImV4cCI6MjA1MDI2MzU1MX0.Uxv5ITF62i0lJbWf2EwOQOa58geCLVImRcYGP99w81g';
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
 // ===== GLOBALE VARIABLEN =====
 let aiTools = [];
 let currentLang = 'de';
@@ -1900,6 +1920,140 @@ function debounce(func, wait) {
   };
 }
 
+// ===== SUPABASE VOTING SYSTEM =====
+// Generiere eine anonyme User-ID
+function getUserId() {
+  let userId = localStorage.getItem('aiUserId');
+  if (!userId) {
+    // Erstelle eine eindeutige ID
+    userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('aiUserId', userId);
+  }
+  return userId;
+}
+
+// Lade Votes von Supabase
+async function loadVotesFromSupabase() {
+  try {
+    const { data, error } = await supabase
+      .from('votes')
+      .select('*');
+    
+    if (error) {
+      console.error('Fehler beim Laden der Votes:', error);
+      return;
+    }
+    
+    // Setze alle Votes zurück
+    aiTools.forEach(tool => {
+      tool.upVotes = 0;
+      tool.downVotes = 0;
+      tool.votes = 0;
+      tool.userVote = null;
+    });
+    
+    const userId = getUserId();
+    
+    // Aggregiere Votes
+    if (data) {
+      data.forEach(vote => {
+        const tool = aiTools.find(t => t.id === vote.tool_id);
+        if (tool) {
+          if (vote.vote_type === 'up') {
+            tool.upVotes++;
+          } else if (vote.vote_type === 'down') {
+            tool.downVotes++;
+          }
+          
+          // Prüfe ob der aktuelle User bereits gevoted hat
+          if (vote.user_id === userId) {
+            tool.userVote = vote.vote_type;
+          }
+        }
+      });
+      
+      // Berechne Gesamtvotes
+      aiTools.forEach(tool => {
+        tool.votes = tool.upVotes + tool.downVotes;
+      });
+    }
+  } catch (error) {
+    console.error('Fehler beim Laden der Votes:', error);
+  }
+}
+
+// Speichere Vote in Supabase
+async function saveVoteToSupabase(toolId, voteType) {
+  const userId = getUserId();
+  
+  try {
+    // Prüfe ob bereits ein Vote existiert
+    const { data: existingVotes, error: fetchError } = await supabase
+      .from('votes')
+      .select('*')
+      .eq('tool_id', toolId)
+      .eq('user_id', userId);
+    
+    if (fetchError) {
+      console.error('Fehler beim Abrufen des Votes:', fetchError);
+      return false;
+    }
+    
+    if (existingVotes && existingVotes.length > 0) {
+      // Update bestehenden Vote
+      const existingVote = existingVotes[0];
+      
+      if (existingVote.vote_type === voteType) {
+        // Gleicher Vote - lösche ihn (Toggle)
+        const { error: deleteError } = await supabase
+          .from('votes')
+          .delete()
+          .eq('id', existingVote.id);
+        
+        if (deleteError) {
+          console.error('Fehler beim Löschen des Votes:', deleteError);
+          return false;
+        }
+        return 'deleted';
+      } else {
+        // Anderer Vote - update
+        const { error: updateError } = await supabase
+          .from('votes')
+          .update({ vote_type: voteType, updated_at: new Date().toISOString() })
+          .eq('id', existingVote.id);
+        
+        if (updateError) {
+          console.error('Fehler beim Aktualisieren des Votes:', updateError);
+          return false;
+        }
+        return 'updated';
+      }
+    } else {
+      // Erstelle neuen Vote
+      const { error: insertError } = await supabase
+        .from('votes')
+        .insert([
+          {
+            tool_id: toolId,
+            user_id: userId,
+            vote_type: voteType,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          }
+        ]);
+      
+      if (insertError) {
+        console.error('Fehler beim Einfügen des Votes:', insertError);
+        return false;
+      }
+      return 'created';
+    }
+  } catch (error) {
+    console.error('Fehler beim Speichern des Votes:', error);
+    return false;
+  }
+}
+
 // ===== DATEN LADEN =====
 async function loadAITools() {
   try {
@@ -1907,21 +2061,16 @@ async function loadAITools() {
     if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
     aiTools = await response.json();
     
-    // Ensure votes are numbers
+    // Initialize vote counts
     aiTools.forEach(tool => {
-      tool.votes = parseInt(tool.votes) || 0;
-      tool.upVotes = parseInt(tool.upVotes) || 0;
-      tool.downVotes = parseInt(tool.downVotes) || 0;
+      tool.votes = 0;
+      tool.upVotes = 0;
+      tool.downVotes = 0;
+      tool.userVote = null;
     });
     
-    const savedVotes = JSON.parse(localStorage.getItem('aiToolVotes') || '{}');
-    aiTools.forEach(tool => {
-      if (savedVotes[tool.id]) {
-        tool.votes = savedVotes[tool.id].votes || 0;
-        tool.upVotes = savedVotes[tool.id].upVotes || 0;
-        tool.downVotes = savedVotes[tool.id].downVotes || 0;
-      }
-    });
+    // Load votes from Supabase
+    await loadVotesFromSupabase();
     
     addAIRecommendations();
     renderTopCharts();
@@ -2262,7 +2411,7 @@ function highlightMatchingCategory(searchTerm) {
 }
 
 // ===== TOOL DETAIL MODAL =====
-function openToolDetail(toolId) {
+async function openToolDetail(toolId) {
   const tool = aiTools.find(t => t.id === toolId);
   if (!tool) return;
 
@@ -2272,9 +2421,30 @@ function openToolDetail(toolId) {
   const seoTitle = currentLang === 'de' ? (tool.seoTitle?.de || tool.name) : (tool.seoTitle?.en || tool.name);
   const seoDesc = currentLang === 'de' ? (tool.seoDesc?.de || description) : (tool.seoDesc?.en || description);
     
-  // FIX: Mehrsprachige Pros/Cons
-  const pros = currentLang === 'de' ? (tool.pros?.de || tool.pros || []) : (tool.pros?.en || tool.pros || []);
-  const cons = currentLang === 'de' ? (tool.cons?.de || tool.cons || []) : (tool.cons?.en || tool.cons || []);
+  // FIX: Mehrsprachige Pros/Cons - NEUE LOGIK
+  let pros = [];
+  let cons = [];
+  
+  if (tool.pros) {
+    if (typeof tool.pros === 'object' && tool.pros.de && tool.pros.en) {
+      // Neues Format: {de: [...], en: [...]}
+      pros = currentLang === 'de' ? tool.pros.de : tool.pros.en;
+    } else if (Array.isArray(tool.pros)) {
+      // Altes Format: nur ein Array
+      pros = tool.pros;
+    }
+  }
+  
+  if (tool.cons) {
+    if (typeof tool.cons === 'object' && tool.cons.de && tool.cons.en) {
+      // Neues Format: {de: [...], en: [...]}
+      cons = currentLang === 'de' ? tool.cons.de : tool.cons.en;
+    } else if (Array.isArray(tool.cons)) {
+      // Altes Format: nur ein Array
+      cons = tool.cons;
+    }
+  }
+  
   const features = tool.features || [];
   const alternatives = tool.alternatives || [];
   const useCases = tool.useCases || [];
@@ -2476,66 +2646,90 @@ function shareToolDirectly(toolId) {
   }
 }
 
-// ===== IMPROVED VOTING SYSTEM =====
-function vote(toolId, type) {
+// ===== SUPABASE VOTING FUNKTION =====
+async function vote(toolId, type) {
   const tool = aiTools.find(t => t.id === toolId);
   if (!tool) return;
-
-  const savedVotes = JSON.parse(localStorage.getItem('aiToolVotes') || '{}');
-  const userVotes = JSON.parse(localStorage.getItem('userVotes') || '{}');
-
-  // Initialize vote counts if not present
-  if (!tool.upVotes) tool.upVotes = 0;
-  if (!tool.downVotes) tool.downVotes = 0;
-  tool.votes = tool.upVotes + tool.downVotes;
-
-  if (userVotes[toolId] === type) {
-    // Remove vote
+  
+  // Alte Vote-Daten speichern
+  const oldUpVotes = tool.upVotes || 0;
+  const oldDownVotes = tool.downVotes || 0;
+  const oldUserVote = tool.userVote;
+  
+  // Sofortige UI-Aktualisierung (optimistisches Update)
+  if (oldUserVote === type) {
+    // Toggle: Vote entfernen
     if (type === 'up') {
       tool.upVotes = Math.max(0, tool.upVotes - 1);
     } else {
       tool.downVotes = Math.max(0, tool.downVotes - 1);
     }
-    delete userVotes[toolId];
     tool.userVote = null;
   } else {
-    // Remove previous vote if exists
-    if (userVotes[toolId] === 'up') {
+    // Vorherigen Vote entfernen falls vorhanden
+    if (oldUserVote === 'up') {
       tool.upVotes = Math.max(0, tool.upVotes - 1);
-    } else if (userVotes[toolId] === 'down') {
+    } else if (oldUserVote === 'down') {
       tool.downVotes = Math.max(0, tool.downVotes - 1);
     }
     
-    // Add new vote
+    // Neuen Vote hinzufügen
     if (type === 'up') {
       tool.upVotes++;
     } else {
       tool.downVotes++;
     }
-    
-    userVotes[toolId] = type;
     tool.userVote = type;
   }
-
-  // Update total votes
+  
   tool.votes = tool.upVotes + tool.downVotes;
-
-  // Save to localStorage
-  savedVotes[toolId] = {
-    votes: tool.votes,
-    upVotes: tool.upVotes,
-    downVotes: tool.downVotes
-  };
   
-  localStorage.setItem('aiToolVotes', JSON.stringify(savedVotes));
-  localStorage.setItem('userVotes', JSON.stringify(userVotes));
-
-  // Recalculate AI recommendations
-  addAIRecommendations();
-  
-  // Update UI
+  // UI sofort aktualisieren
   renderTopCharts();
   renderTools();
+  
+  // In Supabase speichern (im Hintergrund)
+  try {
+    const result = await saveVoteToSupabase(toolId, type);
+    
+    if (result === false) {
+      // Fehler: Zurücksetzen auf alte Werte
+      tool.upVotes = oldUpVotes;
+      tool.downVotes = oldDownVotes;
+      tool.userVote = oldUserVote;
+      tool.votes = tool.upVotes + tool.downVotes;
+      
+      // UI zurücksetzen
+      renderTopCharts();
+      renderTools();
+      
+      alert(currentLang === 'de' ? 'Fehler beim Speichern des Votes. Bitte versuchen Sie es erneut.' : 'Error saving vote. Please try again.');
+    } else {
+      // Erfolg: Votes neu von Supabase laden für Aktualität
+      await loadVotesFromSupabase();
+      
+      // Recalculate AI recommendations
+      addAIRecommendations();
+      
+      // UI mit aktuellen Daten aktualisieren
+      renderTopCharts();
+      renderTools();
+    }
+  } catch (error) {
+    console.error('Fehler beim Voting:', error);
+    
+    // Zurücksetzen auf alte Werte
+    tool.upVotes = oldUpVotes;
+    tool.downVotes = oldDownVotes;
+    tool.userVote = oldUserVote;
+    tool.votes = tool.upVotes + tool.downVotes;
+    
+    // UI zurücksetzen
+    renderTopCharts();
+    renderTools();
+    
+    alert(currentLang === 'de' ? 'Fehler beim Speichern des Votes. Bitte versuchen Sie es erneut.' : 'Error saving vote. Please try again.');
+  }
 }
 
 // ===== FAVORITEN & VERGLEICH =====
@@ -2791,6 +2985,18 @@ document.getElementById('langToggle').addEventListener('click', () => {
   updateLanguage();
   renderTopCharts();
   renderTools();
+  
+  // Detail-Modal neu rendern falls offen
+  const activeModal = document.querySelector('.modal-overlay.active#toolModal');
+  if (activeModal) {
+    const toolId = document.querySelector('.tool-detail-name')?.textContent;
+    if (toolId) {
+      const tool = aiTools.find(t => t.name === toolId);
+      if (tool) {
+        openToolDetail(tool.id);
+      }
+    }
+  }
 });
 
 function updateLanguage() {
@@ -2856,7 +3062,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const preconnectLinks = [
     'https://fonts.gstatic.com',
     'https://cdnjs.cloudflare.com',
-    'https://www.googletagmanager.com'
+    'https://www.googletagmanager.com',
+    'https://kffoeqqgurbptguqjdlq.supabase.co'
   ];
   
   preconnectLinks.forEach(link => {
@@ -2867,6 +3074,24 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(preconnect);
   });
 });
+
+// ===== SUPABASE TABELLE ERSTELLEN (für Entwickler) =====
+/*
+Erstelle diese Tabelle in Supabase:
+
+CREATE TABLE votes (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  tool_id TEXT NOT NULL,
+  user_id TEXT NOT NULL,
+  vote_type TEXT NOT NULL CHECK (vote_type IN ('up', 'down')),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+  UNIQUE(tool_id, user_id)
+);
+
+CREATE INDEX idx_votes_tool_id ON votes(tool_id);
+CREATE INDEX idx_votes_user_id ON votes(user_id);
+*/
 </script>
 
 </body>
