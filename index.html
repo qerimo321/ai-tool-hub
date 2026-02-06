@@ -569,6 +569,7 @@ body.focus-mode .search-container {
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 12px;
+  position: relative;
 }
 
 .tool-name {
@@ -576,6 +577,7 @@ body.focus-mode .search-container {
   font-size: 1.1rem;
   color: var(--text-primary);
   margin-bottom: 4px;
+  padding-right: 60px;
 }
 
 .tool-category {
@@ -592,6 +594,54 @@ body.focus-mode .search-container {
   gap: 4px;
   font-size: 0.85rem;
   color: var(--gold);
+}
+
+/* ===== NEW: UP-VOTE COUNTER ===== */
+.tool-votes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.vote-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.vote-count i {
+  color: var(--success);
+}
+
+.vote-count.up {
+  color: var(--success);
+}
+
+.vote-count.down {
+  color: var(--error);
+}
+
+/* ===== AI RECOMMENDATION BADGE - NEUE POSITION ===== */
+.ai-recommended {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  color: white;
+  padding: 6px 12px;
+  border-radius: 0 var(--radius) 0 var(--radius);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+  box-shadow: 0 2px 10px rgba(168, 85, 247, 0.3);
 }
 
 .tool-description {
@@ -737,30 +787,6 @@ body.focus-mode .search-container {
   box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
 }
 
-/* ===== AI RECOMMENDATION BADGE ===== */
-.ai-recommended {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: linear-gradient(135deg, var(--secondary), var(--primary));
-  color: white;
-  padding: 4px 10px;
-  border-radius: 15px;
-  font-size: 0.65rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
 /* ===== SMART PREVIEW ===== */
 .tool-preview {
   position: absolute;
@@ -781,6 +807,7 @@ body.focus-mode .search-container {
   transition: var(--transition);
   border: 1px solid var(--primary);
   text-align: center;
+  z-index: 1;
 }
 
 .preview-stats {
@@ -971,6 +998,12 @@ body.focus-mode .search-container {
   background: rgba(251, 191, 36, 0.15);
   color: var(--gold);
   border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.tool-badge.votes {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
 .tool-description-full {
@@ -1429,6 +1462,11 @@ body.focus-mode .search-container {
   .compact-filters {
     justify-content: center;
   }
+  
+  .ai-recommended {
+    font-size: 0.6rem;
+    padding: 4px 8px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1471,6 +1509,10 @@ body.focus-mode .search-container {
     height: 36px;
     font-size: 0.9rem;
   }
+  
+  .tool-votes {
+    font-size: 0.75rem;
+  }
 }
 
 /* ===== SCROLLBAR ===== */
@@ -1490,6 +1532,24 @@ body.focus-mode .search-container {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--bg-hover);
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+.tool-card {
+  will-change: transform;
+}
+
+.tools-grid {
+  contain: content;
+}
+
+.modal-overlay {
+  will-change: opacity;
+}
+
+/* ===== DEBOUNCE HELPER ===== */
+.debounce {
+  transition: none !important;
 }
 </style>
 </head>
@@ -1643,6 +1703,7 @@ body.focus-mode .search-container {
         <option value="votes" data-de="Beste Bewertung" data-en="Best Rated">Beste Bewertung</option>
         <option value="name" data-de="A-Z" data-en="A-Z">A-Z</option>
         <option value="rating">Rating</option>
+        <option value="trending" data-de="Trending" data-en="Trending">Trending</option>
       </select>
     </div>
   </div>
@@ -1826,20 +1887,42 @@ let searchQuery = '';
 let lastScrollY = 0;
 let isFocusMode = false;
 
+// ===== DEBOUNCE FUNCTION =====
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 // ===== DATEN LADEN =====
 async function loadAITools() {
   try {
     const response = await fetch('./data.json');
     if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
     aiTools = await response.json();
-      
+    
+    // Ensure votes are numbers
+    aiTools.forEach(tool => {
+      tool.votes = parseInt(tool.votes) || 0;
+      tool.upVotes = parseInt(tool.upVotes) || 0;
+      tool.downVotes = parseInt(tool.downVotes) || 0;
+    });
+    
     const savedVotes = JSON.parse(localStorage.getItem('aiToolVotes') || '{}');
     aiTools.forEach(tool => {
       if (savedVotes[tool.id]) {
-        tool.votes = savedVotes[tool.id];
+        tool.votes = savedVotes[tool.id].votes || 0;
+        tool.upVotes = savedVotes[tool.id].upVotes || 0;
+        tool.downVotes = savedVotes[tool.id].downVotes || 0;
       }
     });
-      
+    
     addAIRecommendations();
     renderTopCharts();
     renderTools();
@@ -1868,7 +1951,14 @@ function addAIRecommendations() {
     if (tool.hasLifetimeDeal) score += 2;
     if (userHistory.includes(tool.category)) score += 2;
     if (favorites.includes(tool.id)) score += 3;
-      
+    
+    // Calculate vote ratio
+    const totalVotes = tool.upVotes + tool.downVotes;
+    if (totalVotes > 0) {
+      const voteRatio = tool.upVotes / totalVotes;
+      if (voteRatio > 0.8) score += 2;
+    }
+    
     tool.aiScore = score;
     tool.isAIRecommended = score >= 6;
   });
@@ -1877,15 +1967,21 @@ function addAIRecommendations() {
 // ===== TOP 5 CHARTS =====
 function renderTopCharts() {
   const topTools = [...aiTools]
-    .sort((a, b) => (b.votes || 0) - (a.votes || 0))
+    .sort((a, b) => {
+      // Sort by votes, then by rating
+      if (b.votes !== a.votes) return b.votes - a.votes;
+      return (b.rating || 0) - (a.rating || 0);
+    })
     .slice(0, 5);
 
   const topChartsHTML = topTools.map((tool, index) => {
     const description = currentLang === 'de' ? tool.description.de : tool.description.en;
-    const rankClass = 'rank-' + (index + 1);
     const ltdBadge = tool.hasLifetimeDeal ? '<span class="ltd-badge">LTD</span>' : '';
     const aiRecommended = tool.isAIRecommended ? '<div class="ai-recommended"><i class="fas fa-robot"></i> AI Pick</div>' : '';
-      
+    
+    // Calculate net votes (up - down)
+    const netVotes = (tool.upVotes || 0) - (tool.downVotes || 0);
+    
     return `
       <div class="tool-card" onclick="openToolDetail('${tool.id}')">
         ${aiRecommended}
@@ -1893,6 +1989,17 @@ function renderTopCharts() {
           <div>
             <div class="tool-name">${tool.name}</div>
             <div class="tool-category">${getCategoryLabel(tool.category)}</div>
+            <div class="tool-votes">
+              <span class="vote-count up">
+                <i class="fas fa-thumbs-up"></i> ${tool.upVotes || 0}
+              </span>
+              <span class="vote-count down">
+                <i class="fas fa-thumbs-down"></i> ${tool.downVotes || 0}
+              </span>
+              <span class="vote-count" style="margin-left: 8px;">
+                <i class="fas fa-chart-line"></i> ${netVotes >= 0 ? '+' : ''}${netVotes}
+              </span>
+            </div>
           </div>
           <div class="tool-rating">
             <i class="fas fa-star"></i>
@@ -1953,7 +2060,15 @@ function renderTopCharts() {
 }
 
 // ===== ALLE TOOLS =====
+const renderToolsDebounced = debounce(() => {
+  renderToolsInternal();
+}, 50);
+
 function renderTools() {
+  renderToolsDebounced();
+}
+
+function renderToolsInternal() {
   let filteredTools = [...aiTools];
 
   if (currentCategory !== 'all') {
@@ -1977,31 +2092,59 @@ function renderTools() {
     highlightMatchingCategory(searchLower);
   }
 
+  // Apply sorting
   if (currentSort === 'votes') {
-    filteredTools.sort((a, b) => (b.votes || 0) - (a.votes || 0));
+    filteredTools.sort((a, b) => {
+      // Sort by total votes, then by net votes
+      if (b.votes !== a.votes) return b.votes - a.votes;
+      const aNet = (a.upVotes || 0) - (a.downVotes || 0);
+      const bNet = (b.upVotes || 0) - (b.downVotes || 0);
+      return bNet - aNet;
+    });
   } else if (currentSort === 'name') {
     filteredTools.sort((a, b) => a.name.localeCompare(b.name));
   } else if (currentSort === 'rating') {
     filteredTools.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+  } else if (currentSort === 'trending') {
+    // Trending: high rating + recent votes
+    filteredTools.sort((a, b) => {
+      const aScore = (a.rating || 0) * 20 + (a.votes || 0);
+      const bScore = (b.rating || 0) * 20 + (b.votes || 0);
+      return bScore - aScore;
+    });
   }
 
   // Smooth animation for filter changes
   const toolsGrid = document.getElementById('toolsGrid');
-  toolsGrid.style.opacity = '0';
-  toolsGrid.style.transform = 'translateY(10px)';
+  toolsGrid.classList.add('debounce');
   
   setTimeout(() => {
     const toolsHTML = filteredTools.map(tool => {
       const description = currentLang === 'de' ? tool.description.de : tool.description.en;
       const ltdBadge = tool.hasLifetimeDeal ? '<span class="ltd-badge">LTD</span>' : '';
-        
+      const aiRecommended = tool.isAIRecommended ? '<div class="ai-recommended"><i class="fas fa-robot"></i> AI Pick</div>' : '';
+      
+      // Calculate net votes
+      const netVotes = (tool.upVotes || 0) - (tool.downVotes || 0);
+      
       return `
         <div class="tool-card" onclick="openToolDetail('${tool.id}')">
-          ${tool.isAIRecommended ? '<div class="ai-recommended"><i class="fas fa-robot"></i> AI Pick</div>' : ''}
+          ${aiRecommended}
           <div class="tool-header">
             <div>
               <div class="tool-name">${tool.name}</div>
               <div class="tool-category">${getCategoryLabel(tool.category)}</div>
+              <div class="tool-votes">
+                <span class="vote-count up">
+                  <i class="fas fa-thumbs-up"></i> ${tool.upVotes || 0}
+                </span>
+                <span class="vote-count down">
+                  <i class="fas fa-thumbs-down"></i> ${tool.downVotes || 0}
+                </span>
+                <span class="vote-count" style="margin-left: 8px;">
+                  <i class="fas fa-chart-line"></i> ${netVotes >= 0 ? '+' : ''}${netVotes}
+                </span>
+              </div>
             </div>
             <div class="tool-rating">
               <i class="fas fa-star"></i>
@@ -2061,12 +2204,11 @@ function renderTools() {
     document.getElementById('toolCount').textContent = filteredTools.length;
     updateLanguage();
     
-    // Smooth reveal
+    // Remove debounce class for animations
     setTimeout(() => {
-      toolsGrid.style.opacity = '1';
-      toolsGrid.style.transform = 'translateY(0)';
-    }, 50);
-  }, 300);
+      toolsGrid.classList.remove('debounce');
+    }, 10);
+  }, 10);
 }
 
 // ===== INTENT SEARCH =====
@@ -2130,8 +2272,9 @@ function openToolDetail(toolId) {
   const seoTitle = currentLang === 'de' ? (tool.seoTitle?.de || tool.name) : (tool.seoTitle?.en || tool.name);
   const seoDesc = currentLang === 'de' ? (tool.seoDesc?.de || description) : (tool.seoDesc?.en || description);
     
-  const pros = tool.pros || [];
-  const cons = tool.cons || [];
+  // FIX: Mehrsprachige Pros/Cons
+  const pros = currentLang === 'de' ? (tool.pros?.de || tool.pros || []) : (tool.pros?.en || tool.pros || []);
+  const cons = currentLang === 'de' ? (tool.cons?.de || tool.cons || []) : (tool.cons?.en || tool.cons || []);
   const features = tool.features || [];
   const alternatives = tool.alternatives || [];
   const useCases = tool.useCases || [];
@@ -2155,6 +2298,9 @@ function openToolDetail(toolId) {
     ? useCases.map(uc => getUseCaseLabelDE(uc)).join(', ')
     : useCases.map(uc => getUseCaseLabelEN(uc)).join(', ');
 
+  // Calculate net votes
+  const netVotes = (tool.upVotes || 0) - (tool.downVotes || 0);
+
   const modalContent = `
     <div class="tool-detail-hero">
       <div class="tool-detail-icon">
@@ -2174,6 +2320,10 @@ function openToolDetail(toolId) {
           <span class="tool-badge rating">
             <i class="fas fa-star"></i>
             ${tool.rating}/5
+          </span>
+          <span class="tool-badge votes">
+            <i class="fas fa-thumbs-up"></i>
+            ${netVotes >= 0 ? '+' : ''}${netVotes}
           </span>
           ${tool.hasLifetimeDeal ? '<span class="ltd-badge">Lifetime Deal</span>' : ''}
         </div>
@@ -2326,7 +2476,7 @@ function shareToolDirectly(toolId) {
   }
 }
 
-// ===== VOTING SYSTEM =====
+// ===== IMPROVED VOTING SYSTEM =====
 function vote(toolId, type) {
   const tool = aiTools.find(t => t.id === toolId);
   if (!tool) return;
@@ -2334,26 +2484,56 @@ function vote(toolId, type) {
   const savedVotes = JSON.parse(localStorage.getItem('aiToolVotes') || '{}');
   const userVotes = JSON.parse(localStorage.getItem('userVotes') || '{}');
 
+  // Initialize vote counts if not present
+  if (!tool.upVotes) tool.upVotes = 0;
+  if (!tool.downVotes) tool.downVotes = 0;
+  tool.votes = tool.upVotes + tool.downVotes;
+
   if (userVotes[toolId] === type) {
-    if (type === 'up') tool.votes--;
-    else tool.votes++;
+    // Remove vote
+    if (type === 'up') {
+      tool.upVotes = Math.max(0, tool.upVotes - 1);
+    } else {
+      tool.downVotes = Math.max(0, tool.downVotes - 1);
+    }
     delete userVotes[toolId];
     tool.userVote = null;
   } else {
-    if (userVotes[toolId] === 'up') tool.votes--;
-    else if (userVotes[toolId] === 'down') tool.votes++;
-      
-    if (type === 'up') tool.votes++;
-    else tool.votes--;
-      
+    // Remove previous vote if exists
+    if (userVotes[toolId] === 'up') {
+      tool.upVotes = Math.max(0, tool.upVotes - 1);
+    } else if (userVotes[toolId] === 'down') {
+      tool.downVotes = Math.max(0, tool.downVotes - 1);
+    }
+    
+    // Add new vote
+    if (type === 'up') {
+      tool.upVotes++;
+    } else {
+      tool.downVotes++;
+    }
+    
     userVotes[toolId] = type;
     tool.userVote = type;
   }
 
-  savedVotes[toolId] = tool.votes;
+  // Update total votes
+  tool.votes = tool.upVotes + tool.downVotes;
+
+  // Save to localStorage
+  savedVotes[toolId] = {
+    votes: tool.votes,
+    upVotes: tool.upVotes,
+    downVotes: tool.downVotes
+  };
+  
   localStorage.setItem('aiToolVotes', JSON.stringify(savedVotes));
   localStorage.setItem('userVotes', JSON.stringify(userVotes));
 
+  // Recalculate AI recommendations
+  addAIRecommendations();
+  
+  // Update UI
   renderTopCharts();
   renderTools();
 }
@@ -2372,6 +2552,10 @@ function toggleFavorite(toolId) {
     favorites.push(toolId);
   }
   localStorage.setItem('aiFavorites', JSON.stringify(favorites));
+  
+  // Recalculate AI recommendations
+  addAIRecommendations();
+  
   renderTopCharts();
   renderTools();
 }
@@ -2472,7 +2656,7 @@ function initFocusMode() {
     if (!ticking) {
       window.requestAnimationFrame(() => {
         const currentScrollY = window.scrollY;
-        
+          
         if (currentScrollY > 200 && currentScrollY > lastScrollY) {
           // Scrolling down past threshold
           if (!isFocusMode) {
@@ -2486,11 +2670,11 @@ function initFocusMode() {
             isFocusMode = false;
           }
         }
-        
+          
         lastScrollY = currentScrollY;
         ticking = false;
       });
-      
+        
       ticking = true;
     }
   });
@@ -2500,17 +2684,17 @@ function initFocusMode() {
 const searchBox = document.getElementById('searchBox');
 const searchSuggestions = document.getElementById('searchSuggestions');
 
-searchBox.addEventListener('input', (e) => {
+const searchInputHandler = debounce((e) => {
   searchQuery = e.target.value;
   renderTools();
-    
+      
   if (searchQuery.length > 1) {
     const matches = aiTools.filter(tool => 
       tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       tool.description.de.toLowerCase().includes(searchQuery.toLowerCase()) ||
       tool.description.en.toLowerCase().includes(searchQuery.toLowerCase())
     ).slice(0, 5);
-      
+        
     if (matches.length > 0) {
       searchSuggestions.innerHTML = matches.map(tool => `
         <div class="suggestion-item" onclick="openToolDetail('${tool.id}'); searchSuggestions.classList.remove('active');">
@@ -2525,7 +2709,9 @@ searchBox.addEventListener('input', (e) => {
   } else {
     searchSuggestions.classList.remove('active');
   }
-});
+}, 150);
+
+searchBox.addEventListener('input', searchInputHandler);
 
 document.addEventListener('click', (e) => {
   if (!e.target.closest('.search-container')) {
@@ -2646,10 +2832,40 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// ===== PERFORMANCE OPTIMIZATIONS =====
+// Use Intersection Observer for lazy loading if needed
+let observer;
+if ('IntersectionObserver' in window) {
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const toolCard = entry.target;
+        // Add any lazy loading logic here
+        observer.unobserve(toolCard);
+      }
+    });
+  }, { rootMargin: '50px' });
+}
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
   loadAITools();
   initFocusMode();
+  
+  // Performance: Preconnect to important domains
+  const preconnectLinks = [
+    'https://fonts.gstatic.com',
+    'https://cdnjs.cloudflare.com',
+    'https://www.googletagmanager.com'
+  ];
+  
+  preconnectLinks.forEach(link => {
+    const preconnect = document.createElement('link');
+    preconnect.rel = 'preconnect';
+    preconnect.href = link;
+    preconnect.crossOrigin = 'anonymous';
+    document.head.appendChild(preconnect);
+  });
 });
 </script>
 
