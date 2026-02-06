@@ -24,9 +24,10 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-53RF07VYJ8"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+  // SUPABASE FIX: Global initialisieren
   const supabaseUrl = 'https://doicozkpdbkyvdkpujoh.supabase.co';
   const supabaseKey = 'sb_publishable_AbUAk0m1UhAEQtz9GL2Aww_3wd_NfZx';
-  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+  window.supabase = window.supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 </script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -1991,7 +1992,7 @@ body::before {
       </ul>
 
       <h2 data-de="4. Cookies" data-en="4. Cookies">4. Cookies</h2>
-      <p data-de="Unsere Website verwendet Cookies. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher und sicherer zu machen." data-en="Our website uses cookies. Cookies help us to make our offer more user-friendly and secure.">
+      <p data-de="Unsere Website verwendet Cookies. Cookies helfen us dabei, unser Angebot nutzerfreundlicher und sicherer zu machen." data-en="Our website uses cookies. Cookies help us to make our offer more user-friendly and secure.">
         Unsere Website verwendet Cookies. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher und sicherer zu machen.
       </p>
 
@@ -2036,6 +2037,26 @@ let currentCategory = 'all';
 let currentPriceFilter = 'all';
 let currentSort = 'votes';
 let searchQuery = '';
+
+// ===== SUPABASE CLIENT ÜBERPRÜFEN =====
+// Sicherstellen, dass supabase global verfügbar ist
+if (typeof window.supabase === 'undefined' && typeof window.supabaseClient !== 'undefined') {
+  window.supabase = window.supabaseClient;
+}
+
+// Fallback: Notfalls neu initialisieren
+if (typeof window.supabase === 'undefined') {
+  console.log('Supabase Client neu initialisieren...');
+  const supabaseUrl = 'https://doicozkpdbkyvdkpujoh.supabase.co';
+  const supabaseKey = 'sb_publishable_AbUAk0m1UhAEQtz9GL2Aww_3wd_NfZx';
+  window.supabase = window.supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+}
+
+// Debug: Supabase Status prüfen
+console.log('Supabase Client verfügbar?', typeof window.supabase !== 'undefined');
+if (typeof window.supabase !== 'undefined') {
+  console.log('Supabase Client:', window.supabase);
+}
 
 // ===== DATEN LADEN MIT SUPABASE INTEGRATION =====
 async function loadAITools() {
@@ -2092,7 +2113,12 @@ async function initializeUser() {
 
 async function loadVotesFromSupabase() {
   try {
-    const { data: votesData, error } = await supabase
+    if (typeof window.supabase === 'undefined') {
+      console.error('Supabase Client nicht verfügbar');
+      return;
+    }
+    
+    const { data: votesData, error } = await window.supabase
       .from('tool_votes')
       .select('*');
       
@@ -2470,6 +2496,12 @@ async function vote(toolId, type) {
   const tool = aiTools.find(t => t.id === toolId);
   if (!tool) return;
   
+  // Supabase Client überprüfen
+  if (typeof window.supabase === 'undefined') {
+    showNotification(currentLang === 'de' ? 'Fehler: Datenbank nicht verfügbar' : 'Error: Database not available', 'error');
+    return;
+  }
+  
   // UI sofort updaten für schnelles Feedback
   const oldUserVote = tool.userVote || 0;
   const voteValue = type === 'up' ? 1 : -1;
@@ -2492,7 +2524,7 @@ async function vote(toolId, type) {
   
   try {
     // 1. ZUERST prüfen, ob der Eintrag existiert
-    const { data: existingData, error: fetchError } = await supabase
+    const { data: existingData, error: fetchError } = await window.supabase
       .from('tool_votes')
       .select('*')
       .eq('tool_id', toolId);
@@ -2536,7 +2568,7 @@ async function vote(toolId, type) {
       const newDownvotes = Math.max(0, (current.downvotes || 0) + downvotes);
       const newTotal = newUpvotes - newDownvotes;
       
-      const { error: updateError } = await supabase
+      const { error: updateError } = await window.supabase
         .from('tool_votes')
         .update({
           upvotes: newUpvotes,
@@ -2556,7 +2588,7 @@ async function vote(toolId, type) {
       const initialDownvotes = voteValue === -1 ? 1 : 0;
       const initialTotal = initialUpvotes - initialDownvotes;
       
-      const { error: insertError } = await supabase
+      const { error: insertError } = await window.supabase
         .from('tool_votes')
         .insert({
           tool_id: toolId,
@@ -2583,7 +2615,7 @@ async function vote(toolId, type) {
   } catch (error) {
     console.error('Voting Fehler:', error);
     showNotification(
-      currentLang === 'de' ? 'Fehler: ' + error.message : 'Error: ' + error.message, 
+      currentLang === 'de' ? 'Fehler: ' + (error.message || 'Unbekannter Fehler') : 'Error: ' + (error.message || 'Unknown error'), 
       'error'
     );
     
