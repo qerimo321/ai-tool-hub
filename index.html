@@ -536,6 +536,7 @@ body::before {
   position: relative;
   transition: var(--transition-tech);
   overflow: hidden;
+  cursor: pointer;
 }
 
 .chart-card::before {
@@ -942,6 +943,7 @@ body::before {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 20px;
+  cursor: pointer;
 }
 
 .compact-tool-row:hover {
@@ -1080,6 +1082,452 @@ body::before {
   box-shadow: 0 5px 20px rgba(0, 243, 255, 0.3);
 }
 
+/* ===== MODAL STYLES ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: linear-gradient(145deg, rgba(20, 25, 40, 0.95), rgba(10, 14, 23, 0.95));
+  border-radius: var(--radius-tech);
+  border: 1px solid var(--neon-cyan);
+  max-width: 900px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 243, 255, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  padding: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: linear-gradient(145deg, rgba(20, 25, 40, 0.98), rgba(10, 14, 23, 0.98));
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #ffffff;
+  font-family: 'Space Grotesk', sans-serif;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-close {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition-tech);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--neon-cyan);
+  transform: rotate(90deg);
+}
+
+.modal-content {
+  padding: 30px;
+}
+
+.tool-detail-hero {
+  display: flex;
+  gap: 25px;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tool-detail-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 10px 30px rgba(0, 243, 255, 0.3);
+}
+
+.tool-detail-info {
+  flex: 1;
+}
+
+.tool-detail-name {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.tool-detail-meta {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.tool-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tool-badge.category {
+  background: rgba(0, 243, 255, 0.15);
+  color: var(--neon-cyan);
+  border: 1px solid rgba(0, 243, 255, 0.3);
+}
+
+.tool-badge.price {
+  background: rgba(0, 255, 157, 0.15);
+  color: var(--matrix-green);
+  border: 1px solid rgba(0, 255, 157, 0.3);
+}
+
+.tool-badge.rating {
+  background: rgba(255, 215, 0, 0.15);
+  color: var(--favorite-gold);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.tool-description-full {
+  font-size: 1.05rem;
+  color: var(--tech-silver);
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+.tool-section {
+  margin-bottom: 30px;
+}
+
+.tool-section h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.tool-section h3 i {
+  color: var(--neon-cyan);
+}
+
+.pros-cons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.pros-list, .cons-list {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-tech);
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pros-list h4 {
+  color: var(--matrix-green);
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.cons-list h4 {
+  color: #ff6b6b;
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.pros-list ul, .cons-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pros-list li, .cons-list li {
+  padding: 8px 0;
+  padding-left: 25px;
+  position: relative;
+  color: var(--tech-silver);
+  line-height: 1.6;
+}
+
+.pros-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--matrix-green);
+  font-weight: 900;
+}
+
+.cons-list li::before {
+  content: '✗';
+  position: absolute;
+  left: 0;
+  color: #ff6b6b;
+  font-weight: 900;
+}
+
+.feature-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.feature-tag {
+  background: rgba(185, 103, 255, 0.1);
+  color: var(--neon-purple);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(185, 103, 255, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.alternatives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.alternative-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-tech);
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-tech);
+}
+
+.alternative-card:hover {
+  background: rgba(0, 243, 255, 0.05);
+  border-color: var(--neon-cyan);
+  transform: translateY(-3px);
+}
+
+.alternative-card-name {
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 5px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.alternative-card-category {
+  font-size: 0.75rem;
+  color: var(--tech-silver);
+  text-transform: uppercase;
+}
+
+.tool-actions-modal {
+  display: flex;
+  gap: 15px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 30px;
+}
+
+.btn-primary {
+  flex: 1;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  color: var(--void-black);
+  border: none;
+  padding: 15px 30px;
+  border-radius: var(--radius-tech);
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition-tech);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 243, 255, 0.4);
+}
+
+.btn-secondary {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 15px 30px;
+  border-radius: var(--radius-tech);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition-tech);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--neon-cyan);
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.footer {
+  background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(10, 14, 23, 0.8));
+  border-top: 1px solid rgba(0, 243, 255, 0.2);
+  padding: 40px 20px 20px;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  color: var(--tech-silver);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition-tech);
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.footer-link:hover {
+  color: var(--neon-cyan);
+  transform: translateY(-2px);
+}
+
+.footer-copyright {
+  color: var(--tech-silver);
+  font-size: 0.9rem;
+  margin-top: 20px;
+}
+
+/* Legal Content Styles */
+.legal-content h2 {
+  font-size: 1.5rem;
+  color: var(--neon-cyan);
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.legal-content h3 {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.legal-content p {
+  color: var(--tech-silver);
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+.legal-content ul, .legal-content ol {
+  color: var(--tech-silver);
+  line-height: 1.8;
+  margin-bottom: 15px;
+  margin-left: 25px;
+}
+
+.legal-content li {
+  margin-bottom: 8px;
+}
+
+.legal-content a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: var(--transition-tech);
+}
+
+.legal-content a:hover {
+  border-bottom-color: var(--neon-cyan);
+}
+
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
   .header {
@@ -1164,6 +1612,35 @@ body::before {
   .search-box {
     padding-right: 70px;
   }
+
+  .modal {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .modal-header {
+    padding: 20px;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .tool-detail-hero {
+    flex-direction: column;
+  }
+
+  .pros-cons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-actions-modal {
+    flex-direction: column;
+  }
+
+  .footer-links {
+    gap: 15px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1220,6 +1697,18 @@ body::before {
   .concierge-btn {
     padding: 15px 25px;
     font-size: 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.4rem;
+  }
+
+  .tool-detail-name {
+    font-size: 1.5rem;
+  }
+
+  .alternatives-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1359,6 +1848,31 @@ body::before {
 
 @keyframes spin {
   100% { transform: rotate(360deg); }
+}
+
+/* AI Recommendation Badge */
+.ai-recommended {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, var(--neon-purple), var(--electric-blue));
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 5px 15px rgba(185, 103, 255, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 </style>
 </head>
@@ -1539,6 +2053,148 @@ body::before {
   </div>
 </div>
 
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-links">
+    <a class="footer-link" onclick="openImpressum()" data-de="Impressum" data-en="Imprint">Impressum</a>
+    <a class="footer-link" onclick="openDatenschutz()" data-de="Datenschutz" data-en="Privacy Policy">Datenschutz</a>
+  </div>
+  <div class="footer-copyright">
+    © 2026 AI Finder. <span data-de="Alle Rechte vorbehalten." data-en="All rights reserved.">Alle Rechte vorbehalten.</span>
+  </div>
+</footer>
+
+<!-- Tool Detail Modal -->
+<div class="modal-overlay" id="toolModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalTitle">Tool Details</h2>
+      <button class="modal-close" onclick="closeToolModal()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-content" id="modalContent">
+      <!-- Wird dynamisch gefüllt -->
+    </div>
+  </div>
+</div>
+
+<!-- Impressum Modal -->
+<div class="modal-overlay" id="impressumModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" data-de="Impressum" data-en="Imprint">Impressum</h2>
+      <button class="modal-close" onclick="closeImpressum()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-content legal-content">
+      <h2 data-de="Angaben gemäß § 5 TMG" data-en="Information according to § 5 TMG">Angaben gemäß § 5 TMG</h2>
+      <p>
+        Max Mustermann<br>
+        Musterstraße 123<br>
+        12345 Musterstadt<br>
+        Deutschland
+      </p>
+
+      <h3 data-de="Kontakt" data-en="Contact">Kontakt</h3>
+      <p>
+        <span data-de="Telefon: +49 (0) 123 456789" data-en="Phone: +49 (0) 123 456789">Telefon: +49 (0) 123 456789</span><br>
+        <span data-de="E-Mail: info@ai-finder.de" data-en="Email: info@ai-finder.de">E-Mail: info@ai-finder.de</span>
+      </p>
+
+      <h3 data-de="Umsatzsteuer-ID" data-en="VAT ID">Umsatzsteuer-ID</h3>
+      <p>
+        <span data-de="Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:" data-en="VAT identification number according to §27 a VAT Act:">Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:</span><br>
+        DE123456789
+      </p>
+
+      <h2 data-de="Haftungsausschluss" data-en="Disclaimer">Haftungsausschluss</h2>
+
+      <h3 data-de="Haftung für Inhalte" data-en="Liability for content">Haftung für Inhalte</h3>
+      <p data-de="Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen." data-en="The contents of our pages have been created with the greatest care. However, we cannot guarantee the accuracy, completeness and timeliness of the content. As a service provider, we are responsible for our own content on these pages in accordance with § 7 para.1 TMG and general laws. According to §§ 8 to 10 TMG, however, we as a service provider are not obliged to monitor transmitted or stored third-party information or to research circumstances that indicate illegal activity.">
+        Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+      </p>
+
+      <h3 data-de="Haftung für Links" data-en="Liability for links">Haftung für Links</h3>
+      <p data-de="Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich." data-en="Our offer contains links to external third-party websites over whose content we have no influence. Therefore, we cannot accept any liability for this third-party content. The respective provider or operator of the pages is always responsible for the content of the linked pages.">
+        Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Datenschutz Modal -->
+<div class="modal-overlay" id="datenschutzModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" data-de="Datenschutzerklärung" data-en="Privacy Policy">Datenschutzerklärung</h2>
+      <button class="modal-close" onclick="closeDatenschutz()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-content legal-content">
+      <h2 data-de="1. Datenschutz auf einen Blick" data-en="1. Data protection at a glance">1. Datenschutz auf einen Blick</h2>
+      
+      <h3 data-de="Allgemeine Hinweise" data-en="General information">Allgemeine Hinweise</h3>
+      <p data-de="Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie unsere Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können." data-en="The following information provides a simple overview of what happens to your personal data when you visit our website. Personal data is all data that can be used to personally identify you.">
+        Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie unsere Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.
+      </p>
+
+      <h3 data-de="Datenerfassung auf unserer Website" data-en="Data collection on our website">Datenerfassung auf unserer Website</h3>
+      <p>
+        <strong data-de="Wer ist verantwortlich für die Datenerfassung auf dieser Website?" data-en="Who is responsible for data collection on this website?">Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong>
+      </p>
+      <p data-de="Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen." data-en="Data processing on this website is carried out by the website operator. You can find their contact details in the imprint of this website.">
+        Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.
+      </p>
+
+      <h2 data-de="2. Google Analytics" data-en="2. Google Analytics">2. Google Analytics</h2>
+      <p data-de="Diese Website benutzt Google Analytics, einen Webanalysedienst der Google Ireland Limited. Google Analytics verwendet sog. 'Cookies', Textdateien, die auf Ihrem Computer gespeichert werden und die eine Analyse der Benutzung der Website durch Sie ermöglichen." data-en="This website uses Google Analytics, a web analytics service provided by Google Ireland Limited. Google Analytics uses so-called 'cookies', text files that are stored on your computer and enable an analysis of your use of the website.">
+        Diese Website benutzt Google Analytics, einen Webanalysedienst der Google Ireland Limited. Google Analytics verwendet sog. "Cookies", Textdateien, die auf Ihrem Computer gespeichert werden und die eine Analyse der Benutzung der Website durch Sie ermöglichen.
+      </p>
+
+      <h3 data-de="Art und Umfang der Verarbeitung" data-en="Type and scope of processing">Art und Umfang der Verarbeitung</h3>
+      <ul>
+        <li data-de="Anonymisierte IP-Adressen" data-en="Anonymized IP addresses">Anonymisierte IP-Adressen</li>
+        <li data-de="Browsertyp/-version" data-en="Browser type/version">Browsertyp/-version</li>
+        <li data-de="Verwendetes Betriebssystem" data-en="Operating system used">Verwendetes Betriebssystem</li>
+        <li data-de="Referrer URL (zuvor besuchte Seite)" data-en="Referrer URL (previously visited page)">Referrer URL (zuvor besuchte Seite)</li>
+        <li data-de="Hostname des zugreifenden Rechners" data-en="Hostname of the accessing computer">Hostname des zugreifenden Rechners</li>
+        <li data-de="Uhrzeit der Serveranfrage" data-en="Time of server request">Uhrzeit der Serveranfrage</li>
+      </ul>
+
+      <h3 data-de="Zweck der Verarbeitung" data-en="Purpose of processing">Zweck der Verarbeitung</h3>
+      <p data-de="Im Auftrag des Betreibers dieser Website wird Google diese Informationen benutzen, um Ihre Nutzung der Website auszuwerten, um Reports über die Websiteaktivitäten zusammenzustellen und um weitere mit der Websitenutzung und der Internetnutzung verbundene Dienstleistungen gegenüber dem Websitebetreiber zu erbringen." data-en="On behalf of the operator of this website, Google will use this information to evaluate your use of the website, to compile reports on website activity and to provide other services related to website activity and internet usage to the website operator.">
+        Im Auftrag des Betreibers dieser Website wird Google diese Informationen benutzen, um Ihre Nutzung der Website auszuwerten, um Reports über die Websiteaktivitäten zusammenzustellen und um weitere mit der Websitenutzung und der Internetnutzung verbundene Dienstleistungen gegenüber dem Websitebetreiber zu erbringen.
+      </p>
+
+      <h2 data-de="3. Ihre Rechte" data-en="3. Your rights">3. Ihre Rechte</h2>
+      <p data-de="Sie haben jederzeit das Recht:" data-en="You have the right at any time:">Sie haben jederzeit das Recht:</p>
+      <ul>
+        <li data-de="Auskunft über Ihre bei uns gespeicherten Daten und deren Verarbeitung zu erhalten (Art. 15 DSGVO)" data-en="To receive information about your data stored with us and its processing (Art. 15 GDPR)">Auskunft über Ihre bei uns gespeicherten Daten und deren Verarbeitung zu erhalten (Art. 15 DSGVO)</li>
+        <li data-de="Berichtigung unrichtiger personenbezogener Daten zu verlangen (Art. 16 DSGVO)" data-en="To request correction of incorrect personal data (Art. 16 GDPR)">Berichtigung unrichtiger personenbezogener Daten zu verlangen (Art. 16 DSGVO)</li>
+        <li data-de="Löschung Ihrer bei uns gespeicherten Daten zu verlangen (Art. 17 DSGVO)" data-en="To request deletion of your data stored with us (Art. 17 GDPR)">Löschung Ihrer bei uns gespeicherten Daten zu verlangen (Art. 17 DSGVO)</li>
+        <li data-de="Einschränkung der Datenverarbeitung zu verlangen (Art. 18 DSGVO)" data-en="To request restriction of data processing (Art. 18 GDPR)">Einschränkung der Datenverarbeitung zu verlangen (Art. 18 DSGVO)</li>
+        <li data-de="Widerspruch gegen die Verarbeitung Ihrer Daten einzulegen (Art. 21 DSGVO)" data-en="To object to the processing of your data (Art. 21 GDPR)">Widerspruch gegen die Verarbeitung Ihrer Daten einzulegen (Art. 21 DSGVO)</li>
+      </ul>
+
+      <h2 data-de="4. Cookies" data-en="4. Cookies">4. Cookies</h2>
+      <p data-de="Unsere Website verwendet Cookies. Das sind kleine Textdateien, die Ihr Webbrowser auf Ihrem Endgerät speichert. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen." data-en="Our website uses cookies. These are small text files that your web browser stores on your device. Cookies help us to make our offer more user-friendly, effective and secure.">
+        Unsere Website verwendet Cookies. Das sind kleine Textdateien, die Ihr Webbrowser auf Ihrem Endgerät speichert. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen.
+      </p>
+
+      <h2 data-de="5. Kontakt" data-en="5. Contact">5. Kontakt</h2>
+      <p data-de="Bei Fragen zur Erhebung, Verarbeitung oder Nutzung Ihrer personenbezogenen Daten, bei Auskünften, Berichtigung, Sperrung oder Löschung von Daten wenden Sie sich bitte an:" data-en="If you have any questions about the collection, processing or use of your personal data, or for information, correction, blocking or deletion of data, please contact:">
+        Bei Fragen zur Erhebung, Verarbeitung oder Nutzung Ihrer personenbezogenen Daten, bei Auskünften, Berichtigung, Sperrung oder Löschung von Daten wenden Sie sich bitte an:
+      </p>
+      <p>
+        E-Mail: datenschutz@ai-finder.de
+      </p>
+    </div>
+  </div>
+</div>
+
 <!-- Cookie Banner -->
 <div class="cookie-banner" id="cookieBanner">
   <div class="cookie-content">
@@ -1587,6 +2243,9 @@ async function loadAITools() {
       }
     });
     
+    // AI-basierte Empfehlungen hinzufügen
+    addAIRecommendations();
+    
     renderTopCharts();
     renderTools();
     updateToolCount();
@@ -1602,6 +2261,36 @@ async function loadAITools() {
   }
 }
 
+// ===== AI EMPFEHLUNGEN =====
+function addAIRecommendations() {
+  // Intelligente KI-Empfehlungen basierend auf Nutzungsmustern
+  const userHistory = JSON.parse(localStorage.getItem('userHistory') || '[]');
+  const favorites = JSON.parse(localStorage.getItem('aiFavorites') || '[]');
+  
+  aiTools.forEach(tool => {
+    let score = 0;
+    
+    // Bonus für hohe Bewertungen
+    if (tool.rating >= 4.7) score += 3;
+    
+    // Bonus für viele Votes
+    if (tool.votes > 50) score += 2;
+    
+    // Bonus für beliebte Kategorien
+    if (tool.category === 'text' || tool.category === 'image') score += 1;
+    
+    // Bonus für Lifetime Deals
+    if (tool.hasLifetimeDeal) score += 2;
+    
+    // Bonus basierend auf Nutzerverhalten
+    if (userHistory.includes(tool.category)) score += 2;
+    if (favorites.includes(tool.id)) score += 3;
+    
+    tool.aiScore = score;
+    tool.isAIRecommended = score >= 6;
+  });
+}
+
 // ===== TOP 5 CHARTS =====
 function renderTopCharts() {
   const topTools = [...aiTools]
@@ -1612,9 +2301,11 @@ function renderTopCharts() {
     const description = currentLang === 'de' ? tool.description.de : tool.description.en;
     const rankClass = `rank-${index + 1}`;
     const ltdBadge = tool.hasLifetimeDeal ? '<span class="ltd-badge">LTD</span>' : '';
+    const aiRecommended = tool.isAIRecommended ? '<div class="ai-recommended"><i class="fas fa-robot"></i> AI Pick</div>' : '';
     
     return `
-      <div class="chart-card">
+      <div class="chart-card" onclick="openToolDetail('${tool.id}')">
+        ${aiRecommended}
         <div class="chart-header">
           <div class="chart-rank ${rankClass}">${index + 1}</div>
           <div class="chart-votes">
@@ -1626,7 +2317,7 @@ function renderTopCharts() {
         </div>
         <div class="chart-price">${tool.priceDisplay}${ltdBadge}</div>
         <div class="chart-description">${description}</div>
-        <div class="chart-actions">
+        <div class="chart-actions" onclick="event.stopPropagation()">
           <button class="vote-btn up ${tool.userVote === 'up' ? 'active' : ''}" onclick="vote('${tool.id}', 'up')">
             <i class="fas fa-arrow-up"></i>
             <span data-de="Upvote" data-en="Upvote">Upvote</span>
@@ -1689,8 +2380,8 @@ function renderTools() {
     const ltdBadge = tool.hasLifetimeDeal ? '<span class="ltd-badge">LTD</span>' : '';
     
     return `
-      <div class="compact-tool-row">
-        <div class="tool-vote-compact">
+      <div class="compact-tool-row" onclick="openToolDetail('${tool.id}')">
+        <div class="tool-vote-compact" onclick="event.stopPropagation()">
           <div class="vote-count">${tool.votes || 0}</div>
           <div class="vote-buttons-compact">
             <button class="vote-btn-compact up ${tool.userVote === 'up' ? 'active' : ''}" onclick="vote('${tool.id}', 'up')">
@@ -1704,11 +2395,14 @@ function renderTools() {
         
         <div class="tool-info-compact">
           <div class="tool-category-compact">${getCategoryLabel(tool.category)}</div>
-          <div class="tool-name-compact">${tool.name}</div>
+          <div class="tool-name-compact">
+            ${tool.name}
+            ${tool.isAIRecommended ? '<i class="fas fa-robot" style="color: var(--neon-purple); margin-left: 8px;" title="AI Recommended"></i>' : ''}
+          </div>
           <div class="tool-desc-compact">${description}</div>
         </div>
         
-        <div class="tool-meta-compact">
+        <div class="tool-meta-compact" onclick="event.stopPropagation()">
           <div class="tool-price-compact">${tool.priceDisplay}${ltdBadge}</div>
           <div class="tool-actions-compact">
             <button class="favorite-btn ${isFavorite(tool.id) ? 'active' : ''}" onclick="toggleFavorite('${tool.id}')">
@@ -1717,7 +2411,7 @@ function renderTools() {
             <button class="compare-btn ${isInComparison(tool.id) ? 'active' : ''}" onclick="toggleComparison('${tool.id}')">
               <i class="fas fa-balance-scale"></i>
             </button>
-            <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-link-compact">
+            <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-link-compact" onclick="trackToolClick('${tool.id}')">
               <span data-de="Öffnen" data-en="Open">Öffnen</span>
             </a>
           </div>
@@ -1729,6 +2423,285 @@ function renderTools() {
   document.getElementById('toolsGrid').innerHTML = toolsHTML;
   document.getElementById('toolCount').textContent = filteredTools.length;
   updateLanguage();
+}
+
+// ===== TOOL DETAIL MODAL =====
+function openToolDetail(toolId) {
+  const tool = aiTools.find(t => t.id === toolId);
+  if (!tool) return;
+
+  // Track user interaction
+  trackUserInteraction(tool.category);
+
+  const description = currentLang === 'de' ? tool.description.de : tool.description.en;
+  const seoTitle = currentLang === 'de' ? (tool.seoTitle?.de || tool.name) : (tool.seoTitle?.en || tool.name);
+  const seoDesc = currentLang === 'de' ? (tool.seoDesc?.de || description) : (tool.seoDesc?.en || description);
+  
+  const pros = tool.pros || [];
+  const cons = tool.cons || [];
+  const features = tool.features || [];
+  const alternatives = tool.alternatives || [];
+  const useCases = tool.useCases || [];
+  
+  const prosHTML = pros.map(pro => `<li>${pro}</li>`).join('');
+  const consHTML = cons.map(con => `<li>${con}</li>`).join('');
+  const featuresHTML = features.map(f => `<span class="feature-tag"><i class="fas fa-check-circle"></i> ${f}</span>`).join('');
+  
+  const alternativesHTML = alternatives.map(altId => {
+    const altTool = aiTools.find(t => t.id === altId);
+    if (!altTool) return '';
+    return `
+      <div class="alternative-card" onclick="openToolDetail('${altTool.id}')">
+        <div class="alternative-card-name">${altTool.name}</div>
+        <div class="alternative-card-category">${getCategoryLabel(altTool.category)}</div>
+      </div>
+    `;
+  }).join('');
+
+  const useCasesText = currentLang === 'de' 
+    ? useCases.map(uc => getUseCaseLabelDE(uc)).join(', ')
+    : useCases.map(uc => getUseCaseLabelEN(uc)).join(', ');
+
+  const modalContent = `
+    <div class="tool-detail-hero">
+      <div class="tool-detail-icon">
+        ${getCategoryIcon(tool.category)}
+      </div>
+      <div class="tool-detail-info">
+        <h2 class="tool-detail-name">${tool.name}</h2>
+        <div class="tool-detail-meta">
+          <span class="tool-badge category">
+            <i class="fas fa-tag"></i>
+            ${getCategoryLabel(tool.category)}
+          </span>
+          <span class="tool-badge price">
+            <i class="fas fa-dollar-sign"></i>
+            ${tool.priceDisplay}
+          </span>
+          <span class="tool-badge rating">
+            <i class="fas fa-star"></i>
+            ${tool.rating}/5
+          </span>
+          ${tool.hasLifetimeDeal ? '<span class="ltd-badge">Lifetime Deal</span>' : ''}
+        </div>
+        <p class="tool-description-full">${seoDesc}</p>
+      </div>
+    </div>
+
+    ${pros.length > 0 || cons.length > 0 ? `
+    <div class="tool-section">
+      <h3><i class="fas fa-balance-scale"></i> <span data-de="Vor- & Nachteile" data-en="Pros & Cons">Vor- & Nachteile</span></h3>
+      <div class="pros-cons-grid">
+        ${pros.length > 0 ? `
+        <div class="pros-list">
+          <h4><i class="fas fa-check-circle"></i> <span data-de="Vorteile" data-en="Advantages">Vorteile</span></h4>
+          <ul>${prosHTML}</ul>
+        </div>
+        ` : ''}
+        ${cons.length > 0 ? `
+        <div class="cons-list">
+          <h4><i class="fas fa-times-circle"></i> <span data-de="Nachteile" data-en="Disadvantages">Nachteile</span></h4>
+          <ul>${consHTML}</ul>
+        </div>
+        ` : ''}
+      </div>
+    </div>
+    ` : ''}
+
+    ${features.length > 0 ? `
+    <div class="tool-section">
+      <h3><i class="fas fa-rocket"></i> <span data-de="Hauptfunktionen" data-en="Key Features">Hauptfunktionen</span></h3>
+      <div class="feature-tags">
+        ${featuresHTML}
+      </div>
+    </div>
+    ` : ''}
+
+    ${useCases.length > 0 ? `
+    <div class="tool-section">
+      <h3><i class="fas fa-lightbulb"></i> <span data-de="Beste Anwendungsfälle" data-en="Best Use Cases">Beste Anwendungsfälle</span></h3>
+      <p style="color: var(--tech-silver); line-height: 1.7;">${useCasesText}</p>
+    </div>
+    ` : ''}
+
+    ${alternatives.length > 0 ? `
+    <div class="tool-section">
+      <h3><i class="fas fa-exchange-alt"></i> <span data-de="Vergleichbare Tools" data-en="Similar Tools">Vergleichbare Tools</span></h3>
+      <div class="alternatives-grid">
+        ${alternativesHTML}
+      </div>
+    </div>
+    ` : ''}
+
+    ${tool.pricing ? `
+    <div class="tool-section">
+      <h3><i class="fas fa-credit-card"></i> <span data-de="Preisgestaltung" data-en="Pricing">Preisgestaltung</span></h3>
+      <div style="background: rgba(255, 255, 255, 0.03); border-radius: var(--radius-tech); padding: 20px; border: 1px solid rgba(255, 255, 255, 0.05);">
+        ${Object.entries(tool.pricing).map(([tier, description]) => `
+          <p style="color: var(--tech-silver); margin-bottom: 10px;">
+            <strong style="color: var(--neon-cyan);">${tier}:</strong> ${description}
+          </p>
+        `).join('')}
+      </div>
+    </div>
+    ` : ''}
+
+    <div class="tool-actions-modal">
+      <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="btn-primary" onclick="trackToolClick('${tool.id}')">
+        <i class="fas fa-external-link-alt"></i>
+        <span data-de="Tool öffnen" data-en="Open Tool">Tool öffnen</span>
+      </a>
+      <button class="btn-secondary" onclick="shareToolDirectly('${tool.id}')">
+        <i class="fas fa-share-alt"></i>
+        <span data-de="Teilen" data-en="Share">Teilen</span>
+      </button>
+    </div>
+  `;
+
+  document.getElementById('modalTitle').textContent = seoTitle;
+  document.getElementById('modalContent').innerHTML = modalContent;
+  document.getElementById('toolModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  
+  updateLanguage();
+}
+
+function closeToolModal() {
+  document.getElementById('toolModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// ===== IMPRESSUM & DATENSCHUTZ =====
+function openImpressum() {
+  document.getElementById('impressumModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  updateLanguage();
+}
+
+function closeImpressum() {
+  document.getElementById('impressumModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function openDatenschutz() {
+  document.getElementById('datenschutzModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  updateLanguage();
+}
+
+function closeDatenschutz() {
+  document.getElementById('datenschutzModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+});
+
+// Close modals on ESC key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+});
+
+// ===== INTELLIGENTE FUNKTIONEN =====
+function trackUserInteraction(category) {
+  let history = JSON.parse(localStorage.getItem('userHistory') || '[]');
+  history.push(category);
+  if (history.length > 20) history = history.slice(-20);
+  localStorage.setItem('userHistory', JSON.stringify(history));
+}
+
+function trackToolClick(toolId) {
+  let clicks = JSON.parse(localStorage.getItem('toolClicks') || '{}');
+  clicks[toolId] = (clicks[toolId] || 0) + 1;
+  localStorage.setItem('toolClicks', JSON.stringify(clicks));
+}
+
+function shareToolDirectly(toolId) {
+  const tool = aiTools.find(t => t.id === toolId);
+  if (!tool) return;
+
+  const shareData = {
+    title: `${tool.name} - AI Finder`,
+    text: currentLang === 'de' ? tool.description.de : tool.description.en,
+    url: window.location.href + '?tool=' + toolId
+  };
+
+  if (navigator.share) {
+    navigator.share(shareData).catch(() => {});
+  } else {
+    // Fallback: Copy to clipboard
+    navigator.clipboard.writeText(shareData.url);
+    alert(currentLang === 'de' ? 'Link kopiert!' : 'Link copied!');
+  }
+}
+
+// ===== HELPER FUNCTIONS =====
+function getCategoryIcon(category) {
+  const icons = {
+    text: '✍️',
+    image: '🎨',
+    code: '💻',
+    video: '🎬',
+    audio: '🎵',
+    business: '💼'
+  };
+  return icons[category] || '🤖';
+}
+
+function getUseCaseLabelDE(useCase) {
+  const labels = {
+    'chatbot': 'Chatbots',
+    'writing': 'Schreiben',
+    'coding': 'Programmieren',
+    'image-generator': 'Bildgenerierung',
+    'video-generator': 'Videogenerierung',
+    'voice-generator': 'Sprachgenerierung',
+    'music': 'Musikproduktion',
+    'research': 'Recherche',
+    'analysis': 'Analyse',
+    'design': 'Design',
+    'marketing': 'Marketing',
+    'seo': 'SEO',
+    'social-media': 'Social Media',
+    'productivity': 'Produktivität',
+    'education': 'Bildung',
+    'business': 'Business'
+  };
+  return labels[useCase] || useCase;
+}
+
+function getUseCaseLabelEN(useCase) {
+  const labels = {
+    'chatbot': 'Chatbots',
+    'writing': 'Writing',
+    'coding': 'Coding',
+    'image-generator': 'Image Generation',
+    'video-generator': 'Video Generation',
+    'voice-generator': 'Voice Generation',
+    'music': 'Music Production',
+    'research': 'Research',
+    'analysis': 'Analysis',
+    'design': 'Design',
+    'marketing': 'Marketing',
+    'seo': 'SEO',
+    'social-media': 'Social Media',
+    'productivity': 'Productivity',
+    'education': 'Education',
+    'business': 'Business'
+  };
+  return labels[useCase] || useCase;
 }
 
 // ===== VOTING SYSTEM =====
@@ -1856,7 +2829,7 @@ document.querySelectorAll('.search-hint-chip').forEach(chip => {
 // Surprise Me
 document.getElementById('surpriseBtn').addEventListener('click', () => {
   const randomTool = aiTools[Math.floor(Math.random() * aiTools.length)];
-  window.open(randomTool.link, '_blank');
+  openToolDetail(randomTool.id);
 });
 
 // ===== SPRACHE =====
@@ -1929,6 +2902,13 @@ document.addEventListener('DOMContentLoaded', () => {
   loadAITools();
   showCookieBanner();
   updateLanguage();
+  
+  // Check for direct tool link
+  const urlParams = new URLSearchParams(window.location.search);
+  const toolParam = urlParams.get('tool');
+  if (toolParam) {
+    setTimeout(() => openToolDetail(toolParam), 500);
+  }
 });
 </script>
 
