@@ -48,14 +48,14 @@
 }
 </script>
 <style>
-/* ===== MINIMALISTISCHES DESIGN MIT MAXIMALER INTELLIGENZ ===== */
+/* ===== RADICAL SIMPLICITY ===== */
 :root {
   --primary: #00d4ff;
   --primary-dark: #00a8cc;
   --secondary: #a855f7;
   --bg-dark: #0a0e17;
-  --bg-card: #141824;
-  --bg-hover: #1a1f2e;
+  --bg-card: rgba(20, 24, 36, 0.95);
+  --bg-hover: rgba(26, 31, 46, 0.95);
   --text-primary: #ffffff;
   --text-secondary: #a0aec0;
   --text-muted: #718096;
@@ -66,10 +66,10 @@
   --warning: #f59e0b;
   --gold: #fbbf24;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  --shadow-hover: 0 8px 30px rgba(0, 212, 255, 0.2);
+  --shadow-hover: 0 8px 30px rgba(0, 212, 255, 0.15);
   --radius: 12px;
   --radius-lg: 16px;
-  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -100,6 +100,27 @@ body::before {
     radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.03) 0%, transparent 50%);
   z-index: -1;
   pointer-events: none;
+}
+
+/* ===== FOCUS MODE TRANSITIONS ===== */
+.header, .quick-nav-container, .search-container {
+  transition: var(--transition);
+}
+
+body.focus-mode .header {
+  opacity: 0.3;
+  transform: translateY(-20px);
+}
+
+body.focus-mode .quick-nav-container {
+  background: rgba(10, 14, 23, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+body.focus-mode .search-container {
+  opacity: 0.7;
+  transform: scale(0.98);
 }
 
 /* ===== LANGUAGE SWITCH ===== */
@@ -135,10 +156,11 @@ body::before {
 
 /* ===== HEADER ===== */
 .header {
-  padding: 80px 20px 40px;
+  padding: 60px 20px 30px;
   text-align: center;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
+  transition: var(--transition);
 }
 
 .badge {
@@ -155,7 +177,7 @@ body::before {
 }
 
 .header h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2rem, 5vw, 2.5rem);
   margin-bottom: 16px;
   line-height: 1.1;
   background: linear-gradient(135deg, var(--text-primary), var(--primary));
@@ -165,18 +187,19 @@ body::before {
 }
 
 .header p {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   max-width: 650px;
-  margin: 0 auto 30px;
+  margin: 0 auto 25px;
   line-height: 1.6;
 }
 
-/* ===== SEARCH ===== */
+/* ===== INTENT SEARCH ===== */
 .search-container {
   max-width: 700px;
   margin: 0 auto 20px;
   position: relative;
+  transition: var(--transition);
 }
 
 .search-box {
@@ -189,6 +212,7 @@ body::before {
   font-size: 1rem;
   transition: var(--transition);
   font-family: 'Inter', sans-serif;
+  backdrop-filter: blur(10px);
 }
 
 .search-box:focus {
@@ -196,6 +220,7 @@ body::before {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
   background: var(--bg-hover);
+  transform: translateY(-2px);
 }
 
 .search-icon {
@@ -205,30 +230,6 @@ body::before {
   transform: translateY(-50%);
   color: var(--primary);
   font-size: 1.2rem;
-}
-
-.surprise-btn {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: linear-gradient(135deg, var(--secondary), var(--primary));
-  color: white;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: var(--transition);
-  font-size: 1.1rem;
-}
-
-.surprise-btn:hover {
-  transform: translateY(-50%) scale(1.05);
-  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
 }
 
 .search-hint-container {
@@ -258,99 +259,65 @@ body::before {
   border-color: var(--primary);
 }
 
-.search-suggestions {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 var(--radius) var(--radius);
-  backdrop-filter: blur(10px);
-  max-height: 300px;
-  overflow-y: auto;
-  z-index: 100;
-  display: none;
-  box-shadow: var(--shadow);
-  margin-top: 4px;
-}
-
-.search-suggestions.active {
-  display: block;
-}
-
-.suggestion-item {
-  padding: 12px 18px;
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-bottom: 1px solid var(--border);
-}
-
-.suggestion-item:last-child {
-  border-bottom: none;
-}
-
-.suggestion-item:hover {
-  background: var(--bg-hover);
-}
-
-.suggestion-icon {
-  color: var(--primary);
-  width: 20px;
-  font-size: 1rem;
-}
-
-/* ===== QUICK NAVIGATION ===== */
-.quick-navigation {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  max-width: 1200px;
-  margin: 0 auto 40px;
-  padding: 0 20px;
-}
-
-.quick-card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 20px;
-  transition: var(--transition);
-  border: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-}
-
-.quick-card:hover {
-  transform: translateY(-5px);
+.search-hint-chip.active {
+  background: rgba(0, 212, 255, 0.3);
   border-color: var(--primary);
-  box-shadow: var(--shadow-hover);
-  background: var(--bg-hover);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
 }
 
-.quick-icon {
-  font-size: 2rem;
-  margin-bottom: 12px;
+/* ===== QUICK NAVIGATION PILLS ===== */
+.quick-nav-container {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: rgba(10, 14, 23, 0.8);
+  backdrop-filter: blur(20px);
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid transparent;
+  transition: var(--transition);
 }
 
-.quick-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 6px;
+.quick-nav-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+  scrollbar-width: none;
 }
 
-.quick-desc {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  line-height: 1.4;
+.quick-nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.quick-pill:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.quick-pill.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
 }
 
 /* ===== TOP CHARTS ===== */
@@ -364,7 +331,7 @@ body::before {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 20px;
@@ -378,359 +345,118 @@ body::before {
 .top-charts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
+  gap: 20px;
 }
 
-/* ===== TOOL CARDS (Minimalistisch) ===== */
-.chart-card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 20px;
-  border: 1px solid var(--border);
-  position: relative;
-  transition: var(--transition);
-  cursor: pointer;
-}
-
-.chart-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--primary);
-  box-shadow: var(--shadow-hover);
-}
-
-.chart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.chart-rank {
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 0.9rem;
-  flex-shrink: 0;
-}
-
-.chart-rank.rank-1 {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-}
-
-.chart-rank.rank-2 {
-  background: linear-gradient(135deg, #cbd5e0, #a0aec0);
-}
-
-.chart-rank.rank-3 {
-  background: linear-gradient(135deg, #d97706, #92400e);
-}
-
-.chart-votes {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  font-weight: 600;
-}
-
-.chart-votes i {
-  color: var(--success);
-}
-
-.chart-tool-name {
-  font-weight: 800;
-  font-size: 1.15rem;
-  color: var(--text-primary);
-  margin-bottom: 6px;
-  width: 100%;
-}
-
-.chart-category {
-  font-size: 0.75rem;
-  color: var(--primary);
-  font-weight: 700;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  width: 100%;
-}
-
-.chart-price {
-  font-size: 0.9rem;
-  color: var(--success);
-  font-weight: 700;
-  margin: 8px 0;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.ltd-badge {
-  display: inline-block;
-  background: linear-gradient(135deg, #f59e0b, #ef4444);
-  color: white;
-  font-size: 0.65rem;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 10px;
-  margin-left: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.chart-description {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin-bottom: 16px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.chart-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-/* ===== VOTE BUTTONS (Minimalistisch) ===== */
-.vote-btn {
-  flex: 1;
-  background: var(--bg-hover);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px;
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-
-.vote-btn:hover {
-  transform: translateY(-2px);
-}
-
-.vote-btn.up {
-  color: var(--success);
-  border-color: rgba(16, 185, 129, 0.2);
-}
-
-.vote-btn.up:hover,
-.vote-btn.up.active {
-  background: rgba(16, 185, 129, 0.15);
-  border-color: var(--success);
-}
-
-.vote-btn.down {
-  color: var(--error);
-  border-color: rgba(239, 68, 68, 0.2);
-}
-
-.vote-btn.down:hover,
-.vote-btn.down.active {
-  background: rgba(239, 68, 68, 0.15);
-  border-color: var(--error);
-}
-
-.vote-btn i {
-  font-size: 1rem;
-}
-
-.favorite-btn,
-.compare-btn {
-  background: var(--bg-hover);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: var(--transition);
-  padding: 10px;
-  border-radius: 8px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-}
-
-.favorite-btn:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-  transform: translateY(-2px);
-}
-
-.favorite-btn.active {
-  color: var(--gold);
-  border-color: var(--gold);
-  background: rgba(251, 191, 36, 0.15);
-}
-
-.compare-btn:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-  transform: translateY(-2px);
-}
-
-.compare-btn.active {
-  color: var(--primary);
-  border-color: var(--primary);
-  background: rgba(0, 212, 255, 0.15);
-}
-
-/* ===== TOOLS CONTAINER ===== */
+/* ===== HIGH-DENSITY TOOL GRID ===== */
 .tools-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px 60px;
 }
 
-.compact-tools-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 15px;
 }
 
-.compact-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-}
-
-.filter-btn {
+.tool-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  color: var(--text-secondary);
-  padding: 8px 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 600;
-  transition: var(--transition);
-  font-size: 0.85rem;
-}
-
-.filter-btn:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-  transform: translateY(-2px);
-}
-
-.filter-btn.active {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  border-color: transparent;
-  color: white;
-  font-weight: 700;
-}
-
-.filter-select {
-  padding: 8px 30px 8px 12px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: var(--text-primary);
-  font-size: 0.85rem;
-  transition: var(--transition);
-  cursor: pointer;
-  appearance: none;
-  min-width: 140px;
-  font-weight: 600;
-}
-
-.filter-select:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
-}
-
-.filter-group {
-  position: relative;
-}
-
-.filter-group::after {
-  content: '▼';
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--primary);
-  pointer-events: none;
-  font-size: 0.65rem;
-}
-
-.tools-count {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  font-weight: 600;
-}
-
-.tools-count span {
-  color: var(--primary);
-  font-weight: 800;
-  font-size: 1.1rem;
-}
-
-/* ===== COMPACT TOOL LIST ===== */
-.compact-tools-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-
-.compact-tool-row {
-  background: var(--bg-card);
   border-radius: var(--radius);
-  padding: 16px;
-  border: 1px solid var(--border);
-  transition: var(--transition);
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 16px;
+  padding: 18px;
+  position: relative;
   cursor: pointer;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
 }
 
-.compact-tool-row:hover {
+.tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.tool-card:hover {
   border-color: var(--primary);
-  transform: translateY(-2px);
+  transform: translateY(-5px);
   box-shadow: var(--shadow-hover);
 }
 
-.tool-vote-compact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  min-width: 70px;
+.tool-card:hover::before {
+  opacity: 1;
 }
 
-.vote-count {
+.tool-card:hover .tool-preview {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tool-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.tool-name {
   font-weight: 800;
   font-size: 1.1rem;
   color: var(--text-primary);
+  margin-bottom: 4px;
 }
 
-.vote-buttons-compact {
+.tool-category {
+  font-size: 0.75rem;
+  color: var(--primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tool-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--gold);
+}
+
+.tool-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tool-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--border);
+}
+
+.tool-price {
+  font-size: 0.9rem;
+  color: var(--success);
+  font-weight: 700;
+}
+
+.tool-actions {
   display: flex;
   gap: 8px;
 }
@@ -776,108 +502,68 @@ body::before {
   border-color: var(--error);
 }
 
-.tool-info-compact {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-}
-
-.tool-name-compact {
-  font-weight: 800;
-  font-size: 1.05rem;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.tool-category-compact {
-  font-size: 0.7rem;
-  color: var(--primary);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.tool-desc-compact {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-
-.tool-meta-compact {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-  min-width: 120px;
-}
-
-.tool-price-compact {
-  font-size: 0.9rem;
-  color: var(--success);
-  font-weight: 700;
-}
-
-.tool-actions-compact {
-  display: flex;
-  gap: 8px;
-}
-
-.tool-link-compact {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  padding: 8px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 700;
-  transition: var(--transition);
-  font-size: 0.85rem;
-  white-space: nowrap;
-}
-
-.tool-link-compact:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
-}
-
-/* ===== AI RECOMMENDATION BADGE ===== */
-.ai-recommended {
+/* ===== SMART PREVIEW (GLASSMORPHISM OVERLAY) ===== */
+.tool-preview {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  background: linear-gradient(135deg, var(--secondary), var(--primary));
-  color: white;
-  padding: 4px 10px;
-  border-radius: 15px;
-  font-size: 0.65rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 14, 23, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: var(--transition);
+  border: 1px solid var(--primary);
+  text-align: center;
+}
+
+.preview-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
   font-weight: 800;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-/* ===== MODAL STYLES (Minimalistisch) ===== */
+/* ===== MODAL STYLES ===== */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
   z-index: 2000;
   display: none;
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modal-overlay.active {
@@ -896,13 +582,13 @@ body::before {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
-  max-width: 900px;
+  max-width: 800px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  animation: slideUp 0.3s ease;
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes slideUp {
@@ -917,7 +603,7 @@ body::before {
 }
 
 .modal-header {
-  padding: 24px;
+  padding: 20px;
   border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
@@ -930,7 +616,7 @@ body::before {
 }
 
 .modal-title {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--text-primary);
 }
@@ -957,602 +643,48 @@ body::before {
   transform: rotate(90deg);
 }
 
-.modal-content {
-  padding: 24px;
-}
-
-.tool-detail-hero {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  margin-bottom: 24px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border);
-}
-
-.tool-detail-icon {
-  width: 70px;
-  height: 70px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.2rem;
-  flex-shrink: 0;
-}
-
-.tool-detail-info {
-  flex: 1;
-}
-
-.tool-detail-name {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  margin-bottom: 10px;
-}
-
-.tool-detail-meta {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 12px;
-}
-
-.tool-badge {
-  padding: 6px 12px;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.tool-badge.category {
-  background: rgba(0, 212, 255, 0.15);
-  color: var(--primary);
-  border: 1px solid rgba(0, 212, 255, 0.3);
-}
-
-.tool-badge.price {
-  background: rgba(16, 185, 129, 0.15);
-  color: var(--success);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
-.tool-badge.rating {
-  background: rgba(251, 191, 36, 0.15);
-  color: var(--gold);
-  border: 1px solid rgba(251, 191, 36, 0.3);
-}
-
-.tool-description-full {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.tool-section {
-  margin-bottom: 24px;
-}
-
-.tool-section h3 {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.tool-section h3 i {
-  color: var(--primary);
-  font-size: 1rem;
-}
-
-.pros-cons-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-}
-
-.pros-list,
-.cons-list {
-  background: var(--bg-hover);
-  border-radius: var(--radius);
-  padding: 16px;
-  border: 1px solid var(--border);
-}
-
-.pros-list h4 {
-  color: var(--success);
-  font-weight: 700;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.95rem;
-}
-
-.cons-list h4 {
-  color: var(--error);
-  font-weight: 700;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.95rem;
-}
-
-.pros-list ul,
-.cons-list ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.pros-list li,
-.cons-list li {
-  padding: 6px 0;
-  padding-left: 22px;
-  position: relative;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  font-size: 0.9rem;
-}
-
-.pros-list li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--success);
-  font-weight: 800;
-}
-
-.cons-list li::before {
-  content: '✗';
-  position: absolute;
-  left: 0;
-  color: var(--error);
-  font-weight: 800;
-}
-
-.feature-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.feature-tag {
-  background: rgba(168, 85, 247, 0.15);
-  color: var(--secondary);
-  padding: 6px 12px;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.alternatives-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 12px;
-}
-
-.alternative-card {
-  background: var(--bg-hover);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 12px;
-  text-align: center;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.alternative-card:hover {
-  background: var(--bg-dark);
-  border-color: var(--primary);
-  transform: translateY(-3px);
-}
-
-.alternative-card-name {
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-  font-size: 0.9rem;
-}
-
-.alternative-card-category {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.tool-actions-modal {
-  display: flex;
-  gap: 12px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  margin-top: 24px;
-}
-
-.btn-primary {
-  flex: 1;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: var(--radius);
-  font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  text-decoration: none;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
-}
-
-.btn-secondary {
-  flex: 1;
-  background: var(--bg-hover);
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-  padding: 12px 24px;
-  border-radius: var(--radius);
-  font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.btn-secondary:hover {
-  background: var(--bg-dark);
-  border-color: var(--primary);
-  transform: translateY(-2px);
-}
-
-/* ===== LEGAL CONTENT ===== */
-.legal-content h2 {
-  font-size: 1.4rem;
-  color: var(--primary);
-  margin-top: 24px;
-  margin-bottom: 12px;
-  font-weight: 800;
-}
-
-.legal-content h3 {
-  font-size: 1.1rem;
-  color: var(--text-primary);
-  margin-top: 16px;
-  margin-bottom: 8px;
-  font-weight: 700;
-}
-
-.legal-content p {
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 12px;
-  font-size: 0.95rem;
-}
-
-.legal-content ul,
-.legal-content ol {
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 12px;
-  margin-left: 20px;
-  font-size: 0.95rem;
-}
-
-.legal-content li {
-  margin-bottom: 6px;
-}
-
-.legal-content a {
-  color: var(--primary);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: var(--transition);
-}
-
-.legal-content a:hover {
-  border-bottom-color: var(--primary);
-}
-
-/* ===== FOOTER ===== */
-.footer {
-  background: var(--bg-card);
-  border-top: 1px solid var(--border);
-  padding: 30px 20px 20px;
-  text-align: center;
-}
-
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-.footer-link {
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-weight: 600;
-  transition: var(--transition);
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
-.footer-link:hover {
-  color: var(--primary);
-  transform: translateY(-2px);
-}
-
-.footer-copyright {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  margin-top: 16px;
-}
-
-/* ===== COOKIE BANNER ===== */
-.cookie-banner {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--bg-card);
-  border-top: 1px solid var(--border);
-  padding: 20px;
-  z-index: 1000;
-  backdrop-filter: blur(10px);
-  transform: translateY(100%);
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  opacity: 0;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.cookie-banner.show {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.cookie-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.cookie-content h3 {
-  color: var(--primary);
-  margin-bottom: 8px;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.cookie-content p {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  flex: 1;
-  min-width: 280px;
-  line-height: 1.5;
-}
-
-.cookie-buttons {
-  display: flex;
-  gap: 12px;
-}
-
-.cookie-btn {
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-  border: 1px solid transparent;
-}
-
-.cookie-btn.primary {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-}
-
-.cookie-btn.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
-}
-
-.cookie-btn.secondary {
-  background: var(--bg-hover);
-  color: var(--text-primary);
-  border-color: var(--border);
-}
-
-.cookie-btn.secondary:hover {
-  background: var(--bg-dark);
-  border-color: var(--primary);
-  transform: translateY(-2px);
-}
-
-/* ===== LOADING ===== */
-.loading {
-  display: none;
-  text-align: center;
-  padding: 40px;
-  color: var(--primary);
-}
-
-.loading i {
-  font-size: 2.5rem;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  100% { transform: rotate(360deg); }
-}
-
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tool-card:hover .tool-preview {
+    display: none;
+  }
+  
   .header {
-    padding: 60px 15px 30px;
+    padding: 40px 15px 20px;
   }
   
-  .quick-navigation {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    padding: 0 15px;
-  }
-  
-  .top-charts {
-    grid-template-columns: 1fr;
-  }
-  
-  .tools-container {
-    padding: 0 15px 40px;
-  }
-  
-  .compact-tools-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .compact-filters {
-    justify-content: center;
-  }
-  
-  .compact-tool-row {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  
-  .tool-meta-compact {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .tool-vote-compact {
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
+  .quick-nav-container {
+    padding: 12px 15px;
   }
   
   .modal {
     width: 95%;
     max-height: 95vh;
   }
-  
-  .modal-header {
-    padding: 16px;
-  }
-  
-  .modal-content {
-    padding: 16px;
-  }
-  
-  .tool-detail-hero {
-    flex-direction: column;
-  }
-  
-  .pros-cons-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .tool-actions-modal {
-    flex-direction: column;
-  }
-  
-  .cookie-content {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .cookie-buttons {
-    width: 100%;
-    flex-direction: column;
-  }
-  
-  .cookie-btn {
-    width: 100%;
-    justify-content: center;
-  }
 }
 
 @media (max-width: 480px) {
   .header h1 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
   
   .search-box {
     padding: 14px 55px 14px 45px;
-    font-size: 0.95rem;
   }
   
-  .quick-navigation {
-    grid-template-columns: 1fr;
-  }
-  
-  .chart-actions {
-    gap: 6px;
-  }
-  
-  .vote-btn {
-    padding: 8px;
-    font-size: 0.8rem;
-  }
-  
-  .favorite-btn,
-  .compare-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 0.9rem;
-  }
-  
-  .modal-title {
-    font-size: 1.3rem;
-  }
-  
-  .tool-detail-name {
-    font-size: 1.4rem;
-  }
-  
-  .alternatives-grid {
-    grid-template-columns: 1fr;
+  .tools-grid {
+    gap: 12px;
   }
 }
 
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -1561,7 +693,7 @@ body::before {
 
 ::-webkit-scrollbar-thumb {
   background: var(--bg-card);
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -1602,9 +734,6 @@ body::before {
       data-placeholder-de="Durchsuche alle KI-Tools..." 
       data-placeholder-en="Search all AI tools..."
     >
-    <button class="surprise-btn" id="surpriseBtn" title="Überrasch mich!">
-      <i class="fas fa-dice"></i>
-    </button>
     <div class="search-suggestions" id="searchSuggestions"></div>
   </div>
 
@@ -1627,37 +756,34 @@ body::before {
   </div>
 </header>
 
-<!-- Quick Navigation -->
-<div class="quick-navigation">
-  <div class="quick-card" data-filter="text">
-    <div class="quick-icon">✍️</div>
-    <div class="quick-title" data-de="Text & Schreiben" data-en="Text & Writing">Text & Schreiben</div>
-    <div class="quick-desc" data-de="ChatGPT, Claude & mehr" data-en="ChatGPT, Claude & more">ChatGPT, Claude & mehr</div>
-  </div>
-  <div class="quick-card" data-filter="image">
-    <div class="quick-icon">🎨</div>
-    <div class="quick-title" data-de="Bildgenerierung" data-en="Image Generation">Bildgenerierung</div>
-    <div class="quick-desc" data-de="Midjourney, DALL·E 3" data-en="Midjourney, DALL·E 3">Midjourney, DALL·E 3</div>
-  </div>
-  <div class="quick-card" data-filter="code">
-    <div class="quick-icon">💻</div>
-    <div class="quick-title" data-de="Code" data-en="Code">Code</div>
-    <div class="quick-desc" data-de="GitHub Copilot, Cursor" data-en="GitHub Copilot, Cursor">GitHub Copilot, Cursor</div>
-  </div>
-  <div class="quick-card" data-filter="video">
-    <div class="quick-icon">🎬</div>
-    <div class="quick-title" data-de="Video" data-en="Video">Video</div>
-    <div class="quick-desc" data-de="Runway, Synthesia" data-en="Runway, Synthesia">Runway, Synthesia</div>
-  </div>
-  <div class="quick-card" data-filter="audio">
-    <div class="quick-icon">🎵</div>
-    <div class="quick-title" data-de="Audio" data-en="Audio">Audio</div>
-    <div class="quick-desc" data-de="ElevenLabs, Suno AI" data-en="ElevenLabs, Suno AI">ElevenLabs, Suno AI</div>
-  </div>
-  <div class="quick-card" data-filter="free">
-    <div class="quick-icon">🎁</div>
-    <div class="quick-title" data-de="Kostenlos" data-en="Free">Kostenlos</div>
-    <div class="quick-desc" data-de="100% gratis" data-en="100% free">100% gratis</div>
+<!-- Quick Navigation Pills -->
+<div class="quick-nav-container">
+  <div class="quick-nav-scroll">
+    <div class="quick-pill active" data-category="all">
+      <i class="fas fa-border-all"></i>
+      <span data-de="Alle" data-en="All">Alle</span>
+    </div>
+    <div class="quick-pill" data-category="text">
+      <i class="fas fa-pen"></i>
+      <span data-de="Text & Schreiben" data-en="Text & Writing">Text</span>
+    </div>
+    <div class="quick-pill" data-category="image">
+      <i class="fas fa-image"></i>
+      <span data-de="Bildgenerierung" data-en="Image Generation">Bild</span>
+    </div>
+    <div class="quick-pill" data-category="code">
+      <i class="fas fa-code"></i> Code
+    </div>
+    <div class="quick-pill" data-category="video">
+      <i class="fas fa-video"></i> Video
+    </div>
+    <div class="quick-pill" data-category="audio">
+      <i class="fas fa-music"></i> Audio
+    </div>
+    <div class="quick-pill" data-category="free">
+      <i class="fas fa-gift"></i>
+      <span data-de="Kostenlos" data-en="Free">Kostenlos</span>
+    </div>
   </div>
 </div>
 
@@ -1685,51 +811,7 @@ body::before {
     </div>
   </div>
 
-  <div class="compact-filters">
-    <button class="filter-btn active" data-category="all">
-      <i class="fas fa-border-all"></i>
-      <span data-de="Alle" data-en="All">Alle</span>
-    </button>
-    <button class="filter-btn" data-category="text">
-      <i class="fas fa-pen"></i>
-      <span data-de="Text" data-en="Text">Text</span>
-    </button>
-    <button class="filter-btn" data-category="image">
-      <i class="fas fa-image"></i>
-      <span data-de="Bild" data-en="Image">Bild</span>
-    </button>
-    <button class="filter-btn" data-category="code">
-      <i class="fas fa-code"></i>
-      Code
-    </button>
-    <button class="filter-btn" data-category="video">
-      <i class="fas fa-video"></i>
-      Video
-    </button>
-    <button class="filter-btn" data-category="audio">
-      <i class="fas fa-music"></i>
-      Audio
-    </button>
-
-    <div class="filter-group">
-      <select class="filter-select" id="priceFilter">
-        <option value="all" data-de="Alle Preise" data-en="All Prices">Alle Preise</option>
-        <option value="free" data-de="Kostenlos" data-en="Free">Kostenlos</option>
-        <option value="freemium">Freemium</option>
-        <option value="paid" data-de="Kostenpflichtig" data-en="Paid">Kostenpflichtig</option>
-      </select>
-    </div>
-
-    <div class="filter-group">
-      <select class="filter-select" id="sortFilter">
-        <option value="votes" data-de="Beste Bewertung" data-en="Best Rated">Beste Bewertung</option>
-        <option value="name" data-de="A-Z" data-en="A-Z">A-Z</option>
-        <option value="rating">Rating</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="compact-tools-grid" id="toolsGrid">
+  <div class="tools-grid" id="toolsGrid">
     <!-- Dynamically filled -->
   </div>
 
@@ -1765,138 +847,6 @@ body::before {
   </div>
 </div>
 
-<!-- Impressum Modal -->
-<div class="modal-overlay" id="impressumModal">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 class="modal-title" data-de="Impressum" data-en="Imprint">Impressum</h2>
-      <button class="modal-close" onclick="closeImpressum()">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <div class="modal-content legal-content">
-      <h2 data-de="Angaben gemäß § 5 TMG" data-en="Information according to § 5 TMG">Angaben gemäß § 5 TMG</h2>
-      <p>
-        Max Mustermann<br>
-        Musterstraße 123<br>
-        12345 Musterstadt<br>
-        Deutschland
-      </p>
-
-      <h3 data-de="Kontakt" data-en="Contact">Kontakt</h3>
-      <p>
-        <span data-de="Telefon: +49 (0) 123 456789" data-en="Phone: +49 (0) 123 456789">Telefon: +49 (0) 123 456789</span><br>
-        <span data-de="E-Mail: info@ai-finder.de" data-en="Email: info@ai-finder.de">E-Mail: info@ai-finder.de</span>
-      </p>
-
-      <h3 data-de="Umsatzsteuer-ID" data-en="VAT ID">Umsatzsteuer-ID</h3>
-      <p>
-        <span data-de="Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:" data-en="VAT identification number according to §27 a VAT Act:">Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:</span><br>
-        DE123456789
-      </p>
-
-      <h2 data-de="Haftungsausschluss" data-en="Disclaimer">Haftungsausschluss</h2>
-
-      <h3 data-de="Haftung für Inhalte" data-en="Liability for content">Haftung für Inhalte</h3>
-      <p data-de="Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen." data-en="The contents of our pages have been created with the greatest care. However, we cannot guarantee the accuracy, completeness and timeliness of the content.">
-        Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
-      </p>
-
-      <h3 data-de="Haftung für Links" data-en="Liability for links">Haftung für Links</h3>
-      <p data-de="Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen." data-en="Our offer contains links to external third-party websites over whose content we have no influence. Therefore, we cannot accept any liability for this third-party content.">
-        Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- Datenschutz Modal -->
-<div class="modal-overlay" id="datenschutzModal">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 class="modal-title" data-de="Datenschutzerklärung" data-en="Privacy Policy">Datenschutzerklärung</h2>
-      <button class="modal-close" onclick="closeDatenschutz()">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <div class="modal-content legal-content">
-      <h2 data-de="1. Datenschutz auf einen Blick" data-en="1. Data protection at a glance">1. Datenschutz auf einen Blick</h2>
-      
-      <h3 data-de="Allgemeine Hinweise" data-en="General information">Allgemeine Hinweise</h3>
-      <p data-de="Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie unsere Website besuchen." data-en="The following information provides a simple overview of what happens to your personal data when you visit our website.">
-        Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie unsere Website besuchen.
-      </p>
-
-      <h3 data-de="Datenerfassung auf unserer Website" data-en="Data collection on our website">Datenerfassung auf unserer Website</h3>
-      <p>
-        <strong data-de="Wer ist verantwortlich für die Datenerfassung auf dieser Website?" data-en="Who is responsible for data collection on this website?">Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong>
-      </p>
-      <p data-de="Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum entnehmen." data-en="Data processing on this website is carried out by the website operator. You can find their contact details in the imprint.">
-        Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum entnehmen.
-      </p>
-
-      <h2 data-de="2. Google Analytics" data-en="2. Google Analytics">2. Google Analytics</h2>
-      <p data-de="Diese Website benutzt Google Analytics, einen Webanalysedienst der Google Ireland Limited. Die erfassten Daten werden anonymisiert." data-en="This website uses Google Analytics, a web analytics service provided by Google Ireland Limited. The collected data is anonymized.">
-        Diese Website benutzt Google Analytics, einen Webanalysedienst der Google Ireland Limited. Die erfassten Daten werden anonymisiert.
-      </p>
-
-      <h3 data-de="Art und Umfang der Verarbeitung" data-en="Type and scope of processing">Art und Umfang der Verarbeitung</h3>
-      <ul>
-        <li data-de="Anonymisierte IP-Adressen" data-en="Anonymized IP addresses">Anonymisierte IP-Adressen</li>
-        <li data-de="Browsertyp/-version" data-en="Browser type/version">Browsertyp/-version</li>
-        <li data-de="Verwendetes Betriebssystem" data-en="Operating system used">Verwendetes Betriebssystem</li>
-        <li data-de="Referrer URL" data-en="Referrer URL">Referrer URL</li>
-        <li data-de="Uhrzeit der Serveranfrage" data-en="Time of server request">Uhrzeit der Serveranfrage</li>
-      </ul>
-
-      <h2 data-de="3. Ihre Rechte" data-en="3. Your rights">3. Ihre Rechte</h2>
-      <p data-de="Sie haben jederzeit das Recht:" data-en="You have the right at any time:">Sie haben jederzeit das Recht:</p>
-      <ul>
-        <li data-de="Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)" data-en="Information about your stored data (Art. 15 GDPR)">Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
-        <li data-de="Berichtigung unrichtiger Daten (Art. 16 DSGVO)" data-en="Correction of incorrect data (Art. 16 GDPR)">Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
-        <li data-de="Löschung Ihrer Daten (Art. 17 DSGVO)" data-en="Deletion of your data (Art. 17 GDPR)">Löschung Ihrer Daten (Art. 17 DSGVO)</li>
-        <li data-de="Einschränkung der Verarbeitung (Art. 18 DSGVO)" data-en="Restriction of processing (Art. 18 GDPR)">Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-        <li data-de="Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)" data-en="Objection to processing (Art. 21 GDPR)">Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
-      </ul>
-
-      <h2 data-de="4. Cookies" data-en="4. Cookies">4. Cookies</h2>
-      <p data-de="Unsere Website verwendet Cookies. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher und sicherer zu machen." data-en="Our website uses cookies. Cookies help us to make our offer more user-friendly and secure.">
-        Unsere Website verwendet Cookies. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher und sicherer zu machen.
-      </p>
-
-      <h2 data-de="5. Kontakt" data-en="5. Contact">5. Kontakt</h2>
-      <p data-de="Bei Fragen wenden Sie sich bitte an:" data-en="If you have any questions, please contact:">
-        Bei Fragen wenden Sie sich bitte an:
-      </p>
-      <p>
-        E-Mail: datenschutz@ai-finder.de
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- Cookie Banner -->
-<div class="cookie-banner" id="cookieBanner">
-  <div class="cookie-content">
-    <div>
-      <h3 data-de="🍪 Cookies & Datenschutz" data-en="🍪 Cookies & Privacy">🍪 Cookies & Datenschutz</h3>
-      <p data-de="Wir nutzen Google Analytics zur Verbesserung der Nutzererfahrung. Deine Daten werden anonymisiert." data-en="We use Google Analytics to improve user experience. Your data is anonymized.">
-        Wir nutzen Google Analytics zur Verbesserung der Nutzererfahrung. Deine Daten werden anonymisiert.
-      </p>
-    </div>
-    <div class="cookie-buttons">
-      <button class="cookie-btn primary" id="acceptCookies">
-        <i class="fas fa-check"></i>
-        <span data-de="Akzeptieren" data-en="Accept">Akzeptieren</span>
-      </button>
-      <button class="cookie-btn secondary" id="declineCookies">
-        <i class="fas fa-times"></i>
-        <span data-de="Ablehnen" data-en="Decline">Ablehnen</span>
-      </button>
-    </div>
-  </div>
-</div>
-
 <script>
 // ===== GLOBALE VARIABLEN =====
 let aiTools = [];
@@ -1905,13 +855,47 @@ let currentCategory = 'all';
 let currentPriceFilter = 'all';
 let currentSort = 'votes';
 let searchQuery = '';
+let lastScrollY = 0;
+let isFocusMode = false;
 
 // ===== DATEN LADEN =====
 async function loadAITools() {
   try {
-    const response = await fetch('./data.json');
-    if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
-    aiTools = await response.json();
+    // Sample data - in production, load from data.json
+    aiTools = [
+      {
+        id: 'chatgpt',
+        name: 'ChatGPT',
+        category: 'text',
+        description: { de: 'Advanced AI conversation tool', en: 'Advanced AI conversation tool' },
+        price: 'freemium',
+        priceDisplay: 'Freemium',
+        rating: 4.8,
+        votes: 150,
+        hasLifetimeDeal: false,
+        pros: ['Natural conversations', 'Multi-language support'],
+        cons: ['Limited free tier'],
+        features: ['GPT-4', 'File upload', 'Web browsing'],
+        useCases: ['content-creation', 'education'],
+        link: 'https://chat.openai.com'
+      },
+      {
+        id: 'midjourney',
+        name: 'Midjourney',
+        category: 'image',
+        description: { de: 'AI image generation', en: 'AI image generation' },
+        price: 'paid',
+        priceDisplay: '$10/month',
+        rating: 4.7,
+        votes: 120,
+        hasLifetimeDeal: false,
+        pros: ['High quality images', 'Creative styles'],
+        cons: ['Requires Discord'],
+        features: ['Multiple styles', 'Upscaling'],
+        useCases: ['design', 'content-creation'],
+        link: 'https://midjourney.com'
+      }
+    ];
     
     const savedVotes = JSON.parse(localStorage.getItem('aiToolVotes') || '{}');
     aiTools.forEach(tool => {
@@ -1939,7 +923,7 @@ async function loadAITools() {
 function addAIRecommendations() {
   const userHistory = JSON.parse(localStorage.getItem('userHistory') || '[]');
   const favorites = JSON.parse(localStorage.getItem('aiFavorites') || '[]');
-  
+    
   aiTools.forEach(tool => {
     let score = 0;
     if (tool.rating >= 4.7) score += 3;
@@ -1948,7 +932,7 @@ function addAIRecommendations() {
     if (tool.hasLifetimeDeal) score += 2;
     if (userHistory.includes(tool.category)) score += 2;
     if (favorites.includes(tool.id)) score += 3;
-    
+      
     tool.aiScore = score;
     tool.isAIRecommended = score >= 6;
   });
@@ -1964,34 +948,56 @@ function renderTopCharts() {
     const description = currentLang === 'de' ? tool.description.de : tool.description.en;
     const rankClass = 'rank-' + (index + 1);
     const ltdBadge = tool.hasLifetimeDeal ? '<span class="ltd-badge">LTD</span>' : '';
-    const aiRecommended = tool.isAIRecommended ? '<div class="ai-recommended"><i class="fas fa-robot"></i> AI Pick</div>' : '';
-    
+      
     return `
-      <div class="chart-card" onclick="openToolDetail('${tool.id}')">
-        ${aiRecommended}
-        <div class="chart-header">
-          <div class="chart-rank ${rankClass}">${index + 1}</div>
-          <div class="chart-votes">
-            <i class="fas fa-arrow-up"></i>
-            <span>${tool.votes || 0}</span>
+      <div class="tool-card" onclick="openToolDetail('${tool.id}')">
+        <div class="tool-header">
+          <div>
+            <div class="tool-name">${tool.name}</div>
+            <div class="tool-category">${getCategoryLabel(tool.category)}</div>
+          </div>
+          <div class="tool-rating">
+            <i class="fas fa-star"></i>
+            <span>${tool.rating}/5</span>
           </div>
         </div>
-        <div class="chart-category">${getCategoryLabel(tool.category)}</div>
-        <div class="chart-tool-name">${tool.name}</div>
-        <div class="chart-price">💰 ${tool.priceDisplay}${ltdBadge}</div>
-        <div class="chart-description">${description}</div>
-        <div class="chart-actions" onclick="event.stopPropagation()">
-          <button class="vote-btn up ${tool.userVote === 'up' ? 'active' : ''}" onclick="vote('${tool.id}', 'up')">
-            <i class="fas fa-arrow-up"></i>
-          </button>
-          <button class="vote-btn down ${tool.userVote === 'down' ? 'active' : ''}" onclick="vote('${tool.id}', 'down')">
-            <i class="fas fa-arrow-down"></i>
-          </button>
-          <button class="favorite-btn ${isFavorite(tool.id) ? 'active' : ''}" onclick="toggleFavorite('${tool.id}')">
-            <i class="fas fa-star"></i>
-          </button>
-          <button class="compare-btn ${isInComparison(tool.id) ? 'active' : ''}" onclick="toggleComparison('${tool.id}')">
-            <i class="fas fa-balance-scale"></i>
+        <div class="tool-description">${description}</div>
+        <div class="tool-meta">
+          <div class="tool-price">${tool.priceDisplay}${ltdBadge}</div>
+          <div class="tool-actions">
+            <button class="vote-btn-compact up" onclick="event.stopPropagation(); vote('${tool.id}', 'up')">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+            <button class="vote-btn-compact down" onclick="event.stopPropagation(); vote('${tool.id}', 'down')">
+              <i class="fas fa-arrow-down"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Smart Preview -->
+        <div class="tool-preview">
+          <div class="tool-name">${tool.name}</div>
+          <div class="preview-stats">
+            <div class="stat-item">
+              <div class="stat-value">${tool.rating}/5</div>
+              <div class="stat-label" data-de="Bewertung" data-en="Rating">Bewertung</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">${tool.votes || 0}</div>
+              <div class="stat-label" data-de="Stimmen" data-en="Votes">Stimmen</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">${tool.priceDisplay}</div>
+              <div class="stat-label" data-de="Preis" data-en="Price">Preis</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">${getCategoryLabel(tool.category)}</div>
+              <div class="stat-label" data-de="Kategorie" data-en="Category">Kategorie</div>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="event.stopPropagation(); openToolDetail('${tool.id}')">
+            <i class="fas fa-external-link-alt"></i>
+            <span data-de="Details" data-en="Details">Details</span>
           </button>
         </div>
       </div>
@@ -2010,10 +1016,6 @@ function renderTools() {
     filteredTools = filteredTools.filter(tool => tool.category === currentCategory);
   }
 
-  if (currentPriceFilter !== 'all') {
-    filteredTools = filteredTools.filter(tool => tool.price === currentPriceFilter);
-  }
-
   if (searchQuery) {
     filteredTools = filteredTools.filter(tool => {
       const searchLower = searchQuery.toLowerCase();
@@ -2022,6 +1024,9 @@ function renderTools() {
              tool.description.en.toLowerCase().includes(searchLower) ||
              tool.category.toLowerCase().includes(searchLower);
     });
+    
+    // Intent Search: Highlight matching category
+    highlightMatchingCategory(searchLower);
   }
 
   if (currentSort === 'votes') {
@@ -2032,57 +1037,126 @@ function renderTools() {
     filteredTools.sort((a, b) => (b.rating || 0) - (a.rating || 0));
   }
 
-  const toolsHTML = filteredTools.map(tool => {
-    const description = currentLang === 'de' ? tool.description.de : tool.description.en;
-    const ltdBadge = tool.hasLifetimeDeal ? '<span class="ltd-badge">LTD</span>' : '';
-    
-    return `
-      <div class="compact-tool-row" onclick="openToolDetail('${tool.id}')">
-        <div class="tool-vote-compact" onclick="event.stopPropagation()">
-          <div class="vote-count">${tool.votes || 0}</div>
-          <div class="vote-buttons-compact">
-            <button class="vote-btn-compact up ${tool.userVote === 'up' ? 'active' : ''}" onclick="vote('${tool.id}', 'up')">
-              <i class="fas fa-arrow-up"></i>
-            </button>
-            <button class="vote-btn-compact down ${tool.userVote === 'down' ? 'active' : ''}" onclick="vote('${tool.id}', 'down')">
-              <i class="fas fa-arrow-down"></i>
-            </button>
-          </div>
-        </div>
+  // Smooth animation for filter changes
+  const toolsGrid = document.getElementById('toolsGrid');
+  toolsGrid.style.opacity = '0';
+  toolsGrid.style.transform = 'translateY(10px)';
+  
+  setTimeout(() => {
+    const toolsHTML = filteredTools.map(tool => {
+      const description = currentLang === 'de' ? tool.description.de : tool.description.en;
+      const ltdBadge = tool.hasLifetimeDeal ? '<span class="ltd-badge">LTD</span>' : '';
         
-        <div class="tool-info-compact">
-          <div class="tool-category-compact">${getCategoryLabel(tool.category)}</div>
-          <div class="tool-name-compact">
-            ${tool.name}
-            ${tool.isAIRecommended ? '<i class="fas fa-robot" style="color: var(--secondary);" title="AI Recommended"></i>' : ''}
-          </div>
-          <div class="tool-desc-compact">${description}</div>
-        </div>
-        
-        <div class="tool-meta-compact" onclick="event.stopPropagation()">
-          <div class="tool-price-compact">${tool.priceDisplay}${ltdBadge}</div>
-          <div class="tool-actions-compact">
-            <button class="favorite-btn ${isFavorite(tool.id) ? 'active' : ''}" onclick="toggleFavorite('${tool.id}')">
+      return `
+        <div class="tool-card" onclick="openToolDetail('${tool.id}')">
+          <div class="tool-header">
+            <div>
+              <div class="tool-name">${tool.name}</div>
+              <div class="tool-category">${getCategoryLabel(tool.category)}</div>
+            </div>
+            <div class="tool-rating">
               <i class="fas fa-star"></i>
+              <span>${tool.rating}/5</span>
+            </div>
+          </div>
+          <div class="tool-description">${description}</div>
+          <div class="tool-meta">
+            <div class="tool-price">${tool.priceDisplay}${ltdBadge}</div>
+            <div class="tool-actions">
+              <button class="vote-btn-compact up" onclick="event.stopPropagation(); vote('${tool.id}', 'up')">
+                <i class="fas fa-arrow-up"></i>
+              </button>
+              <button class="vote-btn-compact down" onclick="event.stopPropagation(); vote('${tool.id}', 'down')">
+                <i class="fas fa-arrow-down"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Smart Preview -->
+          <div class="tool-preview">
+            <div class="tool-name">${tool.name}</div>
+            <div class="preview-stats">
+              <div class="stat-item">
+                <div class="stat-value">${tool.rating}/5</div>
+                <div class="stat-label" data-de="Bewertung" data-en="Rating">Bewertung</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">${tool.votes || 0}</div>
+                <div class="stat-label" data-de="Stimmen" data-en="Votes">Stimmen</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">${tool.priceDisplay}</div>
+                <div class="stat-label" data-de="Preis" data-en="Price">Preis</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">${getCategoryLabel(tool.category)}</div>
+                <div class="stat-label" data-de="Kategorie" data-en="Category">Kategorie</div>
+              </div>
+            </div>
+            <button class="btn-primary" onclick="event.stopPropagation(); openToolDetail('${tool.id}')">
+              <i class="fas fa-external-link-alt"></i>
+              <span data-de="Details" data-en="Details">Details</span>
             </button>
-            <button class="compare-btn ${isInComparison(tool.id) ? 'active' : ''}" onclick="toggleComparison('${tool.id}')">
-              <i class="fas fa-balance-scale"></i>
-            </button>
-            <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-link-compact" onclick="trackToolClick('${tool.id}')">
-              <span data-de="Öffnen" data-en="Open">Öffnen</span>
-            </a>
           </div>
         </div>
-      </div>
-    `;
-  }).join('');
+      `;
+    }).join('');
 
-  document.getElementById('toolsGrid').innerHTML = toolsHTML;
-  document.getElementById('toolCount').textContent = filteredTools.length;
-  updateLanguage();
+    toolsGrid.innerHTML = toolsHTML;
+    document.getElementById('toolCount').textContent = filteredTools.length;
+    updateLanguage();
+    
+    // Smooth reveal
+    setTimeout(() => {
+      toolsGrid.style.opacity = '1';
+      toolsGrid.style.transform = 'translateY(0)';
+    }, 50);
+  }, 300);
 }
 
-// ===== TOOL DETAIL MODAL =====
+// ===== INTENT SEARCH =====
+function highlightMatchingCategory(searchTerm) {
+  const categoryMap = {
+    'music': 'audio',
+    'audio': 'audio',
+    'song': 'audio',
+    'bild': 'image',
+    'image': 'image',
+    'photo': 'image',
+    'text': 'text',
+    'writing': 'text',
+    'code': 'code',
+    'programming': 'code',
+    'video': 'video',
+    'free': 'free',
+    'kostenlos': 'free'
+  };
+  
+  const matchingCategory = categoryMap[searchTerm];
+  if (matchingCategory) {
+    // Remove active class from all pills
+    document.querySelectorAll('.quick-pill').forEach(pill => {
+      pill.classList.remove('active');
+    });
+    
+    // Activate matching category
+    const matchingPill = document.querySelector(`.quick-pill[data-category="${matchingCategory}"]`);
+    if (matchingPill) {
+      matchingPill.classList.add('active');
+      currentCategory = matchingCategory;
+    }
+    
+    // Highlight search hint
+    document.querySelectorAll('.search-hint-chip').forEach(chip => {
+      chip.classList.remove('active');
+      if (chip.getAttribute('data-query').toLowerCase() === searchTerm) {
+        chip.classList.add('active');
+      }
+    });
+  }
+}
+
+// ===== TOOL DETAIL MODAL (FIXED LANGUAGE BUG) =====
 function openToolDetail(toolId) {
   const tool = aiTools.find(t => t.id === toolId);
   if (!tool) return;
@@ -2090,33 +1164,14 @@ function openToolDetail(toolId) {
   trackUserInteraction(tool.category);
 
   const description = currentLang === 'de' ? tool.description.de : tool.description.en;
-  const seoTitle = currentLang === 'de' ? (tool.seoTitle?.de || tool.name) : (tool.seoTitle?.en || tool.name);
-  const seoDesc = currentLang === 'de' ? (tool.seoDesc?.de || description) : (tool.seoDesc?.en || description);
-  
   const pros = tool.pros || [];
   const cons = tool.cons || [];
-  const features = tool.features || [];
-  const alternatives = tool.alternatives || [];
-  const useCases = tool.useCases || [];
   
+  // FIXED: Properly translate Pros and Cons headers
+  const prosTitle = currentLang === 'de' ? 'Vorteile' : 'Pros';
+  const consTitle = currentLang === 'de' ? 'Nachteile' : 'Cons';
   const prosHTML = pros.map(pro => '<li>' + pro + '</li>').join('');
   const consHTML = cons.map(con => '<li>' + con + '</li>').join('');
-  const featuresHTML = features.map(f => '<span class="feature-tag"><i class="fas fa-check-circle"></i> ' + f + '</span>').join('');
-  
-  const alternativesHTML = alternatives.map(altId => {
-    const altTool = aiTools.find(t => t.id === altId);
-    if (!altTool) return '';
-    return `
-      <div class="alternative-card" onclick="openToolDetail('${altTool.id}')">
-        <div class="alternative-card-name">${altTool.name}</div>
-        <div class="alternative-card-category">${getCategoryLabel(altTool.category)}</div>
-      </div>
-    `;
-  }).join('');
-
-  const useCasesText = currentLang === 'de' 
-    ? useCases.map(uc => getUseCaseLabelDE(uc)).join(', ')
-    : useCases.map(uc => getUseCaseLabelEN(uc)).join(', ');
 
   const modalContent = `
     <div class="tool-detail-hero">
@@ -2138,25 +1193,24 @@ function openToolDetail(toolId) {
             <i class="fas fa-star"></i>
             ${tool.rating}/5
           </span>
-          ${tool.hasLifetimeDeal ? '<span class="ltd-badge">Lifetime Deal</span>' : ''}
         </div>
-        <p class="tool-description-full">${seoDesc}</p>
+        <p class="tool-description-full">${description}</p>
       </div>
     </div>
 
     ${pros.length > 0 || cons.length > 0 ? `
     <div class="tool-section">
-      <h3><i class="fas fa-balance-scale"></i> <span data-de="Vor- & Nachteile" data-en="Pros & Cons">Vor- & Nachteile</span></h3>
+      <h3><i class="fas fa-balance-scale"></i> ${prosTitle} & ${consTitle}</h3>
       <div class="pros-cons-grid">
         ${pros.length > 0 ? `
         <div class="pros-list">
-          <h4><i class="fas fa-check-circle"></i> <span data-de="Vorteile" data-en="Pros">Vorteile</span></h4>
+          <h4><i class="fas fa-check-circle"></i> ${prosTitle}</h4>
           <ul>${prosHTML}</ul>
         </div>
         ` : ''}
         ${cons.length > 0 ? `
         <div class="cons-list">
-          <h4><i class="fas fa-times-circle"></i> <span data-de="Nachteile" data-en="Cons">Nachteile</span></h4>
+          <h4><i class="fas fa-times-circle"></i> ${consTitle}</h4>
           <ul>${consHTML}</ul>
         </div>
         ` : ''}
@@ -2164,48 +1218,19 @@ function openToolDetail(toolId) {
     </div>
     ` : ''}
 
-    ${features.length > 0 ? `
-    <div class="tool-section">
-      <h3><i class="fas fa-rocket"></i> <span data-de="Hauptfunktionen" data-en="Key Features">Hauptfunktionen</span></h3>
-      <div class="feature-tags">
-        ${featuresHTML}
-      </div>
-    </div>
-    ` : ''}
-
-    ${useCases.length > 0 ? `
-    <div class="tool-section">
-      <h3><i class="fas fa-lightbulb"></i> <span data-de="Beste Anwendungsfälle" data-en="Best Use Cases">Beste Anwendungsfälle</span></h3>
-      <p style="color: var(--text-secondary); line-height: 1.6;">${useCasesText}</p>
-    </div>
-    ` : ''}
-
-    ${alternatives.length > 0 ? `
-    <div class="tool-section">
-      <h3><i class="fas fa-exchange-alt"></i> <span data-de="Vergleichbare Tools" data-en="Similar Tools">Vergleichbare Tools</span></h3>
-      <div class="alternatives-grid">
-        ${alternativesHTML}
-      </div>
-    </div>
-    ` : ''}
-
     <div class="tool-actions-modal">
-      <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="btn-primary" onclick="trackToolClick('${tool.id}')">
+      <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="btn-primary">
         <i class="fas fa-external-link-alt"></i>
         <span data-de="Tool öffnen" data-en="Open Tool">Tool öffnen</span>
       </a>
-      <button class="btn-secondary" onclick="shareToolDirectly('${tool.id}')">
-        <i class="fas fa-share-alt"></i>
-        <span data-de="Teilen" data-en="Share">Teilen</span>
-      </button>
     </div>
   `;
 
-  document.getElementById('modalTitle').textContent = seoTitle;
+  document.getElementById('modalTitle').textContent = tool.name;
   document.getElementById('modalContent').innerHTML = modalContent;
   document.getElementById('toolModal').classList.add('active');
   document.body.style.overflow = 'hidden';
-  
+    
   updateLanguage();
 }
 
@@ -2214,151 +1239,36 @@ function closeToolModal() {
   document.body.style.overflow = '';
 }
 
-// ===== IMPRESSUM & DATENSCHUTZ =====
-function openImpressum() {
-  document.getElementById('impressumModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-  updateLanguage();
-}
-
-function closeImpressum() {
-  document.getElementById('impressumModal').classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-function openDatenschutz() {
-  document.getElementById('datenschutzModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-  updateLanguage();
-}
-
-function closeDatenschutz() {
-  document.getElementById('datenschutzModal').classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-// Close modals on overlay click
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) {
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
+// ===== FOCUS MODE =====
+function initFocusMode() {
+  let ticking = false;
+  
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY > 200 && currentScrollY > lastScrollY) {
+          // Scrolling down past threshold
+          if (!isFocusMode) {
+            document.body.classList.add('focus-mode');
+            isFocusMode = true;
+          }
+        } else if (currentScrollY < 100 || currentScrollY < lastScrollY) {
+          // Scrolling up or near top
+          if (isFocusMode) {
+            document.body.classList.remove('focus-mode');
+            isFocusMode = false;
+          }
+        }
+        
+        lastScrollY = currentScrollY;
+        ticking = false;
+      });
+      
+      ticking = true;
     }
   });
-});
-
-// Close modals on ESC key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay.active').forEach(modal => {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    });
-  }
-});
-
-// ===== INTELLIGENTE FUNKTIONEN =====
-function trackUserInteraction(category) {
-  let history = JSON.parse(localStorage.getItem('userHistory') || '[]');
-  history.push(category);
-  if (history.length > 20) history = history.slice(-20);
-  localStorage.setItem('userHistory', JSON.stringify(history));
-}
-
-function trackToolClick(toolId) {
-  let clicks = JSON.parse(localStorage.getItem('toolClicks') || '{}');
-  clicks[toolId] = (clicks[toolId] || 0) + 1;
-  localStorage.setItem('toolClicks', JSON.stringify(clicks));
-}
-
-function shareToolDirectly(toolId) {
-  const tool = aiTools.find(t => t.id === toolId);
-  if (!tool) return;
-
-  const shareData = {
-    title: tool.name + ' - AI Finder',
-    text: currentLang === 'de' ? tool.description.de : tool.description.en,
-    url: window.location.href + '?tool=' + toolId
-  };
-
-  if (navigator.share) {
-    navigator.share(shareData).catch(() => {});
-  } else {
-    navigator.clipboard.writeText(shareData.url);
-    alert(currentLang === 'de' ? 'Link kopiert!' : 'Link copied!');
-  }
-}
-
-// ===== VOTING SYSTEM =====
-function vote(toolId, type) {
-  const tool = aiTools.find(t => t.id === toolId);
-  if (!tool) return;
-
-  const savedVotes = JSON.parse(localStorage.getItem('aiToolVotes') || '{}');
-  const userVotes = JSON.parse(localStorage.getItem('userVotes') || '{}');
-
-  if (userVotes[toolId] === type) {
-    if (type === 'up') tool.votes--;
-    else tool.votes++;
-    delete userVotes[toolId];
-    tool.userVote = null;
-  } else {
-    if (userVotes[toolId] === 'up') tool.votes--;
-    else if (userVotes[toolId] === 'down') tool.votes++;
-    
-    if (type === 'up') tool.votes++;
-    else tool.votes--;
-    
-    userVotes[toolId] = type;
-    tool.userVote = type;
-  }
-
-  savedVotes[toolId] = tool.votes;
-  localStorage.setItem('aiToolVotes', JSON.stringify(savedVotes));
-  localStorage.setItem('userVotes', JSON.stringify(userVotes));
-
-  renderTopCharts();
-  renderTools();
-}
-
-// ===== FAVORITEN & VERGLEICH =====
-function isFavorite(toolId) {
-  const favorites = JSON.parse(localStorage.getItem('aiFavorites') || '[]');
-  return favorites.includes(toolId);
-}
-
-function toggleFavorite(toolId) {
-  let favorites = JSON.parse(localStorage.getItem('aiFavorites') || '[]');
-  if (favorites.includes(toolId)) {
-    favorites = favorites.filter(id => id !== toolId);
-  } else {
-    favorites.push(toolId);
-  }
-  localStorage.setItem('aiFavorites', JSON.stringify(favorites));
-  renderTopCharts();
-  renderTools();
-}
-
-function isInComparison(toolId) {
-  const comparison = JSON.parse(localStorage.getItem('aiComparison') || '[]');
-  return comparison.includes(toolId);
-}
-
-function toggleComparison(toolId) {
-  let comparison = JSON.parse(localStorage.getItem('aiComparison') || '[]');
-  if (comparison.includes(toolId)) {
-    comparison = comparison.filter(id => id !== toolId);
-  } else {
-    if (comparison.length < 3) {
-      comparison.push(toolId);
-    } else {
-      alert(currentLang === 'de' ? 'Maximal 3 Tools zum Vergleich!' : 'Maximum 3 tools for comparison!');
-      return;
-    }
-  }
-  localStorage.setItem('aiComparison', JSON.stringify(comparison));
-  renderTopCharts();
-  renderTools();
 }
 
 // ===== HELPER FUNCTIONS =====
@@ -2380,143 +1290,24 @@ function getCategoryLabel(category) {
       image: 'Bild',
       code: 'Code',
       video: 'Video',
-      audio: 'Audio'
+      audio: 'Audio',
+      free: 'Kostenlos'
     },
     en: {
       text: 'Text',
       image: 'Image',
       code: 'Code',
       video: 'Video',
-      audio: 'Audio'
+      audio: 'Audio',
+      free: 'Free'
     }
   };
   return labels[currentLang][category] || category;
 }
 
-function getUseCaseLabelDE(useCase) {
-  const labels = {
-    'content-creation': 'Content-Erstellung',
-    'marketing': 'Marketing',
-    'development': 'Entwicklung',
-    'design': 'Design',
-    'productivity': 'Produktivität',
-    'education': 'Bildung',
-    'business': 'Business',
-    'entertainment': 'Unterhaltung'
-  };
-  return labels[useCase] || useCase;
-}
-
-function getUseCaseLabelEN(useCase) {
-  const labels = {
-    'content-creation': 'Content Creation',
-    'marketing': 'Marketing',
-    'development': 'Development',
-    'design': 'Design',
-    'productivity': 'Productivity',
-    'education': 'Education',
-    'business': 'Business',
-    'entertainment': 'Entertainment'
-  };
-  return labels[useCase] || useCase;
-}
-
 function updateToolCount() {
   document.getElementById('toolCount').textContent = aiTools.length;
 }
-
-// ===== SEARCH FUNCTIONALITY =====
-const searchBox = document.getElementById('searchBox');
-const searchSuggestions = document.getElementById('searchSuggestions');
-
-searchBox.addEventListener('input', (e) => {
-  searchQuery = e.target.value;
-  renderTools();
-  
-  if (searchQuery.length > 1) {
-    const matches = aiTools.filter(tool => 
-      tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tool.description.de.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tool.description.en.toLowerCase().includes(searchQuery.toLowerCase())
-    ).slice(0, 5);
-    
-    if (matches.length > 0) {
-      searchSuggestions.innerHTML = matches.map(tool => `
-        <div class="suggestion-item" onclick="openToolDetail('${tool.id}'); searchSuggestions.classList.remove('active');">
-          <span class="suggestion-icon">${getCategoryIcon(tool.category)}</span>
-          <span>${tool.name}</span>
-        </div>
-      `).join('');
-      searchSuggestions.classList.add('active');
-    } else {
-      searchSuggestions.classList.remove('active');
-    }
-  } else {
-    searchSuggestions.classList.remove('active');
-  }
-});
-
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.search-container')) {
-    searchSuggestions.classList.remove('active');
-  }
-});
-
-// Search hints
-document.querySelectorAll('.search-hint-chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    const query = chip.getAttribute('data-query');
-    searchBox.value = query;
-    searchQuery = query;
-    renderTools();
-  });
-});
-
-// Surprise button
-document.getElementById('surpriseBtn').addEventListener('click', () => {
-  const randomTool = aiTools[Math.floor(Math.random() * aiTools.length)];
-  openToolDetail(randomTool.id);
-});
-
-// ===== FILTER FUNCTIONALITY =====
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentCategory = btn.getAttribute('data-category');
-    renderTools();
-  });
-});
-
-document.querySelectorAll('.quick-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const filter = card.getAttribute('data-filter');
-    currentCategory = filter;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector('.filter-btn[data-category="' + filter + '"]').classList.add('active');
-    renderTools();
-    window.scrollTo({ top: document.querySelector('.tools-container').offsetTop - 20, behavior: 'smooth' });
-  });
-});
-
-document.getElementById('priceFilter').addEventListener('change', (e) => {
-  currentPriceFilter = e.target.value;
-  renderTools();
-});
-
-document.getElementById('sortFilter').addEventListener('change', (e) => {
-  currentSort = e.target.value;
-  renderTools();
-});
-
-// ===== LANGUAGE SWITCH =====
-document.getElementById('langToggle').addEventListener('click', () => {
-  currentLang = currentLang === 'de' ? 'en' : 'de';
-  document.getElementById('langText').textContent = currentLang === 'de' ? 'EN' : 'DE';
-  updateLanguage();
-  renderTopCharts();
-  renderTools();
-});
 
 function updateLanguage() {
   document.querySelectorAll('[data-de]').forEach(el => {
@@ -2528,29 +1319,99 @@ function updateLanguage() {
   });
 }
 
-// ===== COOKIE BANNER =====
-const cookieBanner = document.getElementById('cookieBanner');
-const acceptCookies = document.getElementById('acceptCookies');
-const declineCookies = document.getElementById('declineCookies');
+// ===== EVENT LISTENERS =====
+function initEventListeners() {
+  // Search functionality
+  const searchBox = document.getElementById('searchBox');
+  searchBox.addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    renderTools();
+  });
 
-if (!localStorage.getItem('cookieConsent')) {
-  setTimeout(() => {
-    cookieBanner.classList.add('show');
-  }, 1000);
+  // Search hints
+  document.querySelectorAll('.search-hint-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const query = chip.getAttribute('data-query');
+      searchBox.value = query;
+      searchQuery = query;
+      renderTools();
+    });
+  });
+
+  // Quick navigation pills
+  document.querySelectorAll('.quick-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.quick-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      currentCategory = pill.getAttribute('data-category');
+      renderTools();
+    });
+  });
+
+  // Language switch
+  document.getElementById('langToggle').addEventListener('click', () => {
+    currentLang = currentLang === 'de' ? 'en' : 'de';
+    document.getElementById('langText').textContent = currentLang === 'de' ? 'EN' : 'DE';
+    updateLanguage();
+    renderTopCharts();
+    renderTools();
+  });
+
+  // Command+K style search
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      searchBox.focus();
+    }
+  });
 }
 
-acceptCookies.addEventListener('click', () => {
-  localStorage.setItem('cookieConsent', 'accepted');
-  cookieBanner.classList.remove('show');
+// ===== INITIALIZATION =====
+document.addEventListener('DOMContentLoaded', () => {
+  loadAITools();
+  initEventListeners();
+  initFocusMode();
 });
 
-declineCookies.addEventListener('click', () => {
-  localStorage.setItem('cookieConsent', 'declined');
-  cookieBanner.classList.remove('show');
-});
+// ===== UTILITY FUNCTIONS (from original) =====
+function trackUserInteraction(category) {
+  let history = JSON.parse(localStorage.getItem('userHistory') || '[]');
+  history.push(category);
+  if (history.length > 20) history = history.slice(-20);
+  localStorage.setItem('userHistory', JSON.stringify(history));
+}
 
-// ===== INIT =====
-loadAITools();
+function vote(toolId, type) {
+  const tool = aiTools.find(t => t.id === toolId);
+  if (!tool) return;
+
+  const savedVotes = JSON.parse(localStorage.getItem('aiToolVotes') || '{}');
+  const userVotes = JSON.parse(localStorage.getItem('userVotes') || '{}');
+
+  if (userVotes[toolId] === type) {
+    if (type === 'up') tool.votes--;
+    else tool.votes++;
+    delete userVotes[toolId];
+    tool.userVote = null;
+  } else {
+    if (userVotes[toolId] === 'up') tool.votes--;
+    else if (userVotes[toolId] === 'down') tool.votes++;
+      
+    if (type === 'up') tool.votes++;
+    else tool.votes--;
+      
+    userVotes[toolId] = type;
+    tool.userVote = type;
+  }
+
+  savedVotes[toolId] = tool.votes;
+  localStorage.setItem('aiToolVotes', JSON.stringify(savedVotes));
+  localStorage.setItem('userVotes', JSON.stringify(userVotes));
+
+  renderTopCharts();
+  renderTools();
+}
 </script>
 
 </body>
+</html>
