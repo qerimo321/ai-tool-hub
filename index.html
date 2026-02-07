@@ -84,8 +84,9 @@
   /* Layout Variables */
   --tool-row-height: calc(60px * var(--current-density));
   --group-header-height: calc(52px * var(--current-density));
-  --header-height: 80px;
+  --header-height: 60px;
   --drawer-width: 500px;
+  --hero-height: 280px;
 }
 
 /* Safari Safe Area */
@@ -161,290 +162,106 @@ body::before {
   padding: 0 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 20px;
 }
 
-.header-left {
+/* ===== HERO AREA ===== */
+.hero-area {
+  position: relative;
+  margin-top: var(--header-height);
+  height: var(--hero-height);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 20px;
-  flex: 1;
-  max-width: 800px;
+  justify-content: center;
+  padding: 0 20px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(10, 14, 23, 0.8) 0%, transparent 100%);
 }
 
-.logo {
+.hero-title {
   font-weight: 800;
-  font-size: 1.2rem;
+  font-size: 2.2rem;
   background: linear-gradient(135deg, var(--text-primary), var(--primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  white-space: nowrap;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
 }
 
-.omnibox {
-  flex: 1;
-  position: relative;
-  max-width: 600px;
-}
-
-.omnibox-input {
+.hero-search-container {
   width: 100%;
-  padding: 12px 50px 12px 45px;
+  max-width: 600px;
+  position: relative;
+  margin: 0 auto 16px;
+}
+
+.hero-omnibox {
+  width: 100%;
+  position: relative;
+}
+
+.hero-omnibox-input {
+  width: 100%;
+  padding: 14px 20px;
   background: rgba(20, 24, 36, 0.8);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--text-primary);
-  font-size: 0.95rem;
+  font-size: 1rem;
   transition: var(--transition);
   font-family: 'Inter', sans-serif;
+  backdrop-filter: blur(10px);
 }
 
-.omnibox-input:focus {
+.hero-omnibox-input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1), 0 0 20px rgba(0, 212, 255, 0.2);
-  background: rgba(26, 31, 46, 0.8);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1), 0 0 30px rgba(0, 212, 255, 0.2);
+  background: rgba(26, 31, 46, 0.9);
 }
 
-.omnibox-input::placeholder {
+.hero-omnibox-input::placeholder {
   color: var(--text-muted);
 }
 
-.omnibox-icon {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--primary);
-  font-size: 1rem;
-}
-
-.omnibox-ai {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: linear-gradient(135deg, var(--secondary), var(--primary));
-  color: white;
-  width: 26px;
-  height: 26px;
-  border-radius: 8px;
+.search-hint-grid {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: var(--transition);
-  border: none;
-  outline: none;
-}
-
-.omnibox-ai:hover {
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
-}
-
-.omnibox-ai:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-
-.search-hint {
-  font-size: 0.75rem;
-  color: #7dd3fc;
-  margin-top: 4px;
-  padding-left: 45px;
+  gap: 8px;
+  margin-top: 20px;
   opacity: 0.8;
-  font-weight: 400;
 }
 
-/* ===== TOP 5 BAR ===== */
-.top5-bar {
-  background: rgba(20, 24, 36, 0.6);
-  border: 1px solid rgba(0, 212, 255, 0.1);
-  border-radius: var(--radius);
-  padding: 8px 12px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.top5-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.top5-header i {
-  color: var(--primary);
-  font-size: 0.9rem;
-}
-
-.top5-header span {
-  font-weight: 700;
+.search-hint-text {
   font-size: 0.85rem;
-  color: var(--text-primary);
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
-.top5-list {
+.search-examples {
   display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 4px 0;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.top5-list::-webkit-scrollbar {
-  height: 4px;
-}
-
-.top5-list::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 2px;
-}
-
-.top5-list::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 2px;
-}
-
-.top5-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  background: rgba(26, 31, 46, 0.5);
-  border-radius: 8px;
-  border: 1px solid transparent;
-  transition: var(--transition);
-  min-width: 180px;
-  flex-shrink: 0;
-  cursor: pointer;
-  position: relative;
-}
-
-.top5-item:hover {
-  background: rgba(26, 31, 46, 0.8);
-  border-color: rgba(0, 212, 255, 0.3);
-  transform: translateY(-1px);
-}
-
-.top5-rank {
-  font-weight: 800;
-  font-size: 0.9rem;
-  color: var(--primary);
-  width: 18px;
-  text-align: center;
-}
-
-.top5-icon {
-  font-size: 0.9rem;
-  width: 20px;
-  text-align: center;
-}
-
-.top5-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.top5-name {
-  font-weight: 600;
+.search-example {
   font-size: 0.8rem;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.top5-category {
-  font-size: 0.65rem;
-  color: var(--primary);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-
-.top5-votes {
-  font-weight: 800;
-  font-size: 0.85rem;
-  color: var(--text-primary);
-  background: rgba(0, 212, 255, 0.1);
-  padding: 2px 6px;
-  border-radius: 6px;
-  min-width: 24px;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.top5-votes.changed {
-  animation: pulseGlow 0.6s ease;
-}
-
-.top5-quickpeek {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 200px;
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .top5-quickpeek {
-    display: block;
-  }
-}
-
-.filter-chips {
-  display: flex;
-  gap: 8px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding: 4px 0;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.filter-chips::-webkit-scrollbar {
-  display: none;
-}
-
-.filter-chip {
-  background: rgba(20, 24, 36, 0.8);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  padding: 6px 14px;
+  color: var(--text-muted);
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 20px;
-  font-size: 0.8rem;
-  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: var(--transition);
-  white-space: nowrap;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
-.filter-chip:hover {
-  border-color: var(--primary);
+.search-example:hover {
   color: var(--primary);
-  transform: translateY(-1px);
-}
-
-.filter-chip.active {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  border-color: transparent;
-  color: white;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+  border-color: rgba(0, 212, 255, 0.2);
+  background: rgba(0, 212, 255, 0.05);
 }
 
 .header-right {
@@ -497,7 +314,6 @@ body::before {
   align-items: center;
   gap: 6px;
   transition: var(--transition);
-  order: -1;
 }
 
 .lang-btn:hover {
@@ -506,9 +322,198 @@ body::before {
   transform: translateY(-1px);
 }
 
+/* ===== TOP 5 BAR ===== */
+.top5-bar {
+  background: rgba(20, 24, 36, 0.6);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin: 20px auto;
+  max-width: 1400px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.top5-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.top5-header i {
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+.top5-header span {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.top5-list {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 4px 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.top5-list::-webkit-scrollbar {
+  height: 4px;
+}
+
+.top5-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+}
+
+.top5-list::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.top5-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(26, 31, 46, 0.5);
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: var(--transition);
+  min-width: 180px;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.top5-item:hover {
+  background: rgba(26, 31, 46, 0.8);
+  border-color: rgba(0, 212, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.top5-rank {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--primary);
+  width: 18px;
+  text-align: center;
+}
+
+.top5-icon {
+  font-size: 0.9rem;
+  width: 20px;
+  text-align: center;
+}
+
+.top5-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.top5-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top5-category {
+  font-size: 0.65rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.top5-votes {
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  background: rgba(0, 212, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 6px;
+  min-width: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.top5-votes.changed {
+  animation: pulseGlow 0.6s ease;
+}
+
+.top5-quickpeek {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .top5-quickpeek {
+    display: block;
+  }
+}
+
+.filter-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 8px 0;
+  margin: 0 auto 20px;
+  max-width: 1400px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.filter-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-chip {
+  background: rgba(20, 24, 36, 0.8);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-chip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.filter-chip.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-color: transparent;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+}
+
 /* ===== MAIN CONTENT ===== */
 .main-content {
-  margin-top: calc(var(--header-height) + 140px);
   padding: 20px;
   max-width: 1400px;
   margin-left: auto;
@@ -1546,10 +1551,6 @@ body::before {
   :root {
     --drawer-width: 450px;
   }
-  
-  .header-left {
-    max-width: 600px;
-  }
 }
 
 @media (max-width: 992px) {
@@ -1558,40 +1559,34 @@ body::before {
   }
   
   .sticky-header {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 10px 15px;
+    height: var(--header-height);
+    padding: 0 15px;
   }
   
-  .header-left {
-    order: 2;
-    width: 100%;
-    max-width: 100%;
-    margin-top: 10px;
+  .hero-area {
+    height: 260px;
+    padding: 0 15px;
   }
   
-  .omnibox {
-    max-width: 100%;
+  .hero-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
   }
   
-  .main-content {
-    margin-top: 180px;
-  }
-  
-  .top5-item {
-    min-width: 160px;
+  .hero-search-container {
+    max-width: 500px;
   }
 }
 
 @media (max-width: 768px) {
   :root {
     --drawer-width: 100%;
-    --header-height: 120px;
+    --header-height: 60px;
+    --hero-height: 240px;
   }
   
   .main-content {
     padding: 15px;
-    margin-top: 200px;
   }
   
   .tool-row {
@@ -1641,6 +1636,24 @@ body::before {
   .back-to-top {
     bottom: 80px;
   }
+  
+  .hero-area {
+    height: 220px;
+  }
+  
+  .hero-title {
+    font-size: 1.6rem;
+    margin-bottom: 16px;
+  }
+  
+  .search-examples {
+    gap: 12px;
+  }
+  
+  .search-example {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1674,6 +1687,28 @@ body::before {
   
   .top5-quickpeek {
     display: none;
+  }
+  
+  .hero-area {
+    height: 200px;
+  }
+  
+  .hero-title {
+    font-size: 1.4rem;
+  }
+  
+  .hero-omnibox-input {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
+  
+  .search-examples {
+    gap: 8px;
+  }
+  
+  .search-example {
+    font-size: 0.7rem;
+    padding: 2px 8px;
   }
 }
 
@@ -1770,42 +1805,6 @@ body::before {
 
 <!-- Sticky Smart Header -->
 <header class="sticky-header">
-  <div class="header-left">
-    <div class="logo">AI Finder 2026</div>
-    <div class="omnibox">
-      <i class="fas fa-search omnibox-icon"></i>
-      <input 
-        type="text" 
-        class="omnibox-input" 
-        id="omniboxInput"
-        placeholder="Ich suche nach..."
-        data-placeholder-de="Ich suche nach..."
-        data-placeholder-en="I'm looking for..."
-      >
-      <button class="omnibox-ai" id="omniboxAI" title="KI-Suche" aria-label="KI-Suche">
-        <i class="fas fa-robot"></i>
-      </button>
-      <div class="search-hint" id="searchHint">
-        Suche nach Toolnamen, Use-Cases oder Features — z. B. „Text, Bilder, Stimme"
-      </div>
-    </div>
-    
-    <!-- Top 5 Bar -->
-    <div class="top5-bar" id="top5Bar">
-      <div class="top5-header">
-        <i class="fas fa-trophy"></i>
-        <span data-de="Top 5 Tools" data-en="Top 5 Tools">Top 5 Tools</span>
-      </div>
-      <div class="top5-list" id="top5List">
-        <!-- Dynamic top 5 items -->
-      </div>
-    </div>
-    
-    <div class="filter-chips" id="filterChips">
-      <!-- Dynamic filter chips -->
-    </div>
-  </div>
-  
   <div class="header-right">
     <button class="lang-btn" id="langToggle">
       <i class="fas fa-globe"></i>
@@ -1819,8 +1818,54 @@ body::before {
   </div>
 </header>
 
+<!-- Hero Area -->
+<div class="hero-area">
+  <h1 class="hero-title">AI Finder 2026</h1>
+  
+  <div class="hero-search-container">
+    <div class="hero-omnibox">
+      <input 
+        type="text" 
+        class="hero-omnibox-input" 
+        id="omniboxInput"
+        placeholder="Ich suche nach..."
+        data-placeholder-de="Ich suche nach..."
+        data-placeholder-en="I'm looking for..."
+      >
+    </div>
+  </div>
+  
+  <div class="search-hint-grid">
+    <div class="search-hint-text" id="searchHintText">
+      Suche nach Toolnamen, Use-Cases oder Features
+    </div>
+    <div class="search-examples">
+      <div class="search-example">Text</div>
+      <div class="search-example">Bilder</div>
+      <div class="search-example">Stimme</div>
+      <div class="search-example">Code</div>
+    </div>
+  </div>
+</div>
+
 <!-- Main Content -->
 <main class="main-content">
+  <!-- Top 5 Bar -->
+  <div class="top5-bar" id="top5Bar">
+    <div class="top5-header">
+      <i class="fas fa-trophy"></i>
+      <span data-de="Top 5 Tools" data-en="Top 5 Tools">Top 5 Tools</span>
+    </div>
+    <div class="top5-list" id="top5List">
+      <!-- Dynamic top 5 items -->
+    </div>
+  </div>
+  
+  <!-- Filter Chips -->
+  <div class="filter-chips" id="filterChips">
+    <!-- Dynamic filter chips -->
+  </div>
+  
   <!-- Grouped Tool List -->
   <section class="tool-groups" id="toolGroups">
     <!-- Dynamic tool groups -->
@@ -1944,7 +1989,7 @@ body::before {
     <p>Diese Website verwendet Cookies. Das sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden. Sie richten keinen Schaden an. Wir verwenden Cookies, um unser Angebot nutzerfreundlich zu gestalten. Einige Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen.</p>
     
     <h3>Google Analytics</h3>
-    <p>Diese Website nutzt Google Analytics, einen Webanalysedienst der Google Inc. („Google“). Google Analytics verwendet „Cookies“, die eine Analyse der Benutzung der Website durch Sie ermöglicht. Die durch den Cookie erzeugten Informationen über Ihre Benutzung dieser Website werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert.</p>
+    <p>Diese Website nutzt Google Analytics, einen Webanalysedienst der Google Inc. („Google"). Google Analytics verwendet „Cookies", die eine Analyse der Benutzung der Website durch Sie ermöglicht. Die durch den Cookie erzeugten Informationen über Ihre Benutzung dieser Website werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert.</p>
     
     <h3>Ihre Rechte</h3>
     <p>Ihnen stehen grundsätzlich die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerruf und Widerspruch zu. Wenn Sie glauben, dass die Verarbeitung Ihrer Daten gegen das Datenschutzrecht verstößt oder Ihre datenschutzrechtlichen Ansprüche sonst in einer Weise verletzt worden sind, können Sie sich bei der Aufsichtsbehörde beschweren.</p>
@@ -3022,16 +3067,7 @@ function setupEventListeners() {
     }, 300);
   });
   
-  // AI search button
-  document.getElementById('omniboxAI').addEventListener('click', () => {
-    const query = omniboxInput.value;
-    if (query.trim()) {
-      filterByAI();
-    } else {
-      // If no query, just show AI picks
-      filterByAI();
-    }
-  });
+  // AI search button removed - functionality preserved in JS but not in UI
   
   // Enter key in omnibox
   omniboxInput.addEventListener('keydown', (e) => {
@@ -3040,14 +3076,6 @@ function setupEventListeners() {
       if (query.trim()) {
         filterBySearch(query);
       }
-    }
-  });
-  
-  // Accessibility for AI button
-  document.getElementById('omniboxAI').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      document.getElementById('omniboxAI').click();
     }
   });
   
@@ -3200,12 +3228,12 @@ function updateLanguage() {
     }
   });
   
-  // Update search hint
-  const searchHint = document.getElementById('searchHint');
-  if (searchHint) {
-    searchHint.textContent = currentLang === 'de' 
-      ? 'Suche nach Toolnamen, Use-Cases oder Features — z. B. „Text, Bilder, Stimme"'
-      : 'Search for tool names, use cases or features — e.g. "text, images, voice"';
+  // Update search hint text
+  const searchHintText = document.getElementById('searchHintText');
+  if (searchHintText) {
+    searchHintText.textContent = currentLang === 'de' 
+      ? 'Suche nach Toolnamen, Use-Cases oder Features'
+      : 'Search for tool names, use cases or features';
   }
 }
 
