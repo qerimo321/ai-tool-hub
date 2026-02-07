@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://doicozkpdbkyvdkpujoh.supabase.co; base-uri 'self'; frame-ancestors 'none';">
-<title>AI Searcher - Finde sofort dein perfektes KI-Tool</title>
+<title>AI Finder 2026 - Finde sofort dein perfektes KI-Tool</title>
 <meta name="description" content="Finde in 2 Klicks dein perfektes KI-Tool. Echte User-Bewertungen, intelligente Empfehlungen, Favoriten & Vergleichsfunktion.">
 <meta name="keywords" content="KI Tools, AI Software, ChatGPT Alternativen, KI Bildgeneratoren, kostenlose KI Tools">
 <meta name="google-site-verification" content="Wo_6LQQ8LoGlobalzVMjBHh_Z-VD3N_dFdqCZb2BYxV0" />
@@ -14,12 +14,12 @@
 <link rel="alternate" hreflang="x-default" href="https://ai-searcher.github.io/ai-tool-hub/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta property="og:type" content="website">
-<meta property="og:title" content="AI Searcher - Finde sofort dein perfektes KI-Tool">
+<meta property="og:title" content="AI Finder 2026 - Finde sofort dein perfektes KI-Tool">
 <meta property="og:description" content="Finde in 2 Klicks dein perfektes KI-Tool. Echte User-Bewertungen, intelligente Empfehlungen.">
 <meta property="og:url" content="https://ai-searcher.github.io/ai-tool-hub/">
-<meta property="og:site_name" content="AI Searcher">
+<meta property="og:site_name" content="AI Finder">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Searcher">
+<meta name="twitter:title" content="AI Finder 2026">
 <meta name="twitter:description" content="Finde in 2 Klicks dein perfektes KI-Tool">
 <!-- Google Analytics wird nur nach Cookie-Consent geladen -->
 <script>
@@ -41,7 +41,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "AI Searcher",
+  "name": "AI Finder",
   "url": "https://ai-searcher.github.io/ai-tool-hub/",
   "description": "Finde in 2 Klicks dein perfektes KI-Tool. Echte User-Bewertungen, intelligente Empfehlungen.",
   "potentialAction": {
@@ -57,7 +57,6 @@
   --primary: #00d4ff;
   --primary-dark: #00a8cc;
   --secondary: #a855f7;
-  --accent: #00ff9d;
   --bg-dark: #0a0e17;
   --bg-card: #141824;
   --bg-hover: #1a1f2e;
@@ -135,7 +134,6 @@ body {
   font-size: calc(0.9rem * var(--current-density));
 }
 
-/* Futuristic Animated Background */
 body::before {
   content: '';
   position: fixed;
@@ -144,68 +142,10 @@ body::before {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 20% 20%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 40% 60%, rgba(0, 255, 157, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 20% 20%, rgba(0, 212, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.03) 0%, transparent 50%);
   z-index: -1;
   pointer-events: none;
-  animation: pulseBackground 20s ease-in-out infinite alternate;
-}
-
-@keyframes pulseBackground {
-  0% {
-    opacity: 0.7;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-}
-
-/* Futuristic Glow Effects */
-.glow {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.15;
-  z-index: -1;
-  animation: floatGlow 15s infinite ease-in-out;
-}
-
-.glow-1 {
-  background: var(--primary);
-  top: 10%;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.glow-2 {
-  background: var(--secondary);
-  top: 60%;
-  right: 10%;
-  animation-delay: 5s;
-}
-
-.glow-3 {
-  background: var(--accent);
-  bottom: 20%;
-  left: 30%;
-  animation-delay: 10s;
-}
-
-@keyframes floatGlow {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -30px) scale(1.2);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.8);
-  }
 }
 
 /* ===== STICKY SMART HEADER ===== */
@@ -222,24 +162,8 @@ body::before {
   padding: 0 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.site-title {
-  font-weight: 800;
-  font-size: 1.5rem;
-  background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -0.5px;
-  text-shadow: 0 2px 10px rgba(0, 212, 255, 0.3);
-  animation: titleGlow 3s infinite alternate;
+  justify-content: flex-end;
+  gap: 20px;
 }
 
 /* ===== HERO AREA ===== */
@@ -254,56 +178,16 @@ body::before {
   padding: 0 20px;
   text-align: center;
   background: linear-gradient(180deg, rgba(10, 14, 23, 0.8) 0%, transparent 100%);
-  overflow: hidden;
 }
 
 .hero-title {
   font-weight: 800;
-  font-size: 3rem;
-  background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
+  font-size: 2.2rem;
+  background: linear-gradient(135deg, var(--text-primary), var(--primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 24px;
   letter-spacing: -0.5px;
-  position: relative;
-  display: inline-block;
-  animation: titleGlow 3s infinite alternate;
-}
-
-.hero-title::after {
-  content: '🤖';
-  position: absolute;
-  right: -45px;
-  top: 0;
-  font-size: 2rem;
-  animation: float 3s infinite ease-in-out;
-}
-
-@keyframes titleGlow {
-  0% {
-    filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.3));
-  }
-  100% {
-    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.7));
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.hero-subtitle {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  margin-bottom: 32px;
-  max-width: 600px;
-  font-weight: 400;
-  opacity: 0.9;
 }
 
 .hero-search-container {
@@ -320,7 +204,7 @@ body::before {
 
 .hero-omnibox-input {
   width: 100%;
-  padding: 16px 24px;
+  padding: 14px 20px;
   background: rgba(20, 24, 36, 0.8);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -372,20 +256,49 @@ body::before {
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: var(--transition);
-  cursor: pointer;
 }
 
 .search-example:hover {
   color: var(--primary);
   border-color: rgba(0, 212, 255, 0.2);
   background: rgba(0, 212, 255, 0.05);
-  transform: translateY(-2px);
 }
 
 .header-right {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.density-toggle {
+  display: flex;
+  background: rgba(20, 24, 36, 0.8);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px;
+  gap: 4px;
+}
+
+.density-btn {
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+}
+
+.density-btn:hover {
+  color: var(--primary);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.density-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
 }
 
 .lang-btn {
@@ -407,7 +320,6 @@ body::before {
   background: rgba(26, 31, 46, 0.8);
   border-color: var(--primary);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
 }
 
 /* ===== TOP 5 BAR ===== */
@@ -420,35 +332,6 @@ body::before {
   max-width: 1400px;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  animation: slideInUp 0.6s ease-out;
-  overflow: hidden;
-  position: relative;
-}
-
-.top5-bar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    rgba(0, 212, 255, 0.05) 0%, 
-    transparent 20%, 
-    transparent 80%, 
-    rgba(0, 212, 255, 0.05) 100%);
-  pointer-events: none;
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .top5-header {
@@ -471,54 +354,27 @@ body::before {
   color: var(--text-primary);
 }
 
-.top5-info-btn {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  cursor: pointer;
-  transition: var(--transition);
-  margin-left: 6px;
-}
-
-.top5-info-btn:hover {
-  background: rgba(0, 212, 255, 0.1);
-  border-color: var(--primary);
-  color: var(--primary);
-}
-
-.top5-list-wrapper {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-}
-
 .top5-list {
   display: flex;
   gap: 10px;
+  overflow-x: auto;
   padding: 4px 0;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  animation: slideRightToLeft 40s linear infinite;
 }
 
-.top5-list:hover {
-  animation-play-state: paused;
+.top5-list::-webkit-scrollbar {
+  height: 4px;
 }
 
-@keyframes slideRightToLeft {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-100% - 20px));
-  }
+.top5-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+}
+
+.top5-list::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 2px;
 }
 
 .top5-item {
@@ -539,8 +395,7 @@ body::before {
 .top5-item:hover {
   background: rgba(26, 31, 46, 0.8);
   border-color: rgba(0, 212, 255, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+  transform: translateY(-1px);
 }
 
 .top5-rank {
@@ -641,13 +496,12 @@ body::before {
   display: flex;
   align-items: center;
   gap: 6px;
-  position: relative;
 }
 
 .filter-chip:hover {
   border-color: var(--primary);
   color: var(--primary);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .filter-chip.active {
@@ -681,27 +535,14 @@ body::before {
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: var(--transition);
-  animation: fadeIn 0.4s ease-out;
 }
 
 .tool-group:hover {
   box-shadow: var(--shadow-hover);
-  transform: translateY(-2px);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .group-header {
-  padding: 12px 20px;
+  padding: 16px 20px;
   background: rgba(26, 31, 46, 0.5);
   display: flex;
   align-items: center;
@@ -740,14 +581,6 @@ body::before {
   color: var(--text-muted);
   font-size: calc(0.8rem * var(--current-density));
   margin-left: 8px;
-}
-
-.group-description {
-  font-size: calc(0.75rem * var(--current-density));
-  color: var(--text-secondary);
-  margin-top: 2px;
-  font-weight: 400;
-  opacity: 0.8;
 }
 
 .group-toggle {
@@ -942,7 +775,6 @@ body::before {
   align-items: center;
   justify-content: center;
   font-size: 0.9rem;
-  position: relative;
 }
 
 .tool-action-btn:hover {
@@ -968,69 +800,6 @@ body::before {
   color: var(--success);
   border-color: var(--success);
   background: rgba(16, 185, 129, 0.1);
-}
-
-.tool-action-btn.onboarding:hover {
-  color: var(--secondary);
-  border-color: var(--secondary);
-  background: rgba(168, 85, 247, 0.1);
-}
-
-/* Tooltip Styling */
-.tool-action-btn::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%) scale(0.8);
-  background: var(--bg-card);
-  color: var(--text-primary);
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.2s ease;
-  border: 1px solid var(--border);
-  z-index: 1000;
-  box-shadow: var(--shadow);
-  min-width: 120px;
-  text-align: center;
-}
-
-.tool-action-btn:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) scale(1);
-  bottom: calc(100% + 8px);
-}
-
-.filter-chip::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%) scale(0.8);
-  background: var(--bg-card);
-  color: var(--text-primary);
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.2s ease;
-  border: 1px solid var(--border);
-  z-index: 1000;
-  box-shadow: var(--shadow);
-  min-width: 120px;
-  text-align: center;
-}
-
-.filter-chip:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) scale(1);
-  bottom: calc(100% + 8px);
 }
 
 .show-more {
@@ -1069,18 +838,6 @@ body::before {
   pointer-events: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
   margin-left: 20px;
-  animation: popIn 0.3s ease;
-}
-
-@keyframes popIn {
-  0% {
-    transform: translateY(-50%) scale(0.8);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(-50%) scale(1);
-    opacity: 1;
-  }
 }
 
 .tool-peek::before {
@@ -1282,19 +1039,6 @@ body::before {
   z-index: 900;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   transition: var(--transition);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
-  }
-  50% {
-    box-shadow: 0 4px 30px rgba(0, 212, 255, 0.8);
-  }
-  100% {
-    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
-  }
 }
 
 .floating-favorites-btn:hover {
@@ -1316,31 +1060,6 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.floating-onboarding-btn {
-  position: fixed;
-  left: 16px;
-  bottom: 80px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--secondary), var(--accent));
-  color: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  cursor: pointer;
-  z-index: 900;
-  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
-  transition: var(--transition);
-}
-
-.floating-onboarding-btn:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.3);
 }
 
 .back-to-top {
@@ -1568,48 +1287,6 @@ body::before {
   text-align: center;
   color: var(--text-secondary);
   font-size: 0.85rem;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.footer-controls {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.density-toggle {
-  display: flex;
-  background: rgba(20, 24, 36, 0.8);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 4px;
-  gap: 4px;
-}
-
-.density-btn {
-  padding: 6px 12px;
-  border: none;
-  background: transparent;
-  color: var(--text-secondary);
-  font-size: 0.75rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: var(--transition);
-  font-weight: 600;
-}
-
-.density-btn:hover {
-  color: var(--primary);
-  background: rgba(0, 212, 255, 0.1);
-}
-
-.density-btn.active {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
 }
 
 .footer-links {
@@ -1818,135 +1495,6 @@ body::before {
   margin-bottom: 15px;
 }
 
-/* ===== ONBOARDING MODAL ===== */
-.onboarding-modal .modal-content {
-  padding: 25px;
-}
-
-.onboarding-step {
-  margin-bottom: 25px;
-  padding-bottom: 25px;
-  border-bottom: 1px solid var(--border);
-}
-
-.onboarding-step:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
-}
-
-.step-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 15px;
-}
-
-.step-icon {
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  color: white;
-  font-size: 0.9rem;
-  flex-shrink: 0;
-}
-
-.step-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.step-content {
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.step-content ul {
-  padding-left: 20px;
-  margin-top: 10px;
-}
-
-.step-content li {
-  margin-bottom: 8px;
-  position: relative;
-}
-
-.step-content li::before {
-  content: '•';
-  color: var(--primary);
-  font-weight: bold;
-  position: absolute;
-  left: -15px;
-}
-
-.ltd-explanation {
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid rgba(245, 158, 11, 0.2);
-  border-radius: 8px;
-  padding: 12px 15px;
-  margin-top: 15px;
-  font-size: 0.85rem;
-}
-
-.ltd-explanation strong {
-  color: #f59e0b;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.ki-facts {
-  background: rgba(168, 85, 247, 0.1);
-  border: 1px solid rgba(168, 85, 247, 0.2);
-  border-radius: 8px;
-  padding: 12px 15px;
-  margin-top: 15px;
-  font-size: 0.85rem;
-}
-
-.ki-facts strong {
-  color: var(--secondary);
-  display: block;
-  margin-bottom: 5px;
-}
-
-/* ===== TOP5 INFO MODAL ===== */
-.top5-info-modal .modal-content {
-  padding: 25px;
-}
-
-.top5-explanation {
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.top5-explanation p {
-  margin-bottom: 15px;
-}
-
-.top5-explanation ul {
-  padding-left: 20px;
-  margin-bottom: 20px;
-}
-
-.top5-explanation li {
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.top5-explanation li::before {
-  content: '→';
-  color: var(--primary);
-  position: absolute;
-  left: -15px;
-}
-
 /* ===== ANIMATIONS ===== */
 @keyframes countUp {
   0% { transform: scale(1); }
@@ -1968,6 +1516,11 @@ body::before {
 @keyframes slideOutRight {
   from { transform: translateX(0); }
   to { transform: translateX(100%); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 @keyframes pulseGlow {
@@ -2016,12 +1569,8 @@ body::before {
   }
   
   .hero-title {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     margin-bottom: 20px;
-  }
-  
-  .hero-subtitle {
-    font-size: 1rem;
   }
   
   .hero-search-container {
@@ -2084,10 +1633,6 @@ body::before {
     bottom: 80px;
   }
   
-  .floating-onboarding-btn {
-    bottom: 140px;
-  }
-  
   .back-to-top {
     bottom: 80px;
   }
@@ -2097,17 +1642,8 @@ body::before {
   }
   
   .hero-title {
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin-bottom: 16px;
-  }
-  
-  .hero-title::after {
-    font-size: 1.5rem;
-    right: -35px;
-  }
-  
-  .hero-subtitle {
-    font-size: 0.95rem;
   }
   
   .search-examples {
@@ -2118,14 +1654,6 @@ body::before {
     font-size: 0.75rem;
     padding: 3px 10px;
   }
-  
-  .footer-controls {
-    gap: 12px;
-  }
-  
-  .site-title {
-    font-size: 1.2rem;
-  }
 }
 
 @media (max-width: 480px) {
@@ -2135,7 +1663,17 @@ body::before {
   }
   
   .header-right {
+    flex-wrap: wrap;
+    justify-content: flex-end;
     gap: 8px;
+  }
+  
+  .density-toggle {
+    order: 1;
+  }
+  
+  .lang-btn {
+    order: 0;
   }
   
   .top5-list {
@@ -2156,17 +1694,7 @@ body::before {
   }
   
   .hero-title {
-    font-size: 1.8rem;
-  }
-  
-  .hero-title::after {
-    font-size: 1.3rem;
-    right: -30px;
-  }
-  
-  .hero-subtitle {
-    font-size: 0.9rem;
-    padding: 0 10px;
+    font-size: 1.4rem;
   }
   
   .hero-omnibox-input {
@@ -2181,15 +1709,6 @@ body::before {
   .search-example {
     font-size: 0.7rem;
     padding: 2px 8px;
-  }
-  
-  .footer-links {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .site-title {
-    font-size: 1rem;
   }
 }
 
@@ -2266,54 +1785,9 @@ body::before {
   margin-left: 10px;
   font-size: 1rem;
 }
-
-/* ===== PERFORMANCE OPTIMIZATIONS ===== */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-body {
-  will-change: scroll-position;
-  contain: content;
-}
-
-.tool-row, .top5-item, .filter-chip {
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-
-/* Hardware acceleration for animations */
-.hero-title, .floating-favorites-btn, .floating-onboarding-btn {
-  transform: translateZ(0);
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
 </style>
 </head>
 <body class="density-compact">
-
-<!-- Futuristic Glow Effects -->
-<div class="glow glow-1"></div>
-<div class="glow glow-2"></div>
-<div class="glow glow-3"></div>
 
 <!-- Cookie Consent -->
 <div class="cookie-consent" id="cookieConsent">
@@ -2331,23 +1805,22 @@ html {
 
 <!-- Sticky Smart Header -->
 <header class="sticky-header">
-  <div class="header-left">
-    <h1 class="site-title">AI Searcher</h1>
-  </div>
   <div class="header-right">
     <button class="lang-btn" id="langToggle">
       <i class="fas fa-globe"></i>
       <span id="langText">EN</span>
     </button>
+    <div class="density-toggle">
+      <button class="density-btn active" data-density="cozy">Cozy</button>
+      <button class="density-btn" data-density="compact">Compact</button>
+      <button class="density-btn" data-density="future">Future</button>
+    </div>
   </div>
 </header>
 
 <!-- Hero Area -->
 <div class="hero-area">
-  <h1 class="hero-title">AI Finder</h1>
-  <div class="hero-subtitle" id="heroSubtitle">
-    Finde in 2 Klicks dein perfektes KI-Tool. Echte User-Bewertungen, intelligente Empfehlungen.
-  </div>
+  <h1 class="hero-title">AI Finder 2026</h1>
   
   <div class="hero-search-container">
     <div class="hero-omnibox">
@@ -2382,14 +1855,9 @@ html {
     <div class="top5-header">
       <i class="fas fa-trophy"></i>
       <span data-de="Top 5 Tools" data-en="Top 5 Tools">Top 5 Tools</span>
-      <button class="top5-info-btn" onclick="openTop5InfoModal()" title="Erklärung zur Top 5">
-        <i class="fas fa-info"></i>
-      </button>
     </div>
-    <div class="top5-list-wrapper">
-      <div class="top5-list" id="top5List">
-        <!-- Dynamic top 5 items -->
-      </div>
+    <div class="top5-list" id="top5List">
+      <!-- Dynamic top 5 items -->
     </div>
   </div>
   
@@ -2412,20 +1880,12 @@ html {
 
 <!-- Footer -->
 <footer class="site-footer">
-  <div class="footer-controls">
-    <div class="density-toggle">
-      <button class="density-btn active" data-density="cozy">Cozy</button>
-      <button class="density-btn" data-density="compact">Compact</button>
-      <button class="density-btn" data-density="future">Future</button>
-    </div>
-  </div>
-  
   <div class="footer-links">
     <a href="#" id="imprintLink">Impressum</a>
     <a href="#" id="privacyLink">Datenschutz</a>
   </div>
   <div class="footer-copyright">
-    © 2026 AI Searcher. Alle Rechte vorbehalten.
+    © 2026 AI Finder. Alle Rechte vorbehalten.
   </div>
 </footer>
 
@@ -2468,7 +1928,7 @@ html {
     </div>
     
     <div class="dock-actions">
-      <button class="dock-action-btn secondary" id="clearCompare" data-de="Vergleich leeren" data-en="Clear compare">Vergleich leeren</button>
+      <button class="dock-action-btn secondary" id="clearFavorites" data-de="Leeren" data-en="Clear">Leeren</button>
       <button class="dock-action-btn primary" id="compareAction" data-de="Vergleichen" data-en="Compare">Vergleichen</button>
     </div>
   </div>
@@ -2478,10 +1938,6 @@ html {
 <button class="floating-favorites-btn" id="floatingFavoritesBtn" aria-label="Favoriten anzeigen">
   <i class="fas fa-star"></i>
   <span class="floating-favorites-badge" id="floatingFavoritesBadge">0</span>
-</button>
-
-<button class="floating-onboarding-btn" id="floatingOnboardingBtn" aria-label="Onboarding Guide" title="Erklärung zur Nutzung">
-  <i class="fas fa-question"></i>
 </button>
 
 <button class="back-to-top" id="backToTop" aria-label="Nach oben">
@@ -2540,123 +1996,6 @@ html {
   </div>
 </div>
 
-<!-- Onboarding Guide Modal -->
-<div class="modal-overlay" id="onboardingModalOverlay"></div>
-<div class="modal onboarding-modal" id="onboardingModal">
-  <div class="modal-header">
-    <h2 class="modal-title" data-de="AI Searcher Guide" data-en="AI Searcher Guide">AI Searcher Guide</h2>
-    <button class="modal-close" id="onboardingModalClose">
-      <i class="fas fa-times"></i>
-    </button>
-  </div>
-  <div class="modal-content">
-    <div class="onboarding-step">
-      <div class="step-header">
-        <div class="step-icon">1</div>
-        <div class="step-title" data-de="KI-Tools finden & verstehen" data-en="Find & understand AI tools">KI-Tools finden & verstehen</div>
-      </div>
-      <div class="step-content">
-        <p data-de="Hier findest du die besten KI-Tools für jeden Zweck. Die Seite ist in Kategorien unterteilt:" data-en="Here you'll find the best AI tools for every purpose. The site is divided into categories:">
-          Hier findest du die besten KI-Tools für jeden Zweck. Die Seite ist in Kategorien unterteilt:
-        </p>
-        <ul>
-          <li data-de="<strong>Text:</strong> Für Schreiben, Übersetzen und Chatbots" data-en="<strong>Text:</strong> For writing, translation and chatbots"><strong>Text:</strong> Für Schreiben, Übersetzen und Chatbots</li>
-          <li data-de="<strong>Bild:</strong> Für Bilderstellen, Design und Kunst" data-en="<strong>Image:</strong> For image creation, design and art"><strong>Bild:</strong> Für Bilderstellen, Design und Kunst</li>
-          <li data-de="<strong>Code:</strong> Für Programmierhilfen und Entwicklung" data-en="<strong>Code:</strong> For programming aids and development"><strong>Code:</strong> Für Programmierhilfen und Entwicklung</li>
-          <li data-de="<strong>Video:</strong> Für Videobearbeitung und Animation" data-en="<strong>Video:</strong> For video editing and animation"><strong>Video:</strong> Für Videobearbeitung und Animation</li>
-          <li data-de="<strong>Audio:</strong> Für Musik, Stimmen und Podcasts" data-en="<strong>Audio:</strong> For music, voices and podcasts"><strong>Audio:</strong> Für Musik, Stimmen und Podcasts</li>
-        </ul>
-        
-        <div class="ltd-explanation">
-          <strong data-de="Was ist LTD (Lifetime Deal)?" data-en="What is LTD (Lifetime Deal)?">Was ist LTD (Lifetime Deal)?</strong>
-          <p data-de="LTD bedeutet, dass du das Tool nur einmalig bezahlst und es lebenslang nutzen kannst. Das ist oft günstiger als monatliche Abos und spart auf lange Sicht viel Geld!" data-en="LTD means you pay for the tool only once and can use it for a lifetime. This is often cheaper than monthly subscriptions and saves a lot of money in the long run!">
-            LTD bedeutet, dass du das Tool nur einmalig bezahlst und es lebenslang nutzen kannst. Das ist oft günstiger als monatliche Abos und spart auf lange Sicht viel Geld!
-          </p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="onboarding-step">
-      <div class="step-header">
-        <div class="step-icon">2</div>
-        <div class="step-title" data-de="Wie du Tools entdeckst" data-en="How to discover tools">Wie du Tools entdeckst</div>
-      </div>
-      <div class="step-content">
-        <p data-de="Nutze diese Funktionen, um das perfekte Tool zu finden:" data-en="Use these features to find the perfect tool:">
-          Nutze diese Funktionen, um das perfekte Tool zu finden:
-        </p>
-        <ul>
-          <li data-de="<strong>Suche:</strong> Tippe oben in die Suchleiste, was du brauchst" data-en="<strong>Search:</strong> Type what you need in the search bar above"><strong>Suche:</strong> Tippe oben in die Suchleiste, was du brauchst</li>
-          <li data-de="<strong>Filter:</strong> Klicke auf eine Kategorie, um nur diese Tools zu sehen" data-en="<strong>Filters:</strong> Click on a category to see only those tools"><strong>Filter:</strong> Klicke auf eine Kategorie, um nur diese Tools zu sehen</li>
-          <li data-de="<strong>Top 5:</strong> Die beliebtesten Tools, die von anderen Nutzern empfohlen werden" data-en="<strong>Top 5:</strong> The most popular tools recommended by other users"><strong>Top 5:</strong> Die beliebtesten Tools, die von anderen Nutzern empfohlen werden</li>
-          <li data-de="<strong>AI Pick:</strong> Vom System persönlich für dich ausgewählte Tools" data-en="<strong>AI Pick:</strong> Tools personally selected for you by the system"><strong>AI Pick:</strong> Vom System persönlich für dich ausgewählte Tools</li>
-        </ul>
-        
-        <div class="ki-facts">
-          <strong data-de="Wusstest du das über KI?" data-en="Did you know this about AI?">Wusstest du das über KI?</strong>
-          <p data-de="Die meisten KI-Tools lernen von deinen Eingaben. Je besser du beschreibst, was du willst, desto bessere Ergebnisse bekommst du. KI kann kreativ sein, braucht aber klare Anweisungen!" data-en="Most AI tools learn from your inputs. The better you describe what you want, the better results you get. AI can be creative, but needs clear instructions!">
-            Die meisten KI-Tools lernen von deinen Eingaben. Je besser du beschreibst, was du willst, desto bessere Ergebnisse bekommst du. KI kann kreativ sein, braucht aber klare Anweisungen!
-          </p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="onboarding-step">
-      <div class="step-header">
-        <div class="step-icon">3</div>
-        <div class="step-title" data-de="Tools vergleichen & speichern" data-en="Compare & save tools">Tools vergleichen & speichern</div>
-      </div>
-      <div class="step-content">
-        <p data-de="So behältst du den Überblick über interessante Tools:" data-en="This is how you keep track of interesting tools:">
-          So behältst du den Überblick über interessante Tools:
-        </p>
-        <ul>
-          <li data-de="<strong>★ Favoriten:</strong> Klicke auf den Stern, um Tools zu speichern" data-en="<strong>★ Favorites:</strong> Click the star to save tools"><strong>★ Favoriten:</strong> Klicke auf den Stern, um Tools zu speichern</li>
-          <li data-de="<strong>⚖️ Vergleich:</strong> Wähle bis zu 3 Tools zum direkten Vergleich aus" data-en="<strong>⚖️ Compare:</strong> Select up to 3 tools for direct comparison"><strong>⚖️ Vergleich:</strong> Wähle bis zu 3 Tools zum direkten Vergleich aus</li>
-          <li data-de="<strong>🔍 Vorschau:</strong> Fahre mit der Maus über ein Tool für eine Schnellinfo" data-en="<strong>🔍 Preview:</strong> Hover over a tool for a quick info"><strong>🔍 Vorschau:</strong> Fahre mit der Maus über ein Tool für eine Schnellinfo</li>
-          <li data-de="<strong>👍 Bewertung:</strong> Stimme ab, welches Tool dir gefällt" data-en="<strong>👍 Rating:</strong> Vote for which tool you like"><strong>👍 Bewertung:</strong> Stimme ab, welches Tool dir gefällt</li>
-        </ul>
-        <p data-de="Tipp: Du kannst die Seite auf Deutsch oder Englisch anzeigen lassen - einfach auf EN/DE oben rechts klicken!" data-en="Tip: You can view the site in German or English - just click EN/DE at the top right!">
-          Tipp: Du kannst die Seite auf Deutsch oder Englisch anzeigen lassen - einfach auf EN/DE oben rechts klicken!
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Top 5 Info Modal -->
-<div class="modal-overlay" id="top5InfoModalOverlay"></div>
-<div class="modal top5-info-modal" id="top5InfoModal">
-  <div class="modal-header">
-    <h2 class="modal-title" data-de="Top 5 Tools - Erklärung" data-en="Top 5 Tools - Explanation">Top 5 Tools - Erklärung</h2>
-    <button class="modal-close" id="top5InfoModalClose">
-      <i class="fas fa-times"></i>
-    </button>
-  </div>
-  <div class="modal-content">
-    <div class="top5-explanation">
-      <p data-de="Die <strong>Top 5 Tools</strong> zeigen dir die aktuell beliebtesten KI-Tools, basierend auf den Bewertungen unserer Community. So funktioniert es:" data-en="The <strong>Top 5 Tools</strong> show you the currently most popular AI tools based on our community's ratings. Here's how it works:">
-        Die <strong>Top 5 Tools</strong> zeigen dir die aktuell beliebtesten KI-Tools, basierend auf den Bewertungen unserer Community. So funktioniert es:
-      </p>
-      
-      <ul>
-        <li data-de="<strong>Bewertungssystem:</strong> Jeder Nutzer kann Tools mit 👍 (gut) oder 👎 (nicht gut) bewerten" data-en="<strong>Rating system:</strong> Every user can rate tools with 👍 (good) or 👎 (not good)"><strong>Bewertungssystem:</strong> Jeder Nutzer kann Tools mit 👍 (gut) oder 👎 (nicht gut) bewerten</li>
-        <li data-de="<strong>Live-Ranking:</strong> Die Punktzahl wird in Echtzeit aktualisiert" data-en="<strong>Live ranking:</strong> The score is updated in real time"><strong>Live-Ranking:</strong> Die Punktzahl wird in Echtzeit aktualisiert</li>
-        <li data-de="<strong>Community-gesteuert:</strong> Die Tools steigen oder fallen basierend auf echten Nutzererfahrungen" data-en="<strong>Community-driven:</strong> Tools rise or fall based on real user experiences"><strong>Community-gesteuert:</strong> Die Tools steigen oder fallen basierend auf echten Nutzererfahrungen</li>
-        <li data-de="<strong>Automatische Slideshow:</strong> Die Top 5 bewegen sich automatisch, damit du alle sehen kannst" data-en="<strong>Automatic slideshow:</strong> The Top 5 moves automatically so you can see them all"><strong>Automatische Slideshow:</strong> Die Top 5 bewegen sich automatisch, damit du alle sehen kannst</li>
-      </ul>
-      
-      <p data-de="<strong>Wichtig:</strong> Wenn du ein Tool mit 👎 bewertest, verschwindet es nicht! Es wird einfach in der Rangliste nach unten gesetzt. So haben auch weniger bekannte Tools eine Chance, entdeckt zu werden." data-en="<strong>Important:</strong> If you rate a tool with 👎, it doesn't disappear! It just moves down in the ranking. This gives lesser known tools a chance to be discovered.">
-        <strong>Wichtig:</strong> Wenn du ein Tool mit 👎 bewertest, verschwindet es nicht! Es wird einfach in der Rangliste nach unten gesetzt. So haben auch weniger bekannte Tools eine Chance, entdeckt zu werden.
-      </p>
-      
-      <p data-de="Die Top 5 sind ein guter Startpunkt, um die besten KI-Tools zu entdecken. Klicke auf ein Tool, um mehr Details zu sehen oder selbst abzustimmen!" data-en="The Top 5 are a good starting point to discover the best AI tools. Click on a tool to see more details or vote yourself!">
-        Die Top 5 sind ein guter Startpunkt, um die besten KI-Tools zu entdecken. Klicke auf ein Tool, um mehr Details zu sehen oder selbst abzustimmen!
-      </p>
-    </div>
-  </div>
-</div>
-
 <script>
 // ===== GLOBALE VARIABLEN =====
 let aiTools = [];
@@ -2671,9 +2010,6 @@ let isDrawerOpen = false;
 let supabaseRealtimeSubscription = null;
 let top5Tools = [];
 let pollInterval = null;
-let activeFilterId = null;
-let top5AnimationInterval = null;
-let top5AnimationPaused = false;
 
 // ===== SUPABASE CLIENT ÜBERPRÜFEN =====
 if (typeof window.supabase === 'undefined' && typeof window.supabaseClient !== 'undefined') {
@@ -2699,7 +2035,6 @@ async function init() {
   checkCookieConsent();
   setupSupabaseRealtime();
   startPolling();
-  startTop5Animation();
 }
 
 // ===== DATEN LADEN =====
@@ -2791,19 +2126,19 @@ function addAIRecommendations() {
 
 // ===== TOP 5 BAR =====
 function updateTop5Bar() {
+  // Berechne Top 5 Tools basierend auf votes und popularityScore
   const sortedTools = [...aiTools]
     .sort((a, b) => {
+      // Primär nach votes
       if (b.votes !== a.votes) return (b.votes || 0) - (a.votes || 0);
+      // Sekundär nach popularityScore
       return (b.popularityScore || 0) - (a.popularityScore || 0);
     })
-    .slice(0, 10); // Take 10 for animation
+    .slice(0, 5);
   
-  top5Tools = sortedTools.slice(0, 5);
+  top5Tools = sortedTools;
   
-  // Duplicate items for seamless animation
-  const duplicatedTools = [...sortedTools, ...sortedTools];
-  
-  const top5HTML = duplicatedTools.map((tool, index) => {
+  const top5HTML = sortedTools.map((tool, index) => {
     const description = currentLang === 'de' ? tool.description.de : tool.description.en;
     const quickPeek = tool.quickPeek ? 
       (currentLang === 'de' ? tool.quickPeek.de : tool.quickPeek.en) :
@@ -2812,9 +2147,8 @@ function updateTop5Bar() {
     return `
       <div class="top5-item" data-id="${tool.id}" 
            onclick="openToolDrawer('${tool.id}')"
-           title="${tool.name}"
-           style="animation-delay: ${index * 0.1}s">
-        <div class="top5-rank">${(index % 5) + 1}</div>
+           title="${tool.name}">
+        <div class="top5-rank">${index + 1}</div>
         <div class="top5-icon">${getCategoryIcon(tool.category)}</div>
         <div class="top5-info">
           <div class="top5-name">${tool.name}</div>
@@ -2830,30 +2164,9 @@ function updateTop5Bar() {
   updateLanguage();
 }
 
-function startTop5Animation() {
-  const list = document.getElementById('top5List');
-  if (!list) return;
-  
-  // Reset animation
-  list.style.animation = 'none';
-  list.offsetHeight; // Trigger reflow
-  list.style.animation = 'slideRightToLeft 40s linear infinite';
-  
-  // Pause on hover
-  list.addEventListener('mouseenter', () => {
-    list.style.animationPlayState = 'paused';
-    top5AnimationPaused = true;
-  });
-  
-  list.addEventListener('mouseleave', () => {
-    list.style.animationPlayState = 'running';
-    top5AnimationPaused = false;
-  });
-}
-
 function updateTop5VoteCount(toolId, newVotes) {
-  const voteElements = document.querySelectorAll(`[id^="top5Votes-${toolId}"]`);
-  voteElements.forEach(voteElement => {
+  const voteElement = document.getElementById(`top5Votes-${toolId}`);
+  if (voteElement) {
     const oldVotes = parseInt(voteElement.textContent);
     if (newVotes !== oldVotes) {
       voteElement.textContent = newVotes;
@@ -2861,12 +2174,12 @@ function updateTop5VoteCount(toolId, newVotes) {
       setTimeout(() => {
         voteElement.classList.remove('changed');
       }, 600);
+      
+      // Aktualisiere die Top-5-Sortierung
+      setTimeout(() => {
+        updateTop5Bar();
+      }, 100);
     }
-  });
-  
-  // Update animation if needed
-  if (!top5AnimationPaused) {
-    startTop5Animation();
   }
 }
 
@@ -2875,6 +2188,7 @@ function setupSupabaseRealtime() {
   if (typeof window.supabase === 'undefined') return;
   
   try {
+    // Versuche Realtime zu abonnieren
     supabaseRealtimeSubscription = window.supabase
       .channel('tool_votes_changes')
       .on('postgres_changes', 
@@ -2920,6 +2234,7 @@ function handleVoteUpdate(payload) {
 }
 
 function startPolling() {
+  // Polling als Fallback alle 30 Sekunden
   if (pollInterval) clearInterval(pollInterval);
   
   pollInterval = setInterval(async () => {
@@ -2942,28 +2257,22 @@ function updateToolRowVoteCount(toolId) {
 
 // ===== GRUPPIERTE TOOL-LISTE =====
 function renderToolGroups() {
-  let categoriesToShow = ['text', 'image', 'code', 'video', 'audio'];
-  
-  if (currentCategory !== 'all' && currentCategory !== 'free' && currentCategory !== 'ai') {
-    categoriesToShow = [currentCategory];
-  }
-  
+  const categories = ['text', 'image', 'code', 'video', 'audio'];
   const expandedGroups = JSON.parse(localStorage.getItem('expandedGroups') || '{}');
   
-  const groupsHTML = categoriesToShow.map(category => {
-    let categoryTools = aiTools.filter(tool => tool.category === category);
-    
-    if (currentCategory === 'free') {
-      categoryTools = categoryTools.filter(tool => tool.price === 'free');
-    } else if (currentCategory === 'ai') {
-      categoryTools = categoryTools.filter(tool => tool.isAIRecommended);
-    }
-    
+  const groupsHTML = categories.map(category => {
+    const categoryTools = aiTools.filter(tool => tool.category === category);
     if (categoryTools.length === 0) return '';
     
-    const sortedTools = categoryTools.sort((a, b) => (b.votes || 0) - (a.votes || 0));
+    const topTools = categoryTools
+      .sort((a, b) => (b.votes || 0) - (a.votes || 0))
+      .slice(0, 2);
+    
+    const allTools = categoryTools
+      .sort((a, b) => (b.votes || 0) - (a.votes || 0));
+    
     const isExpanded = expandedGroups[category] || false;
-    const displayTools = isExpanded ? sortedTools : sortedTools.slice(0, 2);
+    const displayTools = isExpanded ? allTools : topTools;
     
     const groupHTML = displayTools.map(tool => {
       const description = currentLang === 'de' ? tool.description.de : tool.description.en;
@@ -2998,23 +2307,13 @@ function renderToolGroups() {
           <div class="tool-meta" onclick="event.stopPropagation()">
             <div class="tool-price">${tool.priceDisplay[currentLang === 'de' ? 'de' : 'en']}${ltdBadge}</div>
             <div class="tool-actions">
-              <button class="tool-action-btn favorite ${isFavorite(tool.id) ? 'active' : ''}" 
-                      onclick="toggleFavorite('${tool.id}')"
-                      data-tooltip="${currentLang === 'de' ? 'Zu Favoriten hinzufügen' : 'Add to favorites'}">
+              <button class="tool-action-btn favorite ${isFavorite(tool.id) ? 'active' : ''}" onclick="toggleFavorite('${tool.id}')">
                 <i class="fas fa-star"></i>
               </button>
-              <button class="tool-action-btn compare ${isInComparison(tool.id) ? 'active' : ''}" 
-                      onclick="toggleComparison('${tool.id}')"
-                      data-tooltip="${currentLang === 'de' ? 'Zum Vergleich hinzufügen' : 'Add to comparison'}">
+              <button class="tool-action-btn compare ${isInComparison(tool.id) ? 'active' : ''}" onclick="toggleComparison('${tool.id}')">
                 <i class="fas fa-balance-scale"></i>
               </button>
-              <button class="tool-action-btn onboarding" 
-                      onclick="openOnboardingModal()"
-                      data-tooltip="${currentLang === 'de' ? 'Hilfe & Erklärung' : 'Help & explanation'}">
-                <i class="fas fa-question"></i>
-              </button>
-              <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-action-btn open" onclick="event.stopPropagation(); trackToolClick('${tool.id}')"
-                 data-tooltip="${currentLang === 'de' ? 'Tool öffnen' : 'Open tool'}">
+              <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="tool-action-btn open" onclick="event.stopPropagation(); trackToolClick('${tool.id}')">
                 <i class="fas fa-external-link-alt"></i>
               </a>
             </div>
@@ -3023,12 +2322,11 @@ function renderToolGroups() {
       `;
     }).join('');
     
-    const remainingCount = Math.max(0, sortedTools.length - 2);
-    const showMoreButton = sortedTools.length > 2 ? `
+    const showMoreButton = allTools.length > 2 ? `
       <div class="show-more" onclick="toggleGroup('${category}')">
         <span>${isExpanded ? 
           (currentLang === 'de' ? 'Weniger anzeigen' : 'Show less') : 
-          (currentLang === 'de' ? `+ ${remainingCount} mehr anzeigen` : `+ ${remainingCount} more`)}</span>
+          (currentLang === 'de' ? `+ ${allTools.length - 2} mehr anzeigen` : `+ ${allTools.length - 2} more`)}</span>
         <i class="fas fa-chevron-${isExpanded ? 'up' : 'down'}"></i>
       </div>
     ` : '';
@@ -3038,12 +2336,7 @@ function renderToolGroups() {
         <div class="group-header" onclick="toggleGroup('${category}')">
           <div class="group-title">
             <div class="group-icon">${getCategoryIcon(category)}</div>
-            <div>
-              <div style="font-weight: 700; font-size: calc(1rem * var(--current-density));">
-                ${getCategoryLabel(category)}
-              </div>
-              <div class="group-description">${getCategoryDescription(category)}</div>
-            </div>
+            <span>${getCategoryLabel(category)}</span>
             <span class="group-count">${categoryTools.length}</span>
           </div>
           <div class="group-toggle ${isExpanded ? 'expanded' : ''}">
@@ -3059,28 +2352,6 @@ function renderToolGroups() {
   }).join('');
   
   document.getElementById('toolGroups').innerHTML = groupsHTML;
-  updateLanguage();
-}
-
-function getCategoryDescription(category) {
-  const descriptions = {
-    de: {
-      text: "Chatbots, Schreibassistenten, Übersetzer & Text-Generatoren",
-      image: "Bildgeneratoren, Designer, Foto-Editoren & Kunst-KI",
-      code: "Code-Assistenten, IDE-Erweiterungen, Debugger & Programmierhilfen",
-      video: "Video-Generatoren, Editoren, Animations-Tools & Spezialeffekte",
-      audio: "Sprachgeneratoren, Musik-KI, Audio-Editoren & Podcast-Tools"
-    },
-    en: {
-      text: "Chatbots, writing assistants, translators & text generators",
-      image: "Image generators, designers, photo editors & art AI",
-      code: "Code assistants, IDE extensions, debuggers & programming aids",
-      video: "Video generators, editors, animation tools & special effects",
-      audio: "Voice generators, music AI, audio editors & podcast tools"
-    }
-  };
-  
-  return descriptions[currentLang][category] || '';
 }
 
 function toggleGroup(category) {
@@ -3317,68 +2588,24 @@ function closeToolDrawer() {
 // ===== FILTER CHIPS =====
 function renderFilterChips() {
   const filters = [
-    { 
-      id: 'all', 
-      icon: 'fas fa-border-all', 
-      label: { de: 'Alle', en: 'All' },
-      tooltip: { de: 'Zeige alle KI-Tools', en: 'Show all AI tools' }
-    },
-    { 
-      id: 'text', 
-      icon: 'fas fa-pen', 
-      label: { de: 'Text', en: 'Text' },
-      tooltip: { de: 'Chatbots, Schreibassistenten, Übersetzer', en: 'Chatbots, writing assistants, translators' }
-    },
-    { 
-      id: 'image', 
-      icon: 'fas fa-image', 
-      label: { de: 'Bild', en: 'Image' },
-      tooltip: { de: 'Bildgeneratoren, Designer, Foto-Editoren', en: 'Image generators, designers, photo editors' }
-    },
-    { 
-      id: 'code', 
-      icon: 'fas fa-code', 
-      label: { de: 'Code', en: 'Code' },
-      tooltip: { de: 'Code-Assistenten, IDE-Erweiterungen, Debugger', en: 'Code assistants, IDE extensions, debuggers' }
-    },
-    { 
-      id: 'video', 
-      icon: 'fas fa-video', 
-      label: { de: 'Video', en: 'Video' },
-      tooltip: { de: 'Video-Generatoren, Editoren, Animation', en: 'Video generators, editors, animation' }
-    },
-    { 
-      id: 'audio', 
-      icon: 'fas fa-music', 
-      label: { de: 'Audio', en: 'Audio' },
-      tooltip: { de: 'Sprachgeneratoren, Musik-KI, Audio-Editoren', en: 'Voice generators, music AI, audio editors' }
-    },
-    { 
-      id: 'free', 
-      icon: 'fas fa-gift', 
-      label: { de: 'Kostenlos', en: 'Free' },
-      tooltip: { de: 'Komplett kostenlose KI-Tools', en: 'Completely free AI tools' }
-    },
-    { 
-      id: 'ai', 
-      icon: 'fas fa-robot', 
-      label: { de: 'AI Pick', en: 'AI Pick' },
-      tooltip: { de: 'KI-empfohlene Tools basierend auf deinen Interessen', en: 'AI-recommended tools based on your interests' }
-    }
+    { id: 'all', icon: 'fas fa-border-all', label: { de: 'Alle', en: 'All' } },
+    { id: 'text', icon: 'fas fa-pen', label: { de: 'Text', en: 'Text' } },
+    { id: 'image', icon: 'fas fa-image', label: { de: 'Bild', en: 'Image' } },
+    { id: 'code', icon: 'fas fa-code', label: { de: 'Code', en: 'Code' } },
+    { id: 'video', icon: 'fas fa-video', label: { de: 'Video', en: 'Video' } },
+    { id: 'audio', icon: 'fas fa-music', label: { de: 'Audio', en: 'Audio' } },
+    { id: 'free', icon: 'fas fa-gift', label: { de: 'Kostenlos', en: 'Free' } },
+    { id: 'ai', icon: 'fas fa-robot', label: { de: 'AI Pick', en: 'AI Pick' } }
   ];
   
-  const chipsHTML = filters.map(filter => {
-    const isActive = currentCategory === filter.id;
-    return `
-      <div class="filter-chip ${isActive ? 'active' : ''}" 
-           data-filter="${filter.id}"
-           onclick="setActiveFilter('${filter.id}')"
-           data-tooltip="${currentLang === 'de' ? filter.tooltip.de : filter.tooltip.en}">
-        <i class="${filter.icon}"></i>
-        <span data-de="${filter.label.de}" data-en="${filter.label.en}">${currentLang === 'de' ? filter.label.de : filter.label.en}</span>
-      </div>
-    `;
-  }).join('');
+  const chipsHTML = filters.map(filter => `
+    <div class="filter-chip ${filter.id === currentCategory ? 'active' : ''}" 
+         data-filter="${filter.id}"
+         onclick="setActiveFilter('${filter.id}')">
+      <i class="${filter.icon}"></i>
+      <span data-de="${filter.label.de}" data-en="${filter.label.en}">${currentLang === 'de' ? filter.label.de : filter.label.en}</span>
+    </div>
+  `).join('');
   
   document.getElementById('filterChips').innerHTML = chipsHTML;
   updateLanguage();
@@ -3386,15 +2613,57 @@ function renderFilterChips() {
 
 function setActiveFilter(filterId) {
   currentCategory = filterId;
-  activeFilterId = filterId;
+  renderFilterChips();
   
-  document.querySelectorAll('.filter-chip').forEach(chip => {
-    chip.classList.remove('active');
+  if (filterId === 'all') {
+    renderToolGroups();
+  } else if (filterId === 'free') {
+    filterByPrice('free');
+  } else if (filterId === 'ai') {
+    filterByAI();
+  } else {
+    filterByCategory(filterId);
+  }
+}
+
+function filterByCategory(category) {
+  const groups = document.querySelectorAll('.tool-group');
+  groups.forEach(group => {
+    if (group.dataset.category === category) {
+      group.style.display = 'block';
+    } else {
+      group.style.display = 'none';
+    }
   });
-  
-  document.querySelector(`[data-filter="${filterId}"]`).classList.add('active');
-  
-  renderToolGroups();
+}
+
+function filterByPrice(price) {
+  // Implementation would filter tools by price
+  console.log('Filter by price:', price);
+}
+
+function filterByAI() {
+  const groups = document.querySelectorAll('.tool-group');
+  groups.forEach(group => {
+    const rows = group.querySelectorAll('.tool-row');
+    let hasAIRow = false;
+    
+    rows.forEach(row => {
+      const toolId = row.dataset.id;
+      const tool = aiTools.find(t => t.id === toolId);
+      if (tool && tool.isAIRecommended) {
+        row.style.display = 'grid';
+        hasAIRow = true;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+    
+    group.style.display = hasAIRow ? 'block' : 'none';
+    
+    const showMore = group.querySelector('.show-more');
+    if (showMore) showMore.style.display = 'none';
+  });
 }
 
 // ===== FAVORITES OVERLAY =====
@@ -3481,7 +2750,7 @@ async function vote(toolId, type) {
     tool.votes = (tool.votes || 0) + voteChange;
   }
   
-  // Update UI immediately
+  // Update UI immediately (optimistic)
   const voteCountElement = document.getElementById(`voteCount-${toolId}`);
   if (voteCountElement) {
     voteCountElement.textContent = tool.votes || 0;
@@ -3635,33 +2904,6 @@ function toggleComparison(toolId) {
   renderToolGroups();
 }
 
-// ===== MODAL FUNCTIONS =====
-function openOnboardingModal() {
-  document.getElementById('onboardingModalOverlay').classList.add('active');
-  document.getElementById('onboardingModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-  updateLanguage();
-}
-
-function closeOnboardingModal() {
-  document.getElementById('onboardingModalOverlay').classList.remove('active');
-  document.getElementById('onboardingModal').classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-function openTop5InfoModal() {
-  document.getElementById('top5InfoModalOverlay').classList.add('active');
-  document.getElementById('top5InfoModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-  updateLanguage();
-}
-
-function closeTop5InfoModal() {
-  document.getElementById('top5InfoModalOverlay').classList.remove('active');
-  document.getElementById('top5InfoModal').classList.remove('active');
-  document.body.style.overflow = '';
-}
-
 // ===== COOKIE CONSENT =====
 function checkCookieConsent() {
   const consent = localStorage.getItem('cookieConsent');
@@ -3697,6 +2939,7 @@ function declineCookies() {
 function loadGoogleAnalytics() {
   if (!window.cookiePreferences.analytics) return;
   
+  // Google Analytics Script
   const script = document.createElement('script');
   script.async = true;
   script.src = 'https://www.googletagmanager.com/gtag/js?id=G-53RF07VYJ8';
@@ -3808,7 +3051,7 @@ function closeModal(modalId) {
 
 // ===== EVENT LISTENERS =====
 function setupEventListeners() {
-  // Omnibox search with debouncing
+  // Omnibox search
   const omniboxInput = document.getElementById('omniboxInput');
   let searchDebounce;
   
@@ -3824,6 +3067,9 @@ function setupEventListeners() {
     }, 300);
   });
   
+  // AI search button removed - functionality preserved in JS but not in UI
+  
+  // Enter key in omnibox
   omniboxInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       const query = omniboxInput.value;
@@ -3863,17 +3109,16 @@ function setupEventListeners() {
   
   // Favorites overlay
   document.getElementById('floatingFavoritesBtn').addEventListener('click', openFavoritesOverlay);
-  document.getElementById('floatingOnboardingBtn').addEventListener('click', openOnboardingModal);
   document.getElementById('favoritesClose').addEventListener('click', closeFavoritesOverlay);
   document.getElementById('favoritesOverlay').addEventListener('click', closeFavoritesOverlay);
   
   // Favorites overlay actions
-  document.getElementById('clearCompare').addEventListener('click', () => {
-    localStorage.setItem('aiComparison', JSON.stringify([]));
+  document.getElementById('clearFavorites').addEventListener('click', () => {
+    localStorage.setItem('aiFavorites', JSON.stringify([]));
     updateFavoritesOverlay();
     updateFloatingBadge();
     renderToolGroups();
-    showNotification(currentLang === 'de' ? 'Vergleichsliste geleert' : 'Comparison list cleared', 'info');
+    showNotification(currentLang === 'de' ? 'Favoriten geleert' : 'Favorites cleared', 'info');
   });
   
   document.getElementById('compareAction').addEventListener('click', () => {
@@ -3883,6 +3128,7 @@ function setupEventListeners() {
       return;
     }
     
+    // Open comparison view
     showNotification(currentLang === 'de' ? 'Vergleichsfunktion wird geladen...' : 'Loading comparison...', 'info');
   });
   
@@ -3925,14 +3171,6 @@ function setupEventListeners() {
     closeModal('privacyModal');
   });
   
-  // Onboarding modal
-  document.getElementById('onboardingModalClose').addEventListener('click', closeOnboardingModal);
-  document.getElementById('onboardingModalOverlay').addEventListener('click', closeOnboardingModal);
-  
-  // Top 5 info modal
-  document.getElementById('top5InfoModalClose').addEventListener('click', closeTop5InfoModal);
-  document.getElementById('top5InfoModalOverlay').addEventListener('click', closeTop5InfoModal);
-  
   // Close drawer on ESC
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -3942,29 +3180,12 @@ function setupEventListeners() {
       if (document.getElementById('favoritesOverlay').classList.contains('active')) {
         closeFavoritesOverlay();
       }
-      if (document.getElementById('onboardingModal').classList.contains('active')) {
-        closeOnboardingModal();
-      }
-      if (document.getElementById('top5InfoModal').classList.contains('active')) {
-        closeTop5InfoModal();
-      }
       if (document.getElementById('imprintModal').classList.contains('active')) {
         closeModal('imprintModal');
       }
       if (document.getElementById('privacyModal').classList.contains('active')) {
         closeModal('privacyModal');
       }
-    }
-  });
-  
-  // Performance optimization: throttle scroll events
-  let scrollTimeout;
-  window.addEventListener('scroll', () => {
-    if (!scrollTimeout) {
-      scrollTimeout = setTimeout(() => {
-        scrollTimeout = null;
-        // Update any scroll-dependent elements here
-      }, 100);
     }
   });
 }
@@ -4014,27 +3235,10 @@ function updateLanguage() {
       ? 'Suche nach Toolnamen, Use-Cases oder Features'
       : 'Search for tool names, use cases or features';
   }
-  
-  // Update hero subtitle
-  const heroSubtitle = document.getElementById('heroSubtitle');
-  if (heroSubtitle) {
-    heroSubtitle.textContent = currentLang === 'de'
-      ? 'Finde in 2 Klicks dein perfektes KI-Tool. Echte User-Bewertungen, intelligente Empfehlungen.'
-      : 'Find your perfect AI tool in 2 clicks. Real user reviews, intelligent recommendations.';
-  }
 }
 
 // ===== INITIALIZE =====
-document.addEventListener('DOMContentLoaded', () => {
-  // Use requestAnimationFrame for smoother initialization
-  requestAnimationFrame(() => {
-    init();
-  });
-});
-
-// Performance optimization: use passive event listeners where possible
-document.addEventListener('touchstart', function() {}, { passive: true });
-document.addEventListener('touchmove', function() {}, { passive: true });
+document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>
